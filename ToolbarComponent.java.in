@@ -29,12 +29,6 @@ class ToolbarComponent extends UITestComponent {
 
     private static ToolbarComponentAssert sAssert;
 
-    // The robotium Solo instance for event injection
-    protected Solo mSolo;
-
-    // Native fennec actions
-    protected Actions mActions;
-
     // Root view for browser toolbar
     private final View mToolbarView;
 
@@ -55,9 +49,6 @@ class ToolbarComponent extends UITestComponent {
 
     public ToolbarComponent(UITestContext testContext) {
         super(testContext);
-
-        mSolo = testContext.getSolo();
-        mActions = testContext.getActions();
 
         mToolbarView = ViewHelper.findViewById(BROWSER_TOOLBAR_ID);
         mUrlEditText = (TextView) ViewHelper.findViewById(mToolbarView, URL_EDIT_TEXT_ID);

@@ -5,12 +5,24 @@
 
 package @ANDROID_PACKAGE_NAME@.tests;
 
-abstract class UITestComponent {
-    // UI test context associated with the component
-    final private UITestContext mTestContext;
+import @ANDROID_PACKAGE_NAME@.Actions;
 
-    public UITestComponent(UITestContext testContext) {
+import com.jayway.android.robotium.solo.Solo;
+
+abstract class UITestComponent {
+    // UI test context associated with the component.
+    private final UITestContext mTestContext;
+
+    // The robotium Solo instance for event injection.
+    protected final Solo mSolo;
+
+    // Native fennec actions.
+    protected final Actions mActions;
+
+    public UITestComponent(final UITestContext testContext) {
         mTestContext = testContext;
+        mSolo = mTestContext.getSolo();
+        mActions = mTestContext.getActions();
     }
 
     protected UITestContext getTestContext() {
