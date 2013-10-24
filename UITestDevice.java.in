@@ -31,7 +31,6 @@ class UITestDevice {
         TABLET
     }
 
-    // UI test context
     private final UITestContext mTestContext;
 
     // Type of device (phone or tablet)

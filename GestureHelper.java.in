@@ -16,7 +16,6 @@ import android.app.Activity;
 import android.view.View;
 
 final class GestureHelper {
-    // UI test context
     private static UITestContext sTestContext;
 
     private GestureHelper() {

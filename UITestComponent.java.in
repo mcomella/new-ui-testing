@@ -10,7 +10,6 @@ import @ANDROID_PACKAGE_NAME@.Actions;
 import com.jayway.android.robotium.solo.Solo;
 
 abstract class UITestComponent {
-    // UI test context associated with the component.
     private final UITestContext mTestContext;
 
     // The robotium Solo instance for event injection.

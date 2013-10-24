@@ -12,7 +12,6 @@ import com.jayway.android.robotium.solo.Solo;
 import android.os.SystemClock;
 
 final class WaitHelper {
-    // UI test context
     private static UITestContext sTestContext;
 
     private static final int DEFAULT_MAX_WAIT_MS = 5000;

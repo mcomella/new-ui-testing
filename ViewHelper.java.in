@@ -14,7 +14,6 @@ import android.app.Activity;
 import android.view.View;
 
 final class ViewHelper {
-    // UI test context
     private static UITestContext sTestContext;
 
     private ViewHelper() {
