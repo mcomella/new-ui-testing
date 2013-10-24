@@ -1,0 +1,46 @@
+#filter substitution
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+
+import @ANDROID_PACKAGE_NAME@.Driver;
+import @ANDROID_PACKAGE_NAME@.Element;
+
+import android.app.Activity;
+import android.view.View;
+
+final class ViewHelper {
+    // UI test context
+    private static UITestContext sTestContext;
+
+    private ViewHelper() {
+    }
+
+    public static void init(UITestContext testContext) {
+        sTestContext = testContext;
+    }
+
+    public static View findViewById(String id) {
+        assertThat(sTestContext).isNotNull();
+
+        final Activity activity = sTestContext.getActivity();
+        final Driver driver = sTestContext.getDriver();
+
+        final Element element = driver.findElement(activity, id);
+        return activity.findViewById(element.getId());
+    }
+
+    public static View findViewById(View root, String id) {
+        assertThat(sTestContext).isNotNull();
+
+        final Activity activity = sTestContext.getActivity();
+        final Driver driver = sTestContext.getDriver();
+
+        final Element element = driver.findElement(activity, id);
+        return root.findViewById(element.getId());
+    }
+}

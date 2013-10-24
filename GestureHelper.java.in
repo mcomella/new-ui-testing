@@ -1,0 +1,50 @@
+#filter substitution
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+
+import @ANDROID_PACKAGE_NAME@.Actions;
+import @ANDROID_PACKAGE_NAME@.Driver;
+
+import com.jayway.android.robotium.solo.Solo;
+
+import android.app.Activity;
+import android.view.View;
+
+final class GestureHelper {
+    // UI test context
+    private static UITestContext sTestContext;
+
+    private GestureHelper() {
+    }
+
+    public static void init(UITestContext testContext) {
+        sTestContext = testContext;
+    }
+
+    private static void swipeOnScreen(int direction) {
+        assertThat(sTestContext).isNotNull();
+
+        final Actions actions = sTestContext.getActions();
+        final Driver driver = sTestContext.getDriver();
+
+        final int halfWidth = driver.getGeckoWidth() / 2;
+        final int halfHeight = driver.getGeckoHeight() / 2;
+
+        actions.drag(direction == Solo.LEFT ? halfWidth : 0,
+                     direction == Solo.LEFT ? 0 : halfWidth,
+                     halfHeight, halfHeight);
+    }
+
+    public static void swipeLeft() {
+        swipeOnScreen(Solo.LEFT);
+    }
+
+    public static void swipeRight() {
+        swipeOnScreen(Solo.RIGHT);
+    }
+}

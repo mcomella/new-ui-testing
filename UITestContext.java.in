@@ -1,0 +1,33 @@
+#filter substitution
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import @ANDROID_PACKAGE_NAME@.Actions;
+import @ANDROID_PACKAGE_NAME@.Driver;
+import @ANDROID_PACKAGE_NAME@.Assert;
+
+import com.jayway.android.robotium.solo.Solo;
+
+import android.app.Activity;
+import android.app.Instrumentation;
+
+interface UITestContext {
+    public Activity getActivity();
+
+    public Solo getSolo();
+
+    public Driver getDriver();
+
+    public Actions getActions();
+
+    public UITestDevice getDevice();
+
+    public Instrumentation getInstrumentation();
+
+    public void dumpLog(String message);
+
+    public void dumpLog(String message, Throwable t);
+}

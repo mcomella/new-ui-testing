@@ -1,0 +1,23 @@
+#filter substitution
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import org.fest.assertions.api.Assertions;
+
+import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.AboutHomeComponentAssert;
+import @ANDROID_PACKAGE_NAME@.tests.ToolbarComponent.ToolbarComponentAssert;
+
+import android.app.Activity;
+
+class UITestAssertions extends Assertions {
+	public static AboutHomeComponentAssert assertThat(AboutHomeComponent actual) {
+		return AboutHomeComponent.getAssertInstance(actual);
+	}
+
+	public static ToolbarComponentAssert assertThat(ToolbarComponent actual) {
+		return ToolbarComponent.getAssertInstance(actual);
+	}
+}

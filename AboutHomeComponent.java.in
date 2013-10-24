@@ -1,0 +1,140 @@
+#filter substitution
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+
+import @ANDROID_PACKAGE_NAME@.Actions;
+
+import org.fest.assertions.api.AbstractAssert;
+
+import com.jayway.android.robotium.solo.Solo;
+
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+
+import org.fest.assertions.api.ANDROID;
+
+class AboutHomeComponent extends UITestComponent {
+    private static final String HOME_PAGER_ID = "home_pager";
+
+    private static AboutHomeComponentAssert sAssert;
+
+    public enum Page {
+        HISTORY(0),
+        BOOKMARKS(1),
+        READING_LIST(2);
+
+        private final int mIndex;
+
+        private Page(int index) {
+            mIndex = index;
+        }
+
+        public int getIndex() {
+            return mIndex;
+        }
+    }
+
+    // Root view for home pager
+    private final ViewPager mHomePagerView;
+
+    public AboutHomeComponent(UITestContext testContext) {
+        super(testContext);
+
+        mHomePagerView = (ViewPager) ViewHelper.findViewById(HOME_PAGER_ID);
+    }
+
+    private boolean waitForCurrentItem(final int expectedItem) {
+        return WaitHelper.wait(new WaitHelper.WaitTest() {
+            @Override
+            public boolean test() {
+                ANDROID.assertThat(mHomePagerView).hasCurrentItem(expectedItem);
+                return true;
+            }
+        });
+    }
+
+    private void swipe(int direction) {
+        assertThat(this).isVisible();
+
+        final int currentItem = mHomePagerView.getCurrentItem();
+
+        if (direction == Solo.LEFT) {
+            GestureHelper.swipeLeft();
+        } else {
+            GestureHelper.swipeRight();
+        }
+
+        final PagerAdapter adapter = mHomePagerView.getAdapter();
+        ANDROID.assertThat(adapter).isNotNull();
+
+        // Swiping left goes to next, swiping right goes to previous 
+        final int newItem = currentItem + (direction == Solo.LEFT ? 1 : -1);
+
+        // Clamp new item index to possible ranges
+        final int expectedItem = Math.min(Math.max(0, newItem), adapter.getCount() - 1);
+
+        final boolean success = waitForCurrentItem(expectedItem);
+        assertThat(success).overridingErrorMessage("Current item is not correct after swiping")
+                           .isTrue();
+    }
+
+    public AboutHomeComponent swipeToNext() {
+        swipe(Solo.LEFT);
+        return this;
+    }
+
+    public AboutHomeComponent swipeToPrevious() {
+        swipe(Solo.RIGHT);
+        return this;
+    }
+
+    public static AboutHomeComponentAssert getAssertInstance(AboutHomeComponent actual) {
+        // It's safe to assume the 'actual' object will always be the same
+        // here as AboutHomeComponent is a singleton (see UITest).
+        if (sAssert == null) {
+            sAssert = new AboutHomeComponentAssert(actual);
+        }
+
+        return sAssert;
+    }
+
+    public static class AboutHomeComponentAssert extends AbstractAssert<AboutHomeComponentAssert, AboutHomeComponent> {
+        private final AboutHomeComponent mActual;
+
+        public AboutHomeComponentAssert(AboutHomeComponent actual) {
+            super(actual, AboutHomeComponentAssert.class);
+            mActual = actual;
+        }
+
+        public AboutHomeComponentAssert isVisible() {
+            isNotNull();
+
+            ANDROID.assertThat(mActual.mHomePagerView).overridingErrorMessage("Home pager should be visible")
+                                                      .isVisible();
+            return this;
+        }
+
+        public AboutHomeComponentAssert isNotVisible() {
+            isNotNull();
+
+            ANDROID.assertThat(mActual.mHomePagerView).overridingErrorMessage("Home pager should not be visible")
+                                                      .isGone();
+            return this;
+        }
+
+        public AboutHomeComponentAssert hasCurrentPage(Page page) {
+            isNotNull();
+            isVisible();
+
+            ANDROID.assertThat(mActual.mHomePagerView).overridingErrorMessage("Current page is not <%s>", page)
+                                                      .hasCurrentItem(page.getIndex());
+            return this;
+        }
+    }
+}

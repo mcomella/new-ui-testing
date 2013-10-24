@@ -1,0 +1,105 @@
+#filter substitution
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import com.jayway.android.robotium.solo.Solo;
+
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.os.Build;
+import android.util.DisplayMetrics;
+
+import static org.fest.reflect.core.Reflection.method;
+import static org.fest.reflect.core.Reflection.type;
+
+class UITestDevice {
+    private static final String APP_SHELL_CLASS = "org.mozilla.gecko.GeckoAppShell";
+
+    // Android platform version ranges
+    public static final int VERSION_2x = 0;
+    public static final int VERSION_3x = 1;
+    public static final int VERSION_4x = 2;
+
+    // VERSION_2X or VERSION_3X or VERSION_4X
+    public final int version;
+
+    public enum Type {
+        PHONE,
+        TABLET
+    }
+
+    // UI test context
+    private final UITestContext mTestContext;
+
+    // Type of device (phone or tablet)
+    public final Type type;
+
+    // Screen width
+    public final int width;
+
+    // Screen height
+    public final int height;
+
+    public UITestDevice(UITestContext testContext) {
+        mTestContext = testContext;
+
+        // Determine device version
+        int sdk = Build.VERSION.SDK_INT;
+        if (sdk < Build.VERSION_CODES.HONEYCOMB) {
+            version = VERSION_2x;
+        } else {
+            if (sdk > Build.VERSION_CODES.HONEYCOMB_MR2) {
+                version = VERSION_4x;
+            } else {
+                version = VERSION_3x;
+            }
+        }
+
+        final Activity activity = testContext.getActivity();
+
+        // Determine width and height
+        final DisplayMetrics dm = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        height = dm.heightPixels;
+        width = dm.widthPixels;
+
+        // Determine device type
+        boolean isTablet = false;
+        try {
+            // Load GeckoAppShell.class
+            final ClassLoader cl = activity.getClassLoader();
+            final Class appShellClass = type(APP_SHELL_CLASS).withClassLoader(cl).load();
+
+            // Call GeckoAppShell.isTablet()
+            isTablet = method("isTablet").withReturnType(Boolean.class)
+                                         .in(appShellClass)
+                                         .invoke();
+        } catch (Exception e) {
+            mTestContext.dumpLog("Exception in detectDevice", e);
+        }
+
+        type = (isTablet ? Type.TABLET : Type.PHONE);
+    }
+
+    public boolean isPhone() {
+        return (type == Type.PHONE);
+    }
+
+    public boolean isTablet() {
+        return (type == Type.TABLET);
+    }
+
+    public void rotate() {
+        final Solo solo = mTestContext.getSolo();
+        final Activity activity = mTestContext.getActivity();
+
+        if (activity.getRequestedOrientation () == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            solo.setActivityOrientation(Solo.PORTRAIT);
+        } else {
+            solo.setActivityOrientation(Solo.LANDSCAPE);
+        }
+    }
+}

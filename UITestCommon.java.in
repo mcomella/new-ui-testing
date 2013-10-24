@@ -1,0 +1,129 @@
+#filter substitution
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+
+import @ANDROID_PACKAGE_NAME@.Actions;
+import @ANDROID_PACKAGE_NAME@.Actions.EventExpecter;
+
+import android.app.Activity;
+import android.text.TextUtils;
+
+import static org.fest.reflect.core.Reflection.method;
+import static org.fest.reflect.core.Reflection.type;
+
+final class UITestCommon {
+    private static final String GECKO_THREAD_CLASS = "org.mozilla.gecko.GeckoThread";
+    private static final String LAUNCH_STATE_CLASS = GECKO_THREAD_CLASS + "$LaunchState";
+
+    static final String ABOUT_HOME_URL = "about:home";
+    static final String ABOUT_HOME_TITLE = "";
+
+    static final String BLANK01_URL = "/robocop/robocop_blank_01.html";
+    static final String BLANK01_TITLE = "Browser Blank Page 01";
+
+    static final String BLANK02_URL = "/robocop/robocop_blank_02.html";
+    static final String BLANK02_TITLE = "Browser Blank Page 02";
+
+    static final String BLANK03_URL = "/robocop/robocop_blank_03.html";
+    static final String BLANK03_TITLE = "Browser Blank Page 03";
+
+    // UI test currently running
+    private static UITest sTest;
+
+    private UITestCommon() {
+    }
+
+    private static String adjustIfPredefined(String url) {
+        if (TextUtils.equals(url, BLANK01_URL) ||
+            TextUtils.equals(url, BLANK02_URL) ||
+            TextUtils.equals(url, BLANK03_URL)) {
+            return sTest.getAbsoluteUrl(url);
+        }
+
+        return url;
+    }
+
+    public static void init(UITest test) {
+        sTest = test;
+    }
+
+    public static void blockForGeckoReady() {
+        try {
+            final Actions actions = sTest.getActions();
+
+            EventExpecter geckoReady = actions.expectGeckoEvent("Gecko:Ready");
+
+            final ClassLoader cl = sTest.getActivity().getClassLoader();
+            final Class geckoThreadClass = type(GECKO_THREAD_CLASS).withClassLoader(cl).load();
+            final Class launchStateClass = type(LAUNCH_STATE_CLASS).withClassLoader(cl).load();
+
+            boolean isReady = method("checkLaunchState").withReturnType(Boolean.class)
+                                                        .withParameterTypes(launchStateClass)
+                                                        .in(geckoThreadClass)
+                                                        .invoke(launchStateClass.getEnumConstants()[3]);
+
+            if (!isReady) {
+                geckoReady.blockForEvent();
+            }
+
+            geckoReady.unregisterListener();
+        } catch (Exception e) {
+            sTest.dumpLog("Exception in blockForGeckoReady", e);
+        }
+    }
+
+    public static void enterAndLoadUrl(String url) {
+        assertThat(sTest).isNotNull();
+        assertThat(sTest.TOOLBAR).isNotNull();
+
+        final Actions actions = sTest.getActions();
+
+        EventExpecter domContentLoaded = actions.expectGeckoEvent("DOMContentLoaded");
+
+        // Tweak predefined URLs if necessary
+        url = adjustIfPredefined(url);
+
+        // Enter editing mode, input URL, and commit.
+        sTest.TOOLBAR.enterEditingMode().enterUrl(url).commitEditingMode();
+
+        // Wait for the page to load
+        domContentLoaded.blockForEvent();
+        domContentLoaded.unregisterListener();
+    }
+
+    public static void goBack() {
+        assertThat(sTest).isNotNull();
+
+        if (sTest.getDevice().isTablet()) {
+            assertThat(sTest.TOOLBAR).isNotNull();
+            sTest.TOOLBAR.pressBack();
+        } else {
+            sTest.getActions().sendSpecialKey(Actions.SpecialKey.BACK);
+        }
+
+        // TODO: wait for new page to be fully loaded
+    }
+
+    public static void goForward() {
+        assertThat(sTest).isNotNull();
+
+        if (sTest.getDevice().isTablet()) {
+            assertThat(sTest.TOOLBAR).isNotNull();
+            sTest.TOOLBAR.pressForward();
+        } else {
+            // TODO: Press forward with APPMENU component
+        }
+ 
+        // TODO: wait for new page to be fully loaded
+    }
+
+    public static void reload() {
+        // TODO: On tablets, press reload in TOOLBAR.
+        //       On phones, press reload in APPMENU.
+    }
+}

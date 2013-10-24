@@ -1,0 +1,48 @@
+#filter substitution
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+
+import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
+
+/* Test correct state for URL bar after loading pages.
+ */
+public class testAboutHomeVisibility extends UITest {
+    public void testAboutHomeVisibility() {
+        UITestCommon.blockForGeckoReady();
+
+        // Check initial state with about:home
+        assertThat(TOOLBAR).hasTitle(UITestCommon.ABOUT_HOME_TITLE)
+                           .hasUrl(UITestCommon.ABOUT_HOME_URL);
+        assertThat(ABOUTHOME).isVisible()
+                             .hasCurrentPage(Page.BOOKMARKS);
+
+        // Go to blank 01
+        UITestCommon.enterAndLoadUrl(UITestCommon.BLANK01_URL);
+        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK01_TITLE)
+                           .hasUrl(UITestCommon.BLANK01_URL);
+        assertThat(ABOUTHOME).isNotVisible();
+
+        // Go to blank 02
+        UITestCommon.enterAndLoadUrl(UITestCommon.BLANK02_URL);
+        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK02_TITLE)
+                           .hasUrl(UITestCommon.BLANK02_URL);
+        assertThat(ABOUTHOME).isNotVisible();
+
+        // Enter editing mode, about:home UI should be visible
+        TOOLBAR.enterEditingMode();
+        assertThat(ABOUTHOME).isVisible()
+                             .hasCurrentPage(Page.HISTORY);
+
+        // Dismiss editing mode, about:home UI should be gone
+        TOOLBAR.dismissEditingMode();
+        assertThat(ABOUTHOME).isNotVisible();
+
+        // Loading about:home should show about:home again
+        UITestCommon.enterAndLoadUrl(UITestCommon.ABOUT_HOME_URL);
+        assertThat(TOOLBAR).hasTitle(UITestCommon.ABOUT_HOME_TITLE)
+                           .hasUrl(UITestCommon.ABOUT_HOME_URL);
+        assertThat(ABOUTHOME).isVisible()
+                             .hasCurrentPage(Page.BOOKMARKS);
+    }
+}

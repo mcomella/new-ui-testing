@@ -1,0 +1,30 @@
+#filter substitution
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+
+import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
+
+/* Test correct state for URL bar after loading pages.
+ */
+public class testNewAboutHomeSwipes extends UITest {
+    public void testNewAboutHomeSwipes() {
+    	UITestCommon.blockForGeckoReady();
+
+    	assertThat(ABOUTHOME).overridingErrorMessage("Bookmarks should be the initial page")
+    						 .isVisible()
+    						 .hasCurrentPage(Page.BOOKMARKS);
+
+    	ABOUTHOME.swipeToNext();
+    	assertThat(ABOUTHOME).hasCurrentPage(Page.READING_LIST);
+
+    	ABOUTHOME.swipeToPrevious();
+    	assertThat(ABOUTHOME).hasCurrentPage(Page.BOOKMARKS);
+
+    	ABOUTHOME.swipeToPrevious();
+    	assertThat(ABOUTHOME).hasCurrentPage(Page.HISTORY);
+
+    	ABOUTHOME.swipeToNext();
+    	assertThat(ABOUTHOME).hasCurrentPage(Page.BOOKMARKS);
+    }
+}
