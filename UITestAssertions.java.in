@@ -13,11 +13,11 @@ import @ANDROID_PACKAGE_NAME@.tests.ToolbarComponent.ToolbarComponentAssert;
 import android.app.Activity;
 
 class UITestAssertions extends Assertions {
-	public static AboutHomeComponentAssert assertThat(AboutHomeComponent actual) {
-		return AboutHomeComponent.getAssertInstance(actual);
-	}
+    public static AboutHomeComponentAssert assertThat(AboutHomeComponent actual) {
+        return AboutHomeComponent.getAssertInstance(actual);
+    }
 
-	public static ToolbarComponentAssert assertThat(ToolbarComponent actual) {
-		return ToolbarComponent.getAssertInstance(actual);
-	}
+    public static ToolbarComponentAssert assertThat(ToolbarComponent actual) {
+        return ToolbarComponent.getAssertInstance(actual);
+    }
 }
