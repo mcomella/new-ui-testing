@@ -40,20 +40,19 @@ class AboutHomeComponent extends UITestComponent {
 
     private static AboutHomeComponentAssert sAssert;
 
-    // Root view for home pager
-    private final ViewPager mHomePagerView;
-
     public AboutHomeComponent(UITestContext testContext) {
         super(testContext);
+    }
 
-        mHomePagerView = (ViewPager) mSolo.getView(HOME_PAGER_ID);
+    ViewPager getHomePagerView() {
+        return (ViewPager) mSolo.getView(HOME_PAGER_ID);
     }
 
     private boolean waitForCurrentItem(final int expectedItem) {
         return WaitHelper.wait(new WaitHelper.WaitTest() {
             @Override
             public boolean test() {
-                ANDROID.assertThat(mHomePagerView).hasCurrentItem(expectedItem);
+                ANDROID.assertThat(getHomePagerView()).hasCurrentItem(expectedItem);
                 return true;
             }
         });
@@ -62,7 +61,7 @@ class AboutHomeComponent extends UITestComponent {
     private void swipe(int direction) {
         assertThat(this).isVisible();
 
-        final int currentItem = mHomePagerView.getCurrentItem();
+        final int currentItem = getHomePagerView().getCurrentItem();
 
         if (direction == Solo.LEFT) {
             GestureHelper.swipeLeft();
@@ -70,7 +69,7 @@ class AboutHomeComponent extends UITestComponent {
             GestureHelper.swipeRight();
         }
 
-        final PagerAdapter adapter = mHomePagerView.getAdapter();
+        final PagerAdapter adapter = getHomePagerView().getAdapter();
         ANDROID.assertThat(adapter).isNotNull();
 
         // Swiping left goes to next, swiping right goes to previous
@@ -115,16 +114,16 @@ class AboutHomeComponent extends UITestComponent {
         public AboutHomeComponentAssert isVisible() {
             isNotNull();
 
-            ANDROID.assertThat(mActual.mHomePagerView).overridingErrorMessage("Home pager should be visible")
-                                                      .isVisible();
+            ANDROID.assertThat(mActual.getHomePagerView()).overridingErrorMessage("Home pager should be visible")
+                                                          .isVisible();
             return this;
         }
 
         public AboutHomeComponentAssert isNotVisible() {
             isNotNull();
 
-            ANDROID.assertThat(mActual.mHomePagerView).overridingErrorMessage("Home pager should not be visible")
-                                                      .isGone();
+            ANDROID.assertThat(mActual.getHomePagerView()).overridingErrorMessage("Home pager should not be visible")
+                                                          .isGone();
             return this;
         }
 
@@ -132,8 +131,8 @@ class AboutHomeComponent extends UITestComponent {
             isNotNull();
             isVisible();
 
-            ANDROID.assertThat(mActual.mHomePagerView).overridingErrorMessage("Current page is not <%s>", page)
-                                                      .hasCurrentItem(page.getIndex());
+            ANDROID.assertThat(mActual.getHomePagerView()).overridingErrorMessage("Current page is not <%s>", page)
+                                                          .hasCurrentItem(page.getIndex());
             return this;
         }
     }
