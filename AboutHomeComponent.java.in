@@ -73,7 +73,7 @@ class AboutHomeComponent extends UITestComponent {
         final PagerAdapter adapter = mHomePagerView.getAdapter();
         ANDROID.assertThat(adapter).isNotNull();
 
-        // Swiping left goes to next, swiping right goes to previous 
+        // Swiping left goes to next, swiping right goes to previous
         final int newItem = currentItem + (direction == Solo.LEFT ? 1 : -1);
 
         // Clamp new item index to possible ranges

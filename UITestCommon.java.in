@@ -118,7 +118,7 @@ final class UITestCommon {
         } else {
             // TODO: Press forward with APPMENU component
         }
- 
+
         // TODO: wait for new page to be fully loaded
     }
 

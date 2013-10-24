@@ -55,10 +55,10 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     // Device associated with the test
     private UITestDevice mDevice;
 
-    // Base to build absolute URLs 
+    // Base to build absolute URLs
     private String mBaseUrl;
 
-    // Base to build raw absolute URLs 
+    // Base to build raw absolute URLs
     private String mRawBaseUrl;
 
     // Context instance used to instantiate UI test components
