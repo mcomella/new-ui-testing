@@ -15,7 +15,7 @@ import android.util.DisplayMetrics;
 import static org.fest.reflect.core.Reflection.method;
 import static org.fest.reflect.core.Reflection.type;
 
-class UITestDevice {
+class UITestDeviceHelper {
     private static final String APP_SHELL_CLASS = "org.mozilla.gecko.GeckoAppShell";
 
     // Android platform version ranges
@@ -42,7 +42,7 @@ class UITestDevice {
     // Screen height
     public final int height;
 
-    public UITestDevice(UITestContext testContext) {
+    public UITestDeviceHelper(UITestContext testContext) {
         mTestContext = testContext;
 
         // Determine device version

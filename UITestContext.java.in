@@ -23,7 +23,7 @@ interface UITestContext {
 
     public Actions getActions();
 
-    public UITestDevice getDevice();
+    public UITestDeviceHelper getDevice();
 
     public Instrumentation getInstrumentation();
 
