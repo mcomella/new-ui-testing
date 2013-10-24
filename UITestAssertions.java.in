@@ -7,16 +7,11 @@ package @ANDROID_PACKAGE_NAME@.tests;
 
 import org.fest.assertions.api.Assertions;
 
-import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.AboutHomeComponentAssert;
 import @ANDROID_PACKAGE_NAME@.tests.ToolbarComponent.ToolbarComponentAssert;
 
 import android.app.Activity;
 
 class UITestAssertions extends Assertions {
-    public static AboutHomeComponentAssert assertThat(AboutHomeComponent actual) {
-        return AboutHomeComponent.getAssertInstance(actual);
-    }
-
     public static ToolbarComponentAssert assertThat(ToolbarComponent actual) {
         return ToolbarComponent.getAssertInstance(actual);
     }

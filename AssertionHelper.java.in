@@ -12,17 +12,30 @@ final class AssertionHelper {
 
     private AssertionHelper() { }
 
+    // TODO: Move this method to a helpers.InitHelper class so it does not get imported with *.
     public static void init(final UITestContext testContext) {
         mAsserter = testContext.getAsserter();
     }
 
     public static void assertEquals(final Object expected, final Object actual) {
+        // TODO: Order correct?
         // TODO: name.
+        mAsserter.is(expected, actual, "");
+    }
+
+    public static void assertEquals(final int expected, final int actual) {
+        // TODO: See above.
         mAsserter.is(expected, actual, "");
     }
 
     public static void assertFalse(final boolean actual) {
         assertTrue(!actual);
+    }
+
+    public static void assertNotNull(final Object actual) {
+        // TODO: Order.
+        // TODO: name.
+        mAsserter.isnot(null, actual, "");
     }
 
     public static void assertTrue(final boolean actual) {

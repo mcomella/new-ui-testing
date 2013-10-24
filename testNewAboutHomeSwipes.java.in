@@ -1,7 +1,7 @@
 #filter substitution
 package @ANDROID_PACKAGE_NAME@.tests;
 
-import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
 
@@ -11,20 +11,19 @@ public class testNewAboutHomeSwipes extends UITest {
     public void testNewAboutHomeSwipes() {
         UITestCommon.blockForGeckoReady();
 
-        assertThat(ABOUTHOME).overridingErrorMessage("Bookmarks should be the initial page")
-                             .isVisible()
-                             .hasCurrentPage(Page.BOOKMARKS);
+        assertTrue(ABOUTHOME.isVisible());
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
 
         ABOUTHOME.swipeToNext();
-        assertThat(ABOUTHOME).hasCurrentPage(Page.READING_LIST);
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.READING_LIST));
 
         ABOUTHOME.swipeToPrevious();
-        assertThat(ABOUTHOME).hasCurrentPage(Page.BOOKMARKS);
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
 
         ABOUTHOME.swipeToPrevious();
-        assertThat(ABOUTHOME).hasCurrentPage(Page.HISTORY);
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.HISTORY));
 
         ABOUTHOME.swipeToNext();
-        assertThat(ABOUTHOME).hasCurrentPage(Page.BOOKMARKS);
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
     }
 }
