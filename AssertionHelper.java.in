@@ -1,0 +1,32 @@
+#filter substitution
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import @ANDROID_PACKAGE_NAME@.Assert;
+
+final class AssertionHelper {
+    private static Assert mAsserter;
+
+    private AssertionHelper() { }
+
+    public static void init(final UITestContext testContext) {
+        mAsserter = testContext.getAsserter();
+    }
+
+    public static void assertEquals(final Object expected, final Object actual) {
+        // TODO: name.
+        mAsserter.is(expected, actual, "");
+    }
+
+    public static void assertFalse(final boolean actual) {
+        assertTrue(!actual);
+    }
+
+    public static void assertTrue(final boolean actual) {
+        // TODO: Figure out what to do with name and diag fields.
+        mAsserter.ok(actual, "", "");
+    }
+}

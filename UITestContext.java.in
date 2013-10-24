@@ -6,8 +6,8 @@
 package @ANDROID_PACKAGE_NAME@.tests;
 
 import @ANDROID_PACKAGE_NAME@.Actions;
-import @ANDROID_PACKAGE_NAME@.Driver;
 import @ANDROID_PACKAGE_NAME@.Assert;
+import @ANDROID_PACKAGE_NAME@.Driver;
 
 import com.jayway.android.robotium.solo.Solo;
 
@@ -18,6 +18,8 @@ interface UITestContext {
     public Activity getActivity();
 
     public Solo getSolo();
+
+    public Assert getAsserter();
 
     public Driver getDriver();
 

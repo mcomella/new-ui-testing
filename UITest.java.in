@@ -146,6 +146,11 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     }
 
     @Override
+    public Assert getAsserter() {
+        return mAsserter;
+    }
+
+    @Override
     public Driver getDriver() {
         return mDriver;
     }
@@ -183,6 +188,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     }
 
     private void initHelpers() {
+        AssertionHelper.init(this);
         ViewHelper.init(this);
         WaitHelper.init(this);
         GestureHelper.init(this);
