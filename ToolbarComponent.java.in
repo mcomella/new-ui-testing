@@ -50,7 +50,7 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent(UITestContext testContext) {
         super(testContext);
 
-        mToolbarView = ViewHelper.findViewById(BROWSER_TOOLBAR_ID);
+        mToolbarView = mSolo.getView(BROWSER_TOOLBAR_ID);
         mUrlEditText = (TextView) ViewHelper.findViewById(mToolbarView, URL_EDIT_TEXT_ID);
         mUrlTitleText = (TextView) ViewHelper.findViewById(mToolbarView, URL_TITLE_TEXT_ID);
         mGoButton = (ImageButton) ViewHelper.findViewById(mToolbarView, GO_BUTTON_ID);

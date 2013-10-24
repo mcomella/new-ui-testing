@@ -20,21 +20,15 @@ final class ViewHelper {
     private ViewHelper() {
     }
 
-    public static void init(UITestContext testContext) {
+    public static void init(final UITestContext testContext) {
         sTestContext = testContext;
     }
 
-    public static View findViewById(String id) {
-        assertThat(sTestContext).isNotNull();
-
-        final Activity activity = sTestContext.getActivity();
-        final Driver driver = sTestContext.getDriver();
-
-        final Element element = driver.findElement(activity, id);
-        return activity.findViewById(element.getId());
-    }
-
-    public static View findViewById(View root, String id) {
+    /**
+     * Finds the View with the given ID at the given root. To find a View among all views, see
+     * Robotium's {@see Solo.getView}.
+     */
+    public static View findViewById(final View root, final String id) {
         assertThat(sTestContext).isNotNull();
 
         final Activity activity = sTestContext.getActivity();

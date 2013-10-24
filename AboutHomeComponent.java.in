@@ -46,7 +46,7 @@ class AboutHomeComponent extends UITestComponent {
     public AboutHomeComponent(UITestContext testContext) {
         super(testContext);
 
-        mHomePagerView = (ViewPager) ViewHelper.findViewById(HOME_PAGER_ID);
+        mHomePagerView = (ViewPager) mSolo.getView(HOME_PAGER_ID);
     }
 
     private boolean waitForCurrentItem(final int expectedItem) {
