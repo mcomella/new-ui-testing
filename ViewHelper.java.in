@@ -16,8 +16,7 @@ import android.view.View;
 final class ViewHelper {
     private static UITestContext sTestContext;
 
-    private ViewHelper() {
-    }
+    private ViewHelper() { /* To disallow instantiation. */ }
 
     public static void init(final UITestContext testContext) {
         sTestContext = testContext;
