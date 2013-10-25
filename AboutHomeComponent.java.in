@@ -17,20 +17,13 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 class AboutHomeComponent extends UITestComponent {
+    // TODO: Can we just import the enum directly?
+    // This enum should be kept in sync with ...home.HomePager.Page.
     public enum Page {
-        HISTORY(0),
-        BOOKMARKS(1),
-        READING_LIST(2);
-
-        private final int mIndex;
-
-        private Page(int index) {
-            mIndex = index;
-        }
-
-        public int getIndex() {
-            return mIndex;
-        }
+        HISTORY,
+        TOP_SITES,
+        BOOKMARKS,
+        READING_LIST
     }
 
     private static final String HOME_PAGER_ID = "home_pager";
