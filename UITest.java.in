@@ -82,6 +82,8 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
 
     @Override
     protected void setUp() throws Exception {
+        super.setUp();
+
         final String rootPath = FennecInstrumentationTestRunner.getFennecArguments().getString("deviceroot");
 
         // Read config file and convert it to a map
@@ -93,7 +95,10 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         setActivityIntent(intent);
 
         // Start the activity
-        mActivity = getActivity();
+        // TODO: Fix. getActivity() returns null so I call launchActivityWithIntent explicitly.
+        final String pkgName = getInstrumentation().getTargetContext().getPackageName();
+        mActivity = launchActivityWithIntent(pkgName, sLauncherActivityClass, intent);
+        //mActivity = getActivity();
 
         final String logFile = (String) config.get("logfile");
 
