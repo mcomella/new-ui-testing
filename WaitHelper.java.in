@@ -7,58 +7,25 @@ package @ANDROID_PACKAGE_NAME@.tests;
 
 import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
+import com.jayway.android.robotium.solo.Condition;
 import com.jayway.android.robotium.solo.Solo;
 
-import android.os.SystemClock;
-
 final class WaitHelper {
-    private static UITestContext sTestContext;
-
     private static final int DEFAULT_MAX_WAIT_MS = 5000;
 
-    public interface WaitTest {
-        public boolean test();
+    private static Solo sSolo;
+
+    private WaitHelper() { /* To disallow instantiation. */ }
+
+    public static void init(final UITestContext testContext) {
+        sSolo = testContext.getSolo();
     }
 
-    private WaitHelper() {
-    }
-
-    public static void init(UITestContext testContext) {
-        sTestContext = testContext;
-    }
-
-    public static boolean wait(WaitTest t) {
-        return wait(t, DEFAULT_MAX_WAIT_MS);
-    }
-
-    public static boolean wait(WaitTest t, int timeout) {
-        assertNotNull(sTestContext);
-
-        final Solo solo = sTestContext.getSolo();
-        final long end = SystemClock.uptimeMillis() + timeout;
-
-        while (SystemClock.uptimeMillis() < end) {
-            boolean result;
-            try {
-                result = t.test();
-            } catch (AssertionError ae) {
-                // We might want to assert inside in WaitTest in
-                // order to check expected state.
-                result = false;
-            }
-
-            if (result) {
-                return true;
-            }
-
-            solo.sleep(100);
-        }
-
-        // Log out wait failure for diagnostic purposes only;
-        // a failed wait may be normal and does not necessarily
-        // warrant a test assertion/failure.
-        sTestContext.dumpLog("WaitHelper.wait() timeout after " + timeout + " ms");
-
-        return false;
+    /**
+     * Waits for the given {@link Solo.Condition} using the default wait duration; will throw an
+     * AssertionError if the duration is elapsed and the condition is not satisfied.
+     */
+    public static void wait(final Condition condition) {
+        assertTrue(sSolo.waitForCondition(condition, DEFAULT_MAX_WAIT_MS));
     }
 }

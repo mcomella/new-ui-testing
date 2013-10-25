@@ -7,6 +7,8 @@ package @ANDROID_PACKAGE_NAME@.tests;
 
 import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
+import com.jayway.android.robotium.solo.Condition;
+
 import @ANDROID_PACKAGE_NAME@.Actions;
 
 import android.view.View;
@@ -74,27 +76,22 @@ class ToolbarComponent extends UITestComponent {
         assertFalse(isEditing());
 
         mSolo.clickOnView(getUrlTitleText(), true);
-
-        final boolean isEditing = WaitHelper.wait(new WaitHelper.WaitTest() {
+        // TODO: Previous comment: "Failed to update UI state for editing mode".
+        WaitHelper.wait(new Condition() {
             @Override
-            public boolean test() {
-                assertTrue(isEditing());
-                return true;
+            public boolean isSatisfied() {
+                return isEditing();
             }
         });
+        assertTrue(isEditing()); // TODO: Redundant.
 
-        // TODO: Previous comment: "Failed to update UI state for editing mode".
-        assertTrue(isEditing());
-
-        final boolean gotInput = WaitHelper.wait(new WaitHelper.WaitTest() {
+        // TODO: Previous comment: "Failed to get input focus on editing mode"
+        WaitHelper.wait(new Condition() {
             @Override
-            public boolean test() {
+            public boolean isSatisfied() {
                 return getUrlEditText().isInputMethodTarget();
             }
         });
-
-        // TODO: Previous comment: "Failed to get input focus on editing mode"
-        assertTrue(gotInput);
 
         return this;
     }
@@ -104,11 +101,10 @@ class ToolbarComponent extends UITestComponent {
 
         mSolo.clickOnView(getGoButton());
 
-        final boolean isNotEditing = WaitHelper.wait(new WaitHelper.WaitTest() {
+        WaitHelper.wait(new Condition() {
             @Override
-            public boolean test() {
-                assertFalse(isEditing());
-                return true;
+            public boolean isSatisfied() {
+                return !isEditing();
             }
         });
 
@@ -123,11 +119,10 @@ class ToolbarComponent extends UITestComponent {
 
         mActions.sendSpecialKey(Actions.SpecialKey.BACK);
 
-        final boolean isNotEditing = WaitHelper.wait(new WaitHelper.WaitTest() {
+        WaitHelper.wait(new Condition() {
             @Override
-            public boolean test() {
-                assertFalse(isEditing());
-                return true;
+            public boolean isSatisfied() {
+                return !isEditing();
             }
         });
 
@@ -138,7 +133,6 @@ class ToolbarComponent extends UITestComponent {
     }
 
     public ToolbarComponent enterUrl(String url) {
-        // Override error message
         assertTrue(isEditing());
         assertTrue(getUrlEditText().isInputMethodTarget());
 

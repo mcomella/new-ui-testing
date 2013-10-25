@@ -9,6 +9,7 @@ import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import @ANDROID_PACKAGE_NAME@.Actions;
 
+import com.jayway.android.robotium.solo.Condition;
 import com.jayway.android.robotium.solo.Solo;
 
 import android.support.v4.view.PagerAdapter;
@@ -50,12 +51,11 @@ class AboutHomeComponent extends UITestComponent {
         return getHomePagerView().getVisibility() == View.VISIBLE;
     }
 
-    private boolean waitForCurrentItem(final int expectedItem) {
-        return WaitHelper.wait(new WaitHelper.WaitTest() {
+    private void waitForCurrentItem(final int expectedItem) {
+        WaitHelper.wait(new Condition() {
             @Override
-            public boolean test() {
-                assertEquals(expectedItem, getHomePagerView().getCurrentItem());
-                return true;
+            public boolean isSatisfied() {
+                return getHomePagerView().getCurrentItem() == expectedItem;
             }
         });
     }
@@ -82,7 +82,7 @@ class AboutHomeComponent extends UITestComponent {
 
         // TODO: Previous error message might be useful:
         //     "Current item is not correct after swiping"
-        assertTrue(waitForCurrentItem(expectedItem));
+        waitForCurrentItem(expectedItem);
     }
 
     public AboutHomeComponent swipeToNext() {
