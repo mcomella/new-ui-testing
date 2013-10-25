@@ -37,6 +37,10 @@ final class UITestCommon {
 
     private UITestCommon() { /* To disallow instantiation. */ }
 
+    public static void init(UITest test) {
+        sTest = test;
+    }
+
     private static String adjustIfPredefined(String url) {
         if (TextUtils.equals(url, BLANK01_URL) ||
             TextUtils.equals(url, BLANK02_URL) ||
@@ -45,10 +49,6 @@ final class UITestCommon {
         }
 
         return url;
-    }
-
-    public static void init(UITest test) {
-        sTest = test;
     }
 
     public static void blockForGeckoReady() {
