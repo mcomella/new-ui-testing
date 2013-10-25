@@ -28,4 +28,12 @@ final class WaitHelper {
     public static void wait(final Condition condition) {
         assertTrue(sSolo.waitForCondition(condition, DEFAULT_MAX_WAIT_MS));
     }
+
+    /**
+     * Waits for the given {@link Solo.Condition} using the given wait duration; will throw an
+     * AssertionError if the duration is elapsed and the condition is not satisfied.
+     */
+    public static void wait(final Condition condition, final int waitMillis) {
+        assertTrue(sSolo.waitForCondition(condition, waitMillis));
+    }
 }
