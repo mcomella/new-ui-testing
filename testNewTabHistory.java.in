@@ -1,8 +1,6 @@
 #filter substitution
 package @ANDROID_PACKAGE_NAME@.tests;
 
-import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
-
 /* Test correct state for URL bar after loading pages.
  */
 public class testNewTabHistory extends UITest {
@@ -10,31 +8,31 @@ public class testNewTabHistory extends UITest {
         UITestCommon.blockForGeckoReady();
 
         UITestCommon.enterAndLoadUrl(UITestCommon.BLANK01_URL);
-        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK01_TITLE)
-                           .hasUrl(UITestCommon.BLANK01_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK01_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK01_URL));
 
         UITestCommon.enterAndLoadUrl(UITestCommon.BLANK02_URL);
-        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK02_TITLE)
-                           .hasUrl(UITestCommon.BLANK02_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK02_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK02_URL));
 
         UITestCommon.enterAndLoadUrl(UITestCommon.BLANK03_URL);
-        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK03_TITLE)
-                           .hasUrl(UITestCommon.BLANK03_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK03_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK03_URL));
 
         UITestCommon.goBack();
-        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK02_TITLE)
-                           .hasUrl(UITestCommon.BLANK02_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK02_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK02_URL));
 
         UITestCommon.goBack();
-        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK01_TITLE)
-                           .hasUrl(UITestCommon.BLANK01_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK01_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK01_URL));
 
         UITestCommon.goForward();
-        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK02_TITLE)
-                           .hasUrl(UITestCommon.BLANK02_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK02_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK02_URL));
 
         UITestCommon.reload();
-        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK02_TITLE)
-                           .hasUrl(UITestCommon.BLANK02_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK02_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK02_URL));
     }
 }

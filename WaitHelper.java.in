@@ -5,7 +5,7 @@
 
 package @ANDROID_PACKAGE_NAME@.tests;
 
-import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import com.jayway.android.robotium.solo.Solo;
 
@@ -32,7 +32,7 @@ final class WaitHelper {
     }
 
     public static boolean wait(WaitTest t, int timeout) {
-        assertThat(sTestContext).isNotNull();
+        assertNotNull(sTestContext);
 
         final Solo solo = sTestContext.getSolo();
         final long end = SystemClock.uptimeMillis() + timeout;

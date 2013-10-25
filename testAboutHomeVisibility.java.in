@@ -2,7 +2,6 @@
 package @ANDROID_PACKAGE_NAME@.tests;
 
 import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
-import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
 
 import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
 
@@ -13,21 +12,21 @@ public class testAboutHomeVisibility extends UITest {
         UITestCommon.blockForGeckoReady();
 
         // Check initial state with about:home
-        assertThat(TOOLBAR).hasTitle(UITestCommon.ABOUT_HOME_TITLE)
-                           .hasUrl(UITestCommon.ABOUT_HOME_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.ABOUT_HOME_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.ABOUT_HOME_URL));
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
 
         // Go to blank 01
         UITestCommon.enterAndLoadUrl(UITestCommon.BLANK01_URL);
-        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK01_TITLE)
-                           .hasUrl(UITestCommon.BLANK01_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK01_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK01_URL));
         assertFalse(ABOUTHOME.isVisible());
 
         // Go to blank 02
         UITestCommon.enterAndLoadUrl(UITestCommon.BLANK02_URL);
-        assertThat(TOOLBAR).hasTitle(UITestCommon.BLANK02_TITLE)
-                           .hasUrl(UITestCommon.BLANK02_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK02_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK02_URL));
         assertFalse(ABOUTHOME.isVisible());
 
         // Enter editing mode, about:home UI should be visible
@@ -41,8 +40,8 @@ public class testAboutHomeVisibility extends UITest {
 
         // Loading about:home should show about:home again
         UITestCommon.enterAndLoadUrl(UITestCommon.ABOUT_HOME_URL);
-        assertThat(TOOLBAR).hasTitle(UITestCommon.ABOUT_HOME_TITLE)
-                           .hasUrl(UITestCommon.ABOUT_HOME_URL);
+        assertTrue(TOOLBAR.hasTitle(UITestCommon.ABOUT_HOME_TITLE));
+        assertTrue(TOOLBAR.hasUrl(UITestCommon.ABOUT_HOME_URL));
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
     }

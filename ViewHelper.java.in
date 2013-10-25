@@ -5,7 +5,7 @@
 
 package @ANDROID_PACKAGE_NAME@.tests;
 
-import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import @ANDROID_PACKAGE_NAME@.Driver;
 import @ANDROID_PACKAGE_NAME@.Element;
@@ -28,7 +28,7 @@ final class ViewHelper {
      * Robotium's {@see Solo.getView}.
      */
     public static View findViewById(final View root, final String id) {
-        assertThat(sTestContext).isNotNull();
+        assertNotNull(sTestContext);
 
         final Activity activity = sTestContext.getActivity();
         final Driver driver = sTestContext.getDriver();

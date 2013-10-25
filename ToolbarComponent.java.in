@@ -5,19 +5,13 @@
 
 package @ANDROID_PACKAGE_NAME@.tests;
 
-import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import @ANDROID_PACKAGE_NAME@.Actions;
-
-import org.fest.assertions.api.AbstractAssert;
-
-import com.jayway.android.robotium.solo.Solo;
 
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import org.fest.assertions.api.ANDROID;
 
 class ToolbarComponent extends UITestComponent {
     private static final String BROWSER_TOOLBAR_ID = "browser_toolbar";
@@ -26,8 +20,6 @@ class ToolbarComponent extends UITestComponent {
     private static final String GO_BUTTON_ID = "go";
     private static final String BACK_BUTTON_ID = "back";
     private static final String FORWARD_BUTTON_ID = "forward";
-
-    private static ToolbarComponentAssert sAssert;
 
     public ToolbarComponent(UITestContext testContext) {
         super(testContext);
@@ -63,21 +55,36 @@ class ToolbarComponent extends UITestComponent {
         return (ImageButton) ViewHelper.findViewById(getToolbarView(), FORWARD_BUTTON_ID);
     }
 
+    public boolean hasTitle(final String expected) {
+        return getUrlTitleText().getText().equals(expected);
+    }
+
+    public boolean hasUrl(final String expected) {
+        return getUrlEditText().getText().equals(expected);
+    }
+
+    public boolean isEditing() {
+        // TODO: Should UrlTitleText be View.GONE?
+        return getUrlTitleText().getVisibility() != View.VISIBLE &&
+                getUrlEditText().getVisibility() == View.VISIBLE &&
+                getGoButton().getVisibility() == View.VISIBLE;
+    }
+
     public ToolbarComponent enterEditingMode() {
-        assertThat(this).isNotEditing();
+        assertFalse(isEditing());
 
         mSolo.clickOnView(getUrlTitleText(), true);
 
         final boolean isEditing = WaitHelper.wait(new WaitHelper.WaitTest() {
             @Override
             public boolean test() {
-                assertThat(ToolbarComponent.this).isEditing();
+                assertTrue(isEditing());
                 return true;
             }
         });
 
-        assertThat(isEditing).overridingErrorMessage("Failed to update UI state for editing mode")
-                             .isTrue();
+        // TODO: Previous comment: "Failed to update UI state for editing mode".
+        assertTrue(isEditing());
 
         final boolean gotInput = WaitHelper.wait(new WaitHelper.WaitTest() {
             @Override
@@ -86,54 +93,54 @@ class ToolbarComponent extends UITestComponent {
             }
         });
 
-        assertThat(gotInput).overridingErrorMessage("Failed to get input focus on editing mode")
-                            .isTrue();
+        // TODO: Previous comment: "Failed to get input focus on editing mode"
+        assertTrue(gotInput);
 
         return this;
     }
 
     public ToolbarComponent commitEditingMode() {
-        assertThat(this).isEditing();
+        assertTrue(isEditing());
 
         mSolo.clickOnView(getGoButton());
 
         final boolean isNotEditing = WaitHelper.wait(new WaitHelper.WaitTest() {
             @Override
             public boolean test() {
-                assertThat(ToolbarComponent.this).isNotEditing();
+                assertFalse(isEditing());
                 return true;
             }
         });
 
-        assertThat(isNotEditing).overridingErrorMessage("Failed to update UI state to commit editing mode")
-                                .isTrue();
+        // TODO: Previous comment: "Failed to update UI state to commit editing mode"
+        assertFalse(isEditing());
 
         return this;
     }
 
     public ToolbarComponent dismissEditingMode() {
-        assertThat(this).isEditing();
+        assertTrue(isEditing());
 
         mActions.sendSpecialKey(Actions.SpecialKey.BACK);
 
         final boolean isNotEditing = WaitHelper.wait(new WaitHelper.WaitTest() {
             @Override
             public boolean test() {
-                assertThat(ToolbarComponent.this).isNotEditing();
+                assertFalse(isEditing());
                 return true;
             }
         });
 
-        assertThat(isNotEditing).overridingErrorMessage("Failed to update UI state to dismiss editing mode")
-                                .isTrue();
+        // TODO: Previous comment: "Failed to update UI state to dismiss editing mode"
+        assertFalse(isEditing());
 
         return this;
     }
 
     public ToolbarComponent enterUrl(String url) {
         // Override error message
-        assertThat(this).isEditing();
-        assertThat(getUrlEditText().isInputMethodTarget()).isTrue();
+        assertTrue(isEditing());
+        assertTrue(getUrlEditText().isInputMethodTarget());
 
         mActions.sendKeys(url);
 
@@ -143,8 +150,8 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent pressBack() {
         final ImageButton backButton = getBackButton();
 
-        ANDROID.assertThat(backButton).isNotNull();
-        ANDROID.assertThat(backButton).isVisible();
+        assertNotNull(backButton);
+        assertTrue(backButton.getVisibility() == View.VISIBLE);
 
         mSolo.clickOnView(backButton);
 
@@ -154,66 +161,11 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent pressForward() {
         final ImageButton forwardButton = getForwardButton();
 
-        ANDROID.assertThat(forwardButton).isNotNull();
-        ANDROID.assertThat(forwardButton).isVisible();
+        assertNotNull(forwardButton);
+        assertTrue(forwardButton.getVisibility() == View.VISIBLE);
 
         mSolo.clickOnView(forwardButton);
 
         return this;
-    }
-
-    public static ToolbarComponentAssert getAssertInstance(ToolbarComponent actual) {
-        // It's safe to assume the 'actual' object will always be the same
-        // here as ToolbarComponent is a singleton (see UITest).
-        if (sAssert == null) {
-            sAssert = new ToolbarComponentAssert(actual);
-        }
-
-        return sAssert;
-    }
-
-    public static class ToolbarComponentAssert extends AbstractAssert<ToolbarComponentAssert, ToolbarComponent> {
-        private final ToolbarComponent mActual;
-
-        public ToolbarComponentAssert(ToolbarComponent actual) {
-            super(actual, ToolbarComponentAssert.class);
-            mActual = actual;
-        }
-
-        public ToolbarComponentAssert isEditing() {
-            isNotNull();
-
-            ANDROID.assertThat(mActual.getUrlTitleText()).isGone();
-            ANDROID.assertThat(mActual.getUrlEditText()).isVisible();
-            ANDROID.assertThat(mActual.getGoButton()).isVisible();
-
-            return this;
-        }
-
-        public ToolbarComponentAssert isNotEditing() {
-            isNotNull();
-
-            ANDROID.assertThat(mActual.getUrlTitleText()).isVisible();
-            ANDROID.assertThat(mActual.getUrlEditText()).isGone();
-            ANDROID.assertThat(mActual.getGoButton()).isGone();
-
-            return this;
-        }
-
-        public ToolbarComponentAssert hasTitle(String title) {
-            isNotNull();
-
-            ANDROID.assertThat(mActual.getUrlTitleText()).hasTextString(title);
-
-            return this;
-        }
-
-        public ToolbarComponentAssert hasUrl(String url) {
-            isNotNull();
-
-            ANDROID.assertThat(mActual.getUrlEditText()).hasTextString(url);
-
-            return this;
-        }
     }
 }

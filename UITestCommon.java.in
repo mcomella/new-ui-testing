@@ -5,7 +5,7 @@
 
 package @ANDROID_PACKAGE_NAME@.tests;
 
-import static @ANDROID_PACKAGE_NAME@.tests.UITestAssertions.assertThat;
+import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import @ANDROID_PACKAGE_NAME@.Actions;
 import @ANDROID_PACKAGE_NAME@.Actions.EventExpecter;
@@ -78,8 +78,8 @@ final class UITestCommon {
     }
 
     public static void enterAndLoadUrl(String url) {
-        assertThat(sTest).isNotNull();
-        assertThat(sTest.TOOLBAR).isNotNull();
+        assertNotNull(sTest);
+        assertNotNull(sTest.TOOLBAR);
 
         final Actions actions = sTest.getActions();
 
@@ -97,10 +97,10 @@ final class UITestCommon {
     }
 
     public static void goBack() {
-        assertThat(sTest).isNotNull();
+        assertNotNull(sTest);
 
         if (sTest.getDevice().isTablet()) {
-            assertThat(sTest.TOOLBAR).isNotNull();
+            assertNotNull(sTest.TOOLBAR);
             sTest.TOOLBAR.pressBack();
         } else {
             sTest.getActions().sendSpecialKey(Actions.SpecialKey.BACK);
@@ -110,10 +110,10 @@ final class UITestCommon {
     }
 
     public static void goForward() {
-        assertThat(sTest).isNotNull();
+        assertNotNull(sTest);
 
         if (sTest.getDevice().isTablet()) {
-            assertThat(sTest.TOOLBAR).isNotNull();
+            assertNotNull(sTest.TOOLBAR);
             sTest.TOOLBAR.pressForward();
         } else {
             // TODO: Press forward with APPMENU component
