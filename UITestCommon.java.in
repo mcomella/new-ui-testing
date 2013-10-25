@@ -35,8 +35,7 @@ final class UITestCommon {
     // UI test currently running
     private static UITest sTest;
 
-    private UITestCommon() {
-    }
+    private UITestCommon() { /* To disallow instantiation. */ }
 
     private static String adjustIfPredefined(String url) {
         if (TextUtils.equals(url, BLANK01_URL) ||
