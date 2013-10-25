@@ -18,6 +18,7 @@ import android.widget.TextView;
 class ToolbarComponent extends UITestComponent {
     private static final String BROWSER_TOOLBAR_ID = "browser_toolbar";
     private static final String URL_EDIT_TEXT_ID = "url_edit_text";
+    private static final String URL_DISPLAY_CONTAINER_ID = "url_display_container";
     private static final String URL_TITLE_TEXT_ID = "url_bar_title";
     private static final String GO_BUTTON_ID = "go";
     private static final String BACK_BUTTON_ID = "back";
@@ -36,6 +37,10 @@ class ToolbarComponent extends UITestComponent {
 
     TextView getUrlEditText() {
         return (TextView) ViewHelper.findViewById(getToolbarView(), URL_EDIT_TEXT_ID);
+    }
+
+    View getUrlDisplayContainer() {
+        return ViewHelper.findViewById(getToolbarView(), URL_DISPLAY_CONTAINER_ID);
     }
 
     TextView getUrlTitleText() {
@@ -66,8 +71,7 @@ class ToolbarComponent extends UITestComponent {
     }
 
     public boolean isEditing() {
-        // TODO: Should UrlTitleText be View.GONE?
-        return getUrlTitleText().getVisibility() != View.VISIBLE &&
+        return getUrlDisplayContainer().getVisibility() != View.VISIBLE &&
                 getUrlEditText().getVisibility() == View.VISIBLE &&
                 getGoButton().getVisibility() == View.VISIBLE;
     }
