@@ -139,6 +139,14 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         TOOLBAR = new ToolbarComponent(this);
     }
 
+    private void initHelpers() {
+        AssertionHelper.init(this);
+        GestureHelper.init(this);
+        UITestCommon.init(this);
+        ViewHelper.init(this);
+        WaitHelper.init(this);
+    }
+
     @Override
     public Activity getActivity() {
         return mActivity;
@@ -189,14 +197,6 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
 
     protected final String getAbsoluteRawUrl(String url) {
         return mRawBaseUrl + "/" + url.replaceAll("(^/)", "");
-    }
-
-    private void initHelpers() {
-        AssertionHelper.init(this);
-        ViewHelper.init(this);
-        WaitHelper.init(this);
-        GestureHelper.init(this);
-        UITestCommon.init(this);
     }
 
     private static HashMap loadConfigTable(String rootPath) {
