@@ -121,6 +121,11 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent dismissEditingMode() {
         assertTrue(isEditing());
 
+        // TODO: Better way to drop the soft keyboard? Is this the most correct way? etc.
+        if (getUrlEditText().hasFocus()) {
+            // Drop the soft keyboard.
+            mActions.sendSpecialKey(Actions.SpecialKey.BACK);
+        }
         mActions.sendSpecialKey(Actions.SpecialKey.BACK);
 
         WaitHelper.wait(new Condition() {
