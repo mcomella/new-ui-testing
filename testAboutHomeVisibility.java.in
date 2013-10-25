@@ -15,10 +15,11 @@ public class testAboutHomeVisibility extends UITest {
         assertTrue(TOOLBAR.hasTitle(UITestCommon.ABOUT_HOME_TITLE));
         assertTrue(TOOLBAR.hasUrl(UITestCommon.ABOUT_HOME_URL));
         assertTrue(ABOUTHOME.isVisible());
-        assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
 
         // Go to blank 01
         UITestCommon.enterAndLoadUrl(UITestCommon.BLANK01_URL);
+        // TODO: Assertion below failed.
         assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK01_TITLE));
         assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK01_URL));
         assertFalse(ABOUTHOME.isVisible());
@@ -32,7 +33,7 @@ public class testAboutHomeVisibility extends UITest {
         // Enter editing mode, about:home UI should be visible
         TOOLBAR.enterEditingMode();
         assertTrue(ABOUTHOME.isVisible());
-        assertTrue(ABOUTHOME.hasCurrentPage(Page.HISTORY));
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
 
         // Dismiss editing mode, about:home UI should be gone
         TOOLBAR.dismissEditingMode();
@@ -43,6 +44,6 @@ public class testAboutHomeVisibility extends UITest {
         assertTrue(TOOLBAR.hasTitle(UITestCommon.ABOUT_HOME_TITLE));
         assertTrue(TOOLBAR.hasUrl(UITestCommon.ABOUT_HOME_URL));
         assertTrue(ABOUTHOME.isVisible());
-        assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
     }
 }
