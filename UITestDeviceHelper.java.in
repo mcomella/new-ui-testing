@@ -11,9 +11,9 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.util.DisplayMetrics;
-
-import static org.fest.reflect.core.Reflection.method;
-import static org.fest.reflect.core.Reflection.type;
+import java.lang.Class;
+import java.lang.ClassLoader;
+import java.lang.reflect.Method;
 
 class UITestDeviceHelper {
     private static final String APP_SHELL_CLASS = "org.mozilla.gecko.GeckoAppShell";
@@ -68,14 +68,11 @@ class UITestDeviceHelper {
         // Determine device type
         boolean isTablet = false;
         try {
-            // Load GeckoAppShell.class
+            // TODO: Bug 709230: Remove reflection?
             final ClassLoader cl = activity.getClassLoader();
-            final Class appShellClass = type(APP_SHELL_CLASS).withClassLoader(cl).load();
-
-            // Call GeckoAppShell.isTablet()
-            isTablet = method("isTablet").withReturnType(Boolean.class)
-                                         .in(appShellClass)
-                                         .invoke();
+            final Class appShellClass = cl.loadClass(APP_SHELL_CLASS);
+            final Method isTabletMethod = appShellClass.getMethod("isTablet");
+            isTablet = ((Boolean) isTabletMethod.invoke(null)).booleanValue();
         } catch (Exception e) {
             mTestContext.dumpLog("Exception in detectDevice", e);
         }

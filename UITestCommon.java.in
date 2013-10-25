@@ -12,9 +12,9 @@ import @ANDROID_PACKAGE_NAME@.Actions.EventExpecter;
 
 import android.app.Activity;
 import android.text.TextUtils;
-
-import static org.fest.reflect.core.Reflection.method;
-import static org.fest.reflect.core.Reflection.type;
+import java.lang.Class;
+import java.lang.ClassLoader;
+import java.lang.reflect.Method;
 
 final class UITestCommon {
     private static final String GECKO_THREAD_CLASS = "org.mozilla.gecko.GeckoThread";
@@ -56,16 +56,16 @@ final class UITestCommon {
         try {
             final Actions actions = sTest.getActions();
 
-            EventExpecter geckoReady = actions.expectGeckoEvent("Gecko:Ready");
+            final EventExpecter geckoReady = actions.expectGeckoEvent("Gecko:Ready");
 
+            // TODO: Bug 709230: Remove reflection?
             final ClassLoader cl = sTest.getActivity().getClassLoader();
-            final Class geckoThreadClass = type(GECKO_THREAD_CLASS).withClassLoader(cl).load();
-            final Class launchStateClass = type(LAUNCH_STATE_CLASS).withClassLoader(cl).load();
-
-            boolean isReady = method("checkLaunchState").withReturnType(Boolean.class)
-                                                        .withParameterTypes(launchStateClass)
-                                                        .in(geckoThreadClass)
-                                                        .invoke(launchStateClass.getEnumConstants()[3]);
+            final Class geckoThreadClass = cl.loadClass(GECKO_THREAD_CLASS);
+            final Class launchStateClass = cl.loadClass(LAUNCH_STATE_CLASS);
+            final Method checkLaunchStateMethod =
+                    geckoThreadClass.getMethod("checkLaunchState", launchStateClass);
+            final boolean isReady = ((Boolean) checkLaunchStateMethod.invoke(null,
+                    launchStateClass.getEnumConstants()[3])).booleanValue();
 
             if (!isReady) {
                 geckoReady.blockForEvent();
