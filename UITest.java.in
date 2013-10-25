@@ -77,7 +77,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     }
 
     public UITest() {
-        super(TARGET_PACKAGE_ID, sLauncherActivityClass);
+        super(sLauncherActivityClass);
     }
 
     @Override
