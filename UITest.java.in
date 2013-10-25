@@ -64,11 +64,9 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     // Context instance used to instantiate UI test components
     private static UITestContext sTestContext;
 
-    // AboutHome component
-    static final AboutHomeComponent ABOUTHOME = new AboutHomeComponent(sTestContext);
-
-    // Toolbar component
-    static final ToolbarComponent TOOLBAR = new ToolbarComponent(sTestContext);
+    // TODO: These aren't constants. Keep capitalized?
+    AboutHomeComponent ABOUTHOME;
+    ToolbarComponent TOOLBAR;
 
     static {
         try {
@@ -116,6 +114,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         mBaseUrl = ((String) config.get("host")).replaceAll("(/$)", "");
         mRawBaseUrl = ((String) config.get("rawhost")).replaceAll("(/$)", "");
 
+        initComponents();
         initHelpers();
 
         // Set context used to lazy-load UI test components
@@ -133,6 +132,11 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         }
 
         super.tearDown();
+    }
+
+    private void initComponents() throws Exception {
+        ABOUTHOME = new AboutHomeComponent(this);
+        TOOLBAR = new ToolbarComponent(this);
     }
 
     @Override
