@@ -17,11 +17,11 @@ final class GestureHelper {
 
     private GestureHelper() { /* To disallow instantation. */ }
 
-    public static void init(UITestContext testContext) {
+    public static void init(final UITestContext testContext) {
         sTestContext = testContext;
     }
 
-    private static void swipeOnScreen(int direction) {
+    private static void swipeOnScreen(final int direction) {
         assertNotNull(sTestContext);
 
         final Actions actions = sTestContext.getActions();
