@@ -12,9 +12,6 @@ import @ANDROID_PACKAGE_NAME@.Driver;
 
 import com.jayway.android.robotium.solo.Solo;
 
-import android.app.Activity;
-import android.view.View;
-
 final class GestureHelper {
     private static UITestContext sTestContext;
 
