@@ -13,7 +13,6 @@ public class testAboutHomeVisibility extends UITest {
 
         // Check initial state with about:home
         assertTrue(TOOLBAR.hasTitle(UITestCommon.ABOUT_HOME_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.ABOUT_HOME_URL));
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
 
@@ -21,13 +20,11 @@ public class testAboutHomeVisibility extends UITest {
         UITestCommon.enterAndLoadUrl(UITestCommon.BLANK01_URL);
         // TODO: Assertion below failed.
         assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK01_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK01_URL));
         assertFalse(ABOUTHOME.isVisible());
 
         // Go to blank 02
         UITestCommon.enterAndLoadUrl(UITestCommon.BLANK02_URL);
         assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK02_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK02_URL));
         assertFalse(ABOUTHOME.isVisible());
 
         // Enter editing mode, about:home UI should be visible
@@ -42,7 +39,6 @@ public class testAboutHomeVisibility extends UITest {
         // Loading about:home should show about:home again
         UITestCommon.enterAndLoadUrl(UITestCommon.ABOUT_HOME_URL);
         assertTrue(TOOLBAR.hasTitle(UITestCommon.ABOUT_HOME_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.ABOUT_HOME_URL));
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
     }
