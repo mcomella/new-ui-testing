@@ -16,7 +16,14 @@ import java.lang.Class;
 import java.lang.ClassLoader;
 import java.lang.reflect.Method;
 
-final class UITestCommon {
+/**
+ * A Helper for common use cases combining multiple components or not belonging to a particular
+ * component.
+ *
+ * To prevent code crufting, this should not be a miscellaneous "dump everything!" class - new
+ * Components should be freely created, even for lone methods.
+ */
+final class CommonUseHelper {
     private static final String GECKO_THREAD_CLASS = "org.mozilla.gecko.GeckoThread";
     private static final String LAUNCH_STATE_CLASS = GECKO_THREAD_CLASS + "$LaunchState";
 
@@ -35,7 +42,7 @@ final class UITestCommon {
     // UI test currently running
     private static UITest sTest;
 
-    private UITestCommon() { /* To disallow instantiation. */ }
+    private CommonUseHelper() { /* To disallow instantiation. */ }
 
     public static void init(UITest test) {
         sTest = test;

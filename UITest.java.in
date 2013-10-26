@@ -146,8 +146,8 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
 
     private void initHelpers() {
         AssertionHelper.init(this);
+        CommonUseHelper.init(this);
         GestureHelper.init(this);
-        UITestCommon.init(this);
         ViewHelper.init(this);
         WaitHelper.init(this);
     }

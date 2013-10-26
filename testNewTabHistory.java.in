@@ -5,34 +5,34 @@ package @ANDROID_PACKAGE_NAME@.tests;
  */
 public class testNewTabHistory extends UITest {
     public void testNewTabHistory() {
-        UITestCommon.blockForGeckoReady();
+        CommonUseHelper.blockForGeckoReady();
 
-        UITestCommon.enterAndLoadUrl(UITestCommon.BLANK01_URL);
-        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK01_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK01_URL));
+        CommonUseHelper.enterAndLoadUrl(CommonUseHelper.BLANK01_URL);
+        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK01_TITLE));
+        assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK01_URL));
 
-        UITestCommon.enterAndLoadUrl(UITestCommon.BLANK02_URL);
-        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK02_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK02_URL));
+        CommonUseHelper.enterAndLoadUrl(CommonUseHelper.BLANK02_URL);
+        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK02_TITLE));
+        assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK02_URL));
 
-        UITestCommon.enterAndLoadUrl(UITestCommon.BLANK03_URL);
-        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK03_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK03_URL));
+        CommonUseHelper.enterAndLoadUrl(CommonUseHelper.BLANK03_URL);
+        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK03_TITLE));
+        assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK03_URL));
 
-        UITestCommon.goBack();
-        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK02_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK02_URL));
+        CommonUseHelper.goBack();
+        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK02_TITLE));
+        assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK02_URL));
 
-        UITestCommon.goBack();
-        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK01_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK01_URL));
+        CommonUseHelper.goBack();
+        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK01_TITLE));
+        assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK01_URL));
 
-        UITestCommon.goForward();
-        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK02_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK02_URL));
+        CommonUseHelper.goForward();
+        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK02_TITLE));
+        assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK02_URL));
 
-        UITestCommon.reload();
-        assertTrue(TOOLBAR.hasTitle(UITestCommon.BLANK02_TITLE));
-        assertTrue(TOOLBAR.hasUrl(UITestCommon.BLANK02_URL));
+        CommonUseHelper.reload();
+        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK02_TITLE));
+        assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK02_URL));
     }
 }

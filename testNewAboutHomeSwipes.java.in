@@ -9,7 +9,7 @@ import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
  */
 public class testNewAboutHomeSwipes extends UITest {
     public void testNewAboutHomeSwipes() {
-        UITestCommon.blockForGeckoReady();
+        CommonUseHelper.blockForGeckoReady();
 
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
