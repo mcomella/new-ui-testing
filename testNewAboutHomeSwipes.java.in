@@ -8,12 +8,20 @@ import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
 /* Test correct state for URL bar after loading pages.
  */
 public class testNewAboutHomeSwipes extends UITest {
+    // TODO: Make this abstract using the Page enum.
     public void testNewAboutHomeSwipes() {
         CommonUseHelper.blockForGeckoReady();
 
         assertTrue(ABOUTHOME.isVisible());
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
+
+        ABOUTHOME.swipeToNext();
         assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
 
+        ABOUTHOME.swipeToNext();
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.READING_LIST));
+
+        // Edge case.
         ABOUTHOME.swipeToNext();
         assertTrue(ABOUTHOME.hasCurrentPage(Page.READING_LIST));
 
@@ -21,9 +29,16 @@ public class testNewAboutHomeSwipes extends UITest {
         assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
 
         ABOUTHOME.swipeToPrevious();
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
+
+        ABOUTHOME.swipeToPrevious();
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.HISTORY));
+
+        // Edge case.
+        ABOUTHOME.swipeToPrevious();
         assertTrue(ABOUTHOME.hasCurrentPage(Page.HISTORY));
 
         ABOUTHOME.swipeToNext();
-        assertTrue(ABOUTHOME.hasCurrentPage(Page.BOOKMARKS));
+        assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
     }
 }
