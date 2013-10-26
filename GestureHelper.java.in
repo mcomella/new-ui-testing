@@ -15,8 +15,7 @@ import com.jayway.android.robotium.solo.Solo;
 final class GestureHelper {
     private static UITestContext sTestContext;
 
-    private GestureHelper() {
-    }
+    private GestureHelper() { /* To disallow instantation. */ }
 
     public static void init(UITestContext testContext) {
         sTestContext = testContext;
