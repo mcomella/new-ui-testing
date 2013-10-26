@@ -25,7 +25,6 @@ import java.util.HashMap;
 
 abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
                       implements UITestContext {
-
     protected enum Type {
         MOCHITEST,
         TALOS
@@ -34,35 +33,21 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     private static final String LAUNCHER_ACTIVITY ="@ANDROID_PACKAGE_NAME@.App";
     private static final String TARGET_PACKAGE_ID = "org.mozilla.gecko";
 
-    // Activity class to be launched for the UI test
     private static Class<Activity> sLauncherActivityClass;
+    private static UITestContext sTestContext;
 
-    // The target activity of this UI test
     private Activity mActivity;
-
-    // The robotium Solo instance for event injection
     private Solo mSolo;
-
-    // Native test driver utils for Fennec
     private Driver mDriver;
-
-    // Native fennec actions
     private Actions mActions;
-
-    // Logging and assertion utilities
     private Assert mAsserter;
 
-    // Device associated with the test
     private UITestDeviceHelper mDevice;
 
     // Base to build absolute URLs
     private String mBaseUrl;
-
     // Base to build raw absolute URLs
     private String mRawBaseUrl;
-
-    // Context instance used to instantiate UI test components
-    private static UITestContext sTestContext;
 
     // TODO: These aren't constants. Keep capitalized?
     AboutHomeComponent ABOUTHOME;
