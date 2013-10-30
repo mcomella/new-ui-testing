@@ -44,11 +44,11 @@ final class CommonUseHelper {
 
     private CommonUseHelper() { /* To disallow instantiation. */ }
 
-    public static void init(UITest test) {
+    public static void init(final UITest test) {
         sTest = test;
     }
 
-    private static String adjustIfPredefined(String url) {
+    private static String adjustIfPredefined(final String url) {
         if (TextUtils.equals(url, BLANK01_URL) ||
             TextUtils.equals(url, BLANK02_URL) ||
             TextUtils.equals(url, BLANK03_URL)) {
