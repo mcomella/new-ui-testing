@@ -10,7 +10,7 @@ import @ANDROID_PACKAGE_NAME@.Assert;
 final class AssertionHelper {
     private static Assert mAsserter;
 
-    private AssertionHelper() { }
+    private AssertionHelper() { /* To disallow instantation. */ }
 
     // TODO: Move this method to a helpers.InitHelper class so it does not get imported with *.
     public static void init(final UITestContext testContext) {
