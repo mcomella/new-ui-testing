@@ -24,7 +24,7 @@ final class DeviceHelper {
     public static final int VERSION_4x = 2;
 
     // VERSION_2X or VERSION_3X or VERSION_4X
-    public static int version;
+    public static int sVersion;
 
     public enum Type {
         PHONE,
@@ -34,13 +34,13 @@ final class DeviceHelper {
     private static UITestContext sTestContext;
 
     // Type of device (phone or tablet)
-    public static Type type;
+    public static Type sType;
 
     // Screen width
-    public static int width;
+    public static int sWidth;
 
     // Screen height
-    public static int height;
+    public static int sHeight;
 
     public DeviceHelper() { /* To disallow instantiation. */ }
 
@@ -50,12 +50,12 @@ final class DeviceHelper {
         // Determine device version
         int sdk = Build.VERSION.SDK_INT;
         if (sdk < Build.VERSION_CODES.HONEYCOMB) {
-            version = VERSION_2x;
+            sVersion = VERSION_2x;
         } else {
             if (sdk > Build.VERSION_CODES.HONEYCOMB_MR2) {
-                version = VERSION_4x;
+                sVersion = VERSION_4x;
             } else {
-                version = VERSION_3x;
+                sVersion = VERSION_3x;
             }
         }
 
@@ -64,8 +64,8 @@ final class DeviceHelper {
         // Determine width and height
         final DisplayMetrics dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        height = dm.heightPixels;
-        width = dm.widthPixels;
+        sHeight = dm.heightPixels;
+        sWidth = dm.widthPixels;
 
         // Determine device type
         boolean isTablet = false;
@@ -79,15 +79,15 @@ final class DeviceHelper {
             sTestContext.dumpLog("Exception in detectDevice", e);
         }
 
-        type = (isTablet ? Type.TABLET : Type.PHONE);
+        sType = (isTablet ? Type.TABLET : Type.PHONE);
     }
 
     public static boolean isPhone() {
-        return (type == Type.PHONE);
+        return (sType == Type.PHONE);
     }
 
     public static boolean isTablet() {
-        return (type == Type.TABLET);
+        return (sType == Type.TABLET);
     }
 
     public static void rotate() {
