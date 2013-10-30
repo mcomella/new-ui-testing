@@ -31,11 +31,11 @@ final class DeviceHelper {
 
     private static UITestContext sTestContext;
 
-    public static Type sType;
-    public static AndroidPlatformVersion sVersion;
+    private static Type sType;
+    private static AndroidPlatformVersion sVersion;
 
-    public static int sScreenWidth;
-    public static int sScreenHeight;
+    private static int sScreenHeight;
+    private static int sScreenWidth;
 
     public DeviceHelper() { /* To disallow instantiation. */ }
 
@@ -75,6 +75,18 @@ final class DeviceHelper {
         }
 
         sType = (isTablet ? Type.TABLET : Type.PHONE);
+    }
+
+    public static int getScreenHeight() {
+        return sScreenHeight;
+    }
+
+    public static int getScreenWidth() {
+        return sScreenWidth;
+    }
+
+    public static AndroidPlatformVersion getVersion() {
+        return sVersion;
     }
 
     public static boolean isPhone() {
