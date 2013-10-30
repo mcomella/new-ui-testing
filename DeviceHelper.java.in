@@ -15,7 +15,7 @@ import java.lang.Class;
 import java.lang.ClassLoader;
 import java.lang.reflect.Method;
 
-class UITestDeviceHelper {
+final class DeviceHelper {
     private static final String APP_SHELL_CLASS = "org.mozilla.gecko.GeckoAppShell";
 
     // Android platform version ranges
@@ -42,7 +42,7 @@ class UITestDeviceHelper {
     // Screen height
     public final int height;
 
-    public UITestDeviceHelper(UITestContext testContext) {
+    public DeviceHelper(final UITestContext testContext) {
         mTestContext = testContext;
 
         // Determine device version
