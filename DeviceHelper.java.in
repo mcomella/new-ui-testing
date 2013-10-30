@@ -31,8 +31,8 @@ final class DeviceHelper {
 
     private static UITestContext sTestContext;
 
-    private static Type sType;
-    private static AndroidPlatformVersion sVersion;
+    private static Type sDeviceType;
+    private static AndroidPlatformVersion sAndroidVersion;
 
     private static int sScreenHeight;
     private static int sScreenWidth;
@@ -42,20 +42,20 @@ final class DeviceHelper {
     public static void init(final UITestContext context) {
         sTestContext = context;
 
-        setVersion();
+        setAndroidVersion();
         setScreenDimensions();
-        setType();
+        setDeviceType();
     }
 
-    private static void setVersion() {
+    private static void setAndroidVersion() {
         int sdk = Build.VERSION.SDK_INT;
         if (sdk < Build.VERSION_CODES.HONEYCOMB) {
-            sVersion = AndroidPlatformVersion.v2x;
+            sAndroidVersion = AndroidPlatformVersion.v2x;
         } else {
             if (sdk > Build.VERSION_CODES.HONEYCOMB_MR2) {
-                sVersion = AndroidPlatformVersion.v4x;
+                sAndroidVersion = AndroidPlatformVersion.v4x;
             } else {
-                sVersion = AndroidPlatformVersion.v3x;
+                sAndroidVersion = AndroidPlatformVersion.v3x;
             }
         }
     }
@@ -68,7 +68,7 @@ final class DeviceHelper {
         sScreenWidth = dm.widthPixels;
     }
 
-    private static void setType() {
+    private static void setDeviceType() {
         final Activity activity = sTestContext.getActivity();
         boolean isTablet = false;
         try {
@@ -81,7 +81,7 @@ final class DeviceHelper {
             sTestContext.dumpLog("Exception in detectDevice", e);
         }
 
-        sType = (isTablet ? Type.TABLET : Type.PHONE);
+        sDeviceType = (isTablet ? Type.TABLET : Type.PHONE);
     }
 
     public static int getScreenHeight() {
@@ -92,16 +92,16 @@ final class DeviceHelper {
         return sScreenWidth;
     }
 
-    public static AndroidPlatformVersion getVersion() {
-        return sVersion;
+    public static AndroidPlatformVersion getAndroidVersion() {
+        return sAndroidVersion;
     }
 
     public static boolean isPhone() {
-        return (sType == Type.PHONE);
+        return (sDeviceType == Type.PHONE);
     }
 
     public static boolean isTablet() {
-        return (sType == Type.TABLET);
+        return (sDeviceType == Type.TABLET);
     }
 
     public static void rotate() {
