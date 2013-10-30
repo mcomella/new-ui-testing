@@ -51,12 +51,10 @@ final class DeviceHelper {
         int sdk = Build.VERSION.SDK_INT;
         if (sdk < Build.VERSION_CODES.HONEYCOMB) {
             sAndroidVersion = AndroidPlatformVersion.v2x;
+        } else if (sdk > Build.VERSION_CODES.HONEYCOMB_MR2) {
+            sAndroidVersion = AndroidPlatformVersion.v4x;
         } else {
-            if (sdk > Build.VERSION_CODES.HONEYCOMB_MR2) {
-                sAndroidVersion = AndroidPlatformVersion.v4x;
-            } else {
-                sAndroidVersion = AndroidPlatformVersion.v3x;
-            }
+            sAndroidVersion = AndroidPlatformVersion.v3x;
         }
     }
 
