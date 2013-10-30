@@ -42,8 +42,6 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     private Actions mActions;
     private Assert mAsserter;
 
-    private DeviceHelper mDevice;
-
     // Base to build absolute URLs
     private String mBaseUrl;
     // Base to build raw absolute URLs
@@ -99,7 +97,6 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         mSolo = new Solo(getInstrumentation(), mActivity);
         mDriver = new FennecNativeDriver(mActivity, mSolo, rootPath);
         mActions = new FennecNativeActions(mActivity, mSolo, getInstrumentation(), mAsserter);
-        mDevice = new DeviceHelper(this);
 
         mBaseUrl = ((String) config.get("host")).replaceAll("(/$)", "");
         mRawBaseUrl = ((String) config.get("rawhost")).replaceAll("(/$)", "");
@@ -132,6 +129,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     private void initHelpers() {
         AssertionHelper.init(this);
         CommonUseHelper.init(this);
+        DeviceHelper.init(this);
         GestureHelper.init(this);
         ViewHelper.init(this);
         WaitHelper.init(this);
@@ -160,11 +158,6 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     @Override
     public Actions getActions() {
         return mActions;
-    }
-
-    @Override
-    public DeviceHelper getDevice() {
-        return mDevice;
     }
 
     @Override

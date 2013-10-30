@@ -24,26 +24,28 @@ final class DeviceHelper {
     public static final int VERSION_4x = 2;
 
     // VERSION_2X or VERSION_3X or VERSION_4X
-    public final int version;
+    public static int version;
 
     public enum Type {
         PHONE,
         TABLET
     }
 
-    private final UITestContext mTestContext;
+    private static UITestContext sTestContext;
 
     // Type of device (phone or tablet)
-    public final Type type;
+    public static Type type;
 
     // Screen width
-    public final int width;
+    public static int width;
 
     // Screen height
-    public final int height;
+    public static int height;
 
-    public DeviceHelper(final UITestContext testContext) {
-        mTestContext = testContext;
+    public DeviceHelper() { /* To disallow instantiation. */ }
+
+    public static void init(final UITestContext context) {
+        sTestContext = context;
 
         // Determine device version
         int sdk = Build.VERSION.SDK_INT;
@@ -57,7 +59,7 @@ final class DeviceHelper {
             }
         }
 
-        final Activity activity = testContext.getActivity();
+        final Activity activity = context.getActivity();
 
         // Determine width and height
         final DisplayMetrics dm = new DisplayMetrics();
@@ -74,23 +76,23 @@ final class DeviceHelper {
             final Method isTabletMethod = appShellClass.getMethod("isTablet");
             isTablet = ((Boolean) isTabletMethod.invoke(null)).booleanValue();
         } catch (Exception e) {
-            mTestContext.dumpLog("Exception in detectDevice", e);
+            sTestContext.dumpLog("Exception in detectDevice", e);
         }
 
         type = (isTablet ? Type.TABLET : Type.PHONE);
     }
 
-    public boolean isPhone() {
+    public static boolean isPhone() {
         return (type == Type.PHONE);
     }
 
-    public boolean isTablet() {
+    public static boolean isTablet() {
         return (type == Type.TABLET);
     }
 
-    public void rotate() {
-        final Solo solo = mTestContext.getSolo();
-        final Activity activity = mTestContext.getActivity();
+    public static void rotate() {
+        final Solo solo = sTestContext.getSolo();
+        final Activity activity = sTestContext.getActivity();
 
         if (activity.getRequestedOrientation () == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
             solo.setActivityOrientation(Solo.PORTRAIT);

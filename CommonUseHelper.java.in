@@ -105,7 +105,7 @@ final class CommonUseHelper {
     public static void goBack() {
         assertNotNull(sTest);
 
-        if (sTest.getDevice().isTablet()) {
+        if (DeviceHelper.isTablet()) {
             assertNotNull(sTest.TOOLBAR);
             sTest.TOOLBAR.pressBack();
         } else {
@@ -118,7 +118,7 @@ final class CommonUseHelper {
     public static void goForward() {
         assertNotNull(sTest);
 
-        if (sTest.getDevice().isTablet()) {
+        if (DeviceHelper.isTablet()) {
             assertNotNull(sTest.TOOLBAR);
             sTest.TOOLBAR.pressForward();
         } else {
