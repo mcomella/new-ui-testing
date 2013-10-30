@@ -44,20 +44,22 @@ class AboutHomeComponent extends UITestComponent {
         return getHomePagerView().getVisibility() == View.VISIBLE;
     }
 
-    private void waitForCurrentItem(final int expectedItem) {
-        WaitHelper.wait(new Condition() {
-            @Override
-            public boolean isSatisfied() {
-                return getHomePagerView().getCurrentItem() == expectedItem;
-            }
-        });
+    // TODO: What is next/prev?
+    public AboutHomeComponent swipeToNext() {
+        swipe(Solo.LEFT);
+        return this;
     }
 
+    public AboutHomeComponent swipeToPrevious() {
+        swipe(Solo.RIGHT);
+        return this;
+    }
+
+    // TODO: Open specific page rather than swipe in a direction?
     private void swipe(int direction) {
         assertTrue(isVisible());
 
-        final int currentItem = getHomePagerView().getCurrentItem();
-
+        final int pageIndex = getHomePagerView().getCurrentItem();
         if (direction == Solo.LEFT) {
             GestureHelper.swipeLeft();
         } else {
@@ -68,23 +70,19 @@ class AboutHomeComponent extends UITestComponent {
         assertNotNull(adapter);
 
         // Swiping left goes to next, swiping right goes to previous
-        final int newItem = currentItem + (direction == Solo.LEFT ? 1 : -1);
-
-        // Clamp new item index to possible ranges
-        final int expectedItem = Math.min(Math.max(0, newItem), adapter.getCount() - 1);
-
+        final int unboundedPageIndex = pageIndex + (direction == Solo.LEFT ? 1 : -1);
+        final int expectedPageIndex = Math.min(Math.max(0, unboundedPageIndex), adapter.getCount() - 1);
         // TODO: Previous error message might be useful:
         //     "Current item is not correct after swiping"
-        waitForCurrentItem(expectedItem);
+        waitForPageIndex(expectedPageIndex);
     }
 
-    public AboutHomeComponent swipeToNext() {
-        swipe(Solo.LEFT);
-        return this;
-    }
-
-    public AboutHomeComponent swipeToPrevious() {
-        swipe(Solo.RIGHT);
-        return this;
+    private void waitForPageIndex(final int expectedIndex) {
+        WaitHelper.wait(new Condition() {
+            @Override
+            public boolean isSatisfied() {
+                return getHomePagerView().getCurrentItem() == expectedIndex;
+            }
+        });
     }
 }
