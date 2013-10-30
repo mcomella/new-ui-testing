@@ -67,13 +67,10 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     protected void setUp() throws Exception {
         super.setUp();
 
+        sTestContext = this;
+
         final String rootPath = FennecInstrumentationTestRunner.getFennecArguments().getString("deviceroot");
-
-        // Read config file and convert it to a map
         final HashMap config = loadConfigTable(rootPath);
-
-        // Create the intent to be used with all the relevant
-        // arguments to launch the activity.
         final Intent intent = createActivityIntent(config);
         setActivityIntent(intent);
 
@@ -83,14 +80,13 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         mActivity = launchActivityWithIntent(pkgName, sLauncherActivityClass, intent);
         //mActivity = getActivity();
 
-        final String logFile = (String) config.get("logfile");
-
         if (getTestType() == Type.TALOS) {
             mAsserter = new FennecTalosAssert();
         } else {
             mAsserter = new FennecMochitestAssert();
         }
 
+        final String logFile = (String) config.get("logfile");
         mAsserter.setLogFile(logFile);
         mAsserter.setTestName(this.getClass().getName());
 
@@ -103,10 +99,6 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
 
         initComponents();
         initHelpers();
-
-        // Set context used to lazy-load UI test components
-        // later in the actual tests.
-        sTestContext = this;
     }
 
     @Override
