@@ -18,21 +18,21 @@ import java.lang.reflect.Method;
 final class DeviceHelper {
     private static final String APP_SHELL_CLASS = "org.mozilla.gecko.GeckoAppShell";
 
-    // Android platform version ranges
-    public static final int VERSION_2x = 0;
-    public static final int VERSION_3x = 1;
-    public static final int VERSION_4x = 2;
-
     public enum Type {
         PHONE,
         TABLET
     }
 
+    public enum AndroidPlatformVersion {
+        v2x,
+        v3x,
+        v4x
+    }
+
     private static UITestContext sTestContext;
 
-    // VERSION_2X or VERSION_3X or VERSION_4X
-    public static int sVersion;
     public static Type sType;
+    public static AndroidPlatformVersion sVersion;
 
     public static int sScreenWidth;
     public static int sScreenHeight;
@@ -45,12 +45,12 @@ final class DeviceHelper {
         // Determine device version
         int sdk = Build.VERSION.SDK_INT;
         if (sdk < Build.VERSION_CODES.HONEYCOMB) {
-            sVersion = VERSION_2x;
+            sVersion = AndroidPlatformVersion.v2x;
         } else {
             if (sdk > Build.VERSION_CODES.HONEYCOMB_MR2) {
-                sVersion = VERSION_4x;
+                sVersion = AndroidPlatformVersion.v4x;
             } else {
-                sVersion = VERSION_3x;
+                sVersion = AndroidPlatformVersion.v3x;
             }
         }
 
