@@ -23,9 +23,6 @@ final class DeviceHelper {
     public static final int VERSION_3x = 1;
     public static final int VERSION_4x = 2;
 
-    // VERSION_2X or VERSION_3X or VERSION_4X
-    public static int sVersion;
-
     public enum Type {
         PHONE,
         TABLET
@@ -33,14 +30,12 @@ final class DeviceHelper {
 
     private static UITestContext sTestContext;
 
-    // Type of device (phone or tablet)
+    // VERSION_2X or VERSION_3X or VERSION_4X
+    public static int sVersion;
     public static Type sType;
 
-    // Screen width
-    public static int sWidth;
-
-    // Screen height
-    public static int sHeight;
+    public static int sScreenWidth;
+    public static int sScreenHeight;
 
     public DeviceHelper() { /* To disallow instantiation. */ }
 
@@ -64,8 +59,8 @@ final class DeviceHelper {
         // Determine width and height
         final DisplayMetrics dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        sHeight = dm.heightPixels;
-        sWidth = dm.widthPixels;
+        sScreenHeight = dm.heightPixels;
+        sScreenWidth = dm.widthPixels;
 
         // Determine device type
         boolean isTablet = false;
