@@ -16,18 +16,12 @@ import android.app.Instrumentation;
 
 interface UITestContext {
     public Activity getActivity();
-
     public Solo getSolo();
-
     public Assert getAsserter();
-
     public Driver getDriver();
-
     public Actions getActions();
-
     public Instrumentation getInstrumentation();
 
     public void dumpLog(String message);
-
     public void dumpLog(String message, Throwable t);
 }
