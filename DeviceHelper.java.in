@@ -42,7 +42,12 @@ final class DeviceHelper {
     public static void init(final UITestContext context) {
         sTestContext = context;
 
-        // Determine device version
+        setVersion();
+        setScreenDimensions();
+        setType();
+    }
+
+    private static void setVersion() {
         int sdk = Build.VERSION.SDK_INT;
         if (sdk < Build.VERSION_CODES.HONEYCOMB) {
             sVersion = AndroidPlatformVersion.v2x;
@@ -53,16 +58,18 @@ final class DeviceHelper {
                 sVersion = AndroidPlatformVersion.v3x;
             }
         }
+    }
 
-        final Activity activity = context.getActivity();
-
-        // Determine width and height
+    private static void setScreenDimensions() {
+        final Activity activity = sTestContext.getActivity();
         final DisplayMetrics dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
         sScreenHeight = dm.heightPixels;
         sScreenWidth = dm.widthPixels;
+    }
 
-        // Determine device type
+    private static void setType() {
+        final Activity activity = sTestContext.getActivity();
         boolean isTablet = false;
         try {
             // TODO: Bug 709230: Remove reflection?
