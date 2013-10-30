@@ -8,32 +8,32 @@ public class testNewTabHistory extends UITest {
     public void testNewTabHistory() {
         CommonUseHelper.blockForGeckoReady();
 
-        CommonUseHelper.enterAndLoadUrl(CommonUseHelper.BLANK01_URL);
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK01_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK01_URL));
+        NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK01_URL);
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK01_TITLE));
+        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK01_URL));
 
-        CommonUseHelper.enterAndLoadUrl(CommonUseHelper.BLANK02_URL);
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK02_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK02_URL));
+        NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK02_URL);
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK02_TITLE));
+        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK02_URL));
 
-        CommonUseHelper.enterAndLoadUrl(CommonUseHelper.BLANK03_URL);
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK03_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK03_URL));
+        NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK03_URL);
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK03_TITLE));
+        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK03_URL));
 
-        CommonUseHelper.goBack();
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK02_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK02_URL));
+        NavigationHelper.goBack();
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK02_TITLE));
+        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK02_URL));
 
-        CommonUseHelper.goBack();
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK01_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK01_URL));
+        NavigationHelper.goBack();
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK01_TITLE));
+        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK01_URL));
 
-        CommonUseHelper.goForward();
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK02_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK02_URL));
+        NavigationHelper.goForward();
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK02_TITLE));
+        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK02_URL));
 
-        CommonUseHelper.reload();
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK02_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(CommonUseHelper.BLANK02_URL));
+        NavigationHelper.reload();
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK02_TITLE));
+        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK02_URL));
     }
 }

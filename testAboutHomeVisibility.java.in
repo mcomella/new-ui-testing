@@ -12,19 +12,19 @@ public class testAboutHomeVisibility extends UITest {
         CommonUseHelper.blockForGeckoReady();
 
         // Check initial state with about:home
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.ABOUT_HOME_TITLE));
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.ABOUT_HOME_TITLE));
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
 
         // Go to blank 01
-        CommonUseHelper.enterAndLoadUrl(CommonUseHelper.BLANK01_URL);
+        NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK01_URL);
         // TODO: Assertion below failed.
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK01_TITLE));
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK01_TITLE));
         assertFalse(ABOUTHOME.isVisible());
 
         // Go to blank 02
-        CommonUseHelper.enterAndLoadUrl(CommonUseHelper.BLANK02_URL);
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.BLANK02_TITLE));
+        NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK02_URL);
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK02_TITLE));
         assertFalse(ABOUTHOME.isVisible());
 
         // Enter editing mode, about:home UI should be visible
@@ -37,8 +37,8 @@ public class testAboutHomeVisibility extends UITest {
         assertFalse(ABOUTHOME.isVisible());
 
         // Loading about:home should show about:home again
-        CommonUseHelper.enterAndLoadUrl(CommonUseHelper.ABOUT_HOME_URL);
-        assertTrue(TOOLBAR.hasTitle(CommonUseHelper.ABOUT_HOME_TITLE));
+        NavigationHelper.enterAndLoadUrl(NavigationHelper.ABOUT_HOME_URL);
+        assertTrue(TOOLBAR.hasTitle(NavigationHelper.ABOUT_HOME_TITLE));
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
     }
