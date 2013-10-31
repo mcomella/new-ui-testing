@@ -35,6 +35,10 @@ final class AssertionHelper {
         mAsserter.isnot(actual, null, "");
     }
 
+    public static void assertNull(final Object actual) {
+        mAsserter.is(actual, null, "");
+    }
+
     public static void assertTrue(final boolean actual) {
         mAsserter.ok(actual, "", "");
     }
