@@ -163,6 +163,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         mAsserter.dumpLog(message, t);
     }
 
+    // TODO: Why does this return a constant?
     protected Type getTestType() {
         return Type.MOCHITEST;
     }

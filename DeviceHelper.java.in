@@ -102,6 +102,7 @@ final class DeviceHelper {
         return (sDeviceType == Type.TABLET);
     }
 
+    // TODO: Set explicit rotation?
     public static void rotate() {
         final Solo solo = sTestContext.getSolo();
         final Activity activity = sTestContext.getActivity();

@@ -9,6 +9,7 @@ import @ANDROID_PACKAGE_NAME@.Actions;
 
 import com.jayway.android.robotium.solo.Solo;
 
+// TODO: Rename to BaseComponent when packages are created.
 abstract class UITestComponent {
     private final UITestContext mTestContext;
     protected final Solo mSolo;

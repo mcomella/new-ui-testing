@@ -63,14 +63,18 @@ class ToolbarComponent extends UITestComponent {
     }
 
     public boolean hasTitle(final String expected) {
+        // TODO: How is this affected by the showURL preference?
         return getUrlTitleText().getText().equals(expected);
     }
 
+    // TODO: Might need to remove or collapse with title for visibility reasons.
+    // Or better yet, assert it is visible, in editing mode, etc.
     public boolean hasUrl(final String expected) {
         return getUrlEditText().getText().equals(expected);
     }
 
     public boolean isEditing() {
+        // TODO: DisplayContainer vs. TitleText.
         return getUrlDisplayContainer().getVisibility() != View.VISIBLE &&
                 getUrlEditText().getVisibility() == View.VISIBLE &&
                 getGoButton().getVisibility() == View.VISIBLE;
@@ -150,6 +154,8 @@ class ToolbarComponent extends UITestComponent {
         return this;
     }
 
+    // TODO: Ambiguous name? Add doc or is Component.pressBack descriptive enough?
+    // TODO: pressBackButton?
     public ToolbarComponent pressBack() {
         final ImageButton backButton = getBackButton();
 
@@ -158,6 +164,7 @@ class ToolbarComponent extends UITestComponent {
 
         mSolo.clickOnView(backButton);
 
+        // TODO: Wait for something to happen?
         return this;
     }
 

@@ -26,6 +26,7 @@ class AboutHomeComponent extends UITestComponent {
         READING_LIST
     }
 
+    // TODO: Import R directly (nalexander said after preprocessing).
     private static final String HOME_PAGER_ID = "home_pager";
 
     public AboutHomeComponent(UITestContext testContext) {
@@ -36,6 +37,7 @@ class AboutHomeComponent extends UITestComponent {
         return (ViewPager) mSolo.getView(HOME_PAGER_ID);
     }
 
+    // TODO: getCurrentPage? - more versatile.
     public boolean hasCurrentPage(final Page page) {
         return getHomePagerView().getCurrentItem() == page.ordinal();
     }
