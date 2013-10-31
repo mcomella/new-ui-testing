@@ -7,6 +7,7 @@ package @ANDROID_PACKAGE_NAME@.tests;
 
 import @ANDROID_PACKAGE_NAME@.Assert;
 
+// TODO: Should we use mAsserter names? It would make the API inconsistent with JUnit.
 final class AssertionHelper {
     private static Assert mAsserter;
 
@@ -18,28 +19,23 @@ final class AssertionHelper {
     }
 
     public static void assertEquals(final Object expected, final Object actual) {
-        // TODO: Order correct?
-        // TODO: name.
-        mAsserter.is(expected, actual, "");
+        mAsserter.is(actual, expected, "");
     }
 
     public static void assertEquals(final int expected, final int actual) {
-        // TODO: See above.
-        mAsserter.is(expected, actual, "");
+        mAsserter.is(actual, expected, "");
     }
 
     public static void assertFalse(final boolean actual) {
-        assertTrue(!actual);
+        // TODO: What is diag? (Also assertTrue)
+        mAsserter.ok(!actual, "", "");
     }
 
     public static void assertNotNull(final Object actual) {
-        // TODO: Order.
-        // TODO: name.
-        mAsserter.isnot(null, actual, "");
+        mAsserter.isnot(actual, null, "");
     }
 
     public static void assertTrue(final boolean actual) {
-        // TODO: Figure out what to do with name and diag fields.
         mAsserter.ok(actual, "", "");
     }
 }
