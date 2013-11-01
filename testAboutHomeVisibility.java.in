@@ -5,6 +5,7 @@ import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
 
+// TODO: Elaborate on test desc and use /**.
 /* Test correct state for URL bar after loading pages.
  */
 public class testAboutHomeVisibility extends UITest {
@@ -18,7 +19,7 @@ public class testAboutHomeVisibility extends UITest {
 
         // Go to blank 01
         NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK01_URL);
-        // TODO: Assertion below failed.
+        // TODO: Assertion below failed. Need to wait?
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK01_TITLE));
         assertFalse(ABOUTHOME.isVisible());
 

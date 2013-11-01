@@ -5,6 +5,7 @@ import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
 
+// TODO: Elaborate on test desc and use /**.
 /* Test correct state for URL bar after loading pages.
  */
 public class testNewAboutHomeSwipes extends UITest {
