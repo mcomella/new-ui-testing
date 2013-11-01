@@ -12,6 +12,7 @@ import com.jayway.android.robotium.solo.Condition;
 import @ANDROID_PACKAGE_NAME@.Actions;
 
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -35,8 +36,8 @@ class ToolbarComponent extends UITestComponent {
         return mSolo.getView(BROWSER_TOOLBAR_ID);
     }
 
-    TextView getUrlEditText() {
-        return (TextView) ViewHelper.findViewById(getToolbarView(), URL_EDIT_TEXT_ID);
+    EditText getUrlEditText() {
+        return (EditText) ViewHelper.findViewById(getToolbarView(), URL_EDIT_TEXT_ID);
     }
 
     View getUrlDisplayContainer() {
