@@ -4,36 +4,28 @@ package @ANDROID_PACKAGE_NAME@.tests;
 /* Test correct state for URL bar after loading pages.
  */
 public class testNewTabHistory extends UITest {
-    // TODO: Fix hasUrl?
     public void testNewTabHistory() {
         CommonUseHelper.blockForGeckoReady();
 
         NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK01_URL);
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK01_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK01_URL));
 
         NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK02_URL);
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK02_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK02_URL));
 
         NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK03_URL);
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK03_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK03_URL));
 
         NavigationHelper.goBack();
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK02_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK02_URL));
 
         NavigationHelper.goBack();
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK01_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK01_URL));
 
         NavigationHelper.goForward();
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK02_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK02_URL));
 
         NavigationHelper.reload();
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK02_TITLE));
-        //assertTrue(TOOLBAR.hasUrl(NavigationHelper.BLANK02_URL));
     }
 }
