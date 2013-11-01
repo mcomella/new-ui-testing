@@ -8,7 +8,7 @@ package @ANDROID_PACKAGE_NAME@.tests;
  */
 public class testNewTabHistory extends UITest {
     public void testNewTabHistory() {
-        CommonUseHelper.blockForGeckoReady();
+        GeckoHelper.blockForReady();
 
         NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK01_URL);
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK01_TITLE));

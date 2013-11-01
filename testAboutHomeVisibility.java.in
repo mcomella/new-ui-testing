@@ -10,7 +10,7 @@ import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
  */
 public class testAboutHomeVisibility extends UITest {
     public void testAboutHomeVisibility() {
-        CommonUseHelper.blockForGeckoReady();
+        GeckoHelper.blockForReady();
 
         // Check initial state with about:home
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.ABOUT_HOME_TITLE));

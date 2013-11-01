@@ -5,16 +5,6 @@
 
 package @ANDROID_PACKAGE_NAME@.tests;
 
-import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
-
-import @ANDROID_PACKAGE_NAME@.Actions;
-import @ANDROID_PACKAGE_NAME@.Actions.EventExpecter;
-
-import android.app.Activity;
-import java.lang.Class;
-import java.lang.ClassLoader;
-import java.lang.reflect.Method;
-
 /**
  * A Helper for common use cases combining multiple components or not belonging to a particular
  * component.
@@ -23,42 +13,9 @@ import java.lang.reflect.Method;
  * Components should be freely created, even for lone methods.
  */
 final class CommonUseHelper {
-    private static final String GECKO_THREAD_CLASS = "org.mozilla.gecko.GeckoThread";
-    private static final String LAUNCH_STATE_CLASS = GECKO_THREAD_CLASS + "$LaunchState";
-
-    // UI test currently running
-    private static UITest sTest;
-
     private CommonUseHelper() { /* To disallow instantiation. */ }
 
-    // TODO: Should be UITestContext.
-    public static void init(final UITest test) {
-        sTest = test;
+    public static void init(final UITestContext context) {
     }
 
-    // TODO: Move to GeckoHelper?
-    public static void blockForGeckoReady() {
-        try {
-            final Actions actions = sTest.getActions();
-
-            final EventExpecter geckoReady = actions.expectGeckoEvent("Gecko:Ready");
-
-            // TODO: Bug 709230: Remove reflection?
-            final ClassLoader cl = sTest.getActivity().getClassLoader();
-            final Class geckoThreadClass = cl.loadClass(GECKO_THREAD_CLASS);
-            final Class launchStateClass = cl.loadClass(LAUNCH_STATE_CLASS);
-            final Method checkLaunchStateMethod =
-                    geckoThreadClass.getMethod("checkLaunchState", launchStateClass);
-            final boolean isReady = ((Boolean) checkLaunchStateMethod.invoke(null,
-                    launchStateClass.getEnumConstants()[3])).booleanValue();
-
-            if (!isReady) {
-                geckoReady.blockForEvent();
-            }
-
-            geckoReady.unregisterListener();
-        } catch (Exception e) {
-            sTest.dumpLog("Exception in blockForGeckoReady", e);
-        }
-    }
 }

@@ -11,7 +11,7 @@ import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
 public class testNewAboutHomeSwipes extends UITest {
     // TODO: Make this abstract using the Page enum.
     public void testNewAboutHomeSwipes() {
-        CommonUseHelper.blockForGeckoReady();
+        GeckoHelper.blockForReady();
 
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
