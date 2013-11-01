@@ -64,18 +64,18 @@ class ToolbarComponent extends UITestComponent {
     }
 
     public boolean hasTitle(final String expected) {
+        // TODO: Assert this view is visible to the user.
         // TODO: How is this affected by the showURL preference?
         return getUrlTitleText().getText().equals(expected);
     }
 
-    // TODO: Might need to remove or collapse with title for visibility reasons.
-    // Or better yet, assert it is visible, in editing mode, etc.
     public boolean hasUrl(final String expected) {
+        // TODO: Assert that this view is visible to the user.
         return getUrlEditText().getText().equals(expected);
     }
 
     public boolean isEditing() {
-        // TODO: DisplayContainer vs. TitleText.
+        // TODO: DisplayContainer vs. TitleText. What is the difference?
         return getUrlDisplayContainer().getVisibility() != View.VISIBLE &&
                 getUrlEditText().getVisibility() == View.VISIBLE &&
                 getGoButton().getVisibility() == View.VISIBLE;
@@ -85,7 +85,7 @@ class ToolbarComponent extends UITestComponent {
         assertFalse(isEditing());
 
         mSolo.clickOnView(getUrlTitleText(), true);
-        // TODO: Previous comment: "Failed to update UI state for editing mode".
+        // TODO: Previous fail comment: "Failed to update UI state for editing mode".
         WaitHelper.wait(new Condition() {
             @Override
             public boolean isSatisfied() {
@@ -109,6 +109,7 @@ class ToolbarComponent extends UITestComponent {
 
         mSolo.clickOnView(getGoButton());
 
+        // TODO: Previous comment: "Failed to update UI state to commit editing mode"
         WaitHelper.wait(new Condition() {
             @Override
             public boolean isSatisfied() {
@@ -122,13 +123,15 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent dismissEditingMode() {
         assertTrue(isEditing());
 
-        // TODO: Better way to drop the soft keyboard? Is this the most correct way? etc.
         if (getUrlEditText().hasFocus()) {
             // Drop the soft keyboard.
+            // TODO: Solo.hideSoftKeyboard? Seemed to work strangely.
             mActions.sendSpecialKey(Actions.SpecialKey.BACK);
         }
+        // TODO: Solo.goBack.
         mActions.sendSpecialKey(Actions.SpecialKey.BACK);
 
+        // TODO: Previous comment: "Failed to update UI state to dismiss editing mode"
         WaitHelper.wait(new Condition() {
             @Override
             public boolean isSatisfied() {
@@ -139,17 +142,22 @@ class ToolbarComponent extends UITestComponent {
         return this;
     }
 
-    public ToolbarComponent enterUrl(String url) {
+    public ToolbarComponent enterUrl(final String url) {
         assertTrue(isEditing());
         assertTrue(getUrlEditText().isInputMethodTarget());
 
+        // TODO: Robotium's methods caused NPE. Note that Robotium's methods are less
+        // user-like, however, and does not clear text if the text is highlighted
+        // and a key is pressed. May need to add an extra test for this behavior.
+        //final EditText urlEditText = getUrlEditText();
+        //mSolo.clearEditText(urlEditText);
+        //mSolo.enterText(urlEditText, url);
         mActions.sendKeys(url);
 
         return this;
     }
 
-    // TODO: Ambiguous name? Add doc or is Component.pressBack descriptive enough?
-    // TODO: pressBackButton?
+    // TODO: Ambiguous name? pressBackButton? Add doc or is Component.pressBack descriptive enough?
     public ToolbarComponent pressBack() {
         final ImageButton backButton = getBackButton();
 
@@ -158,7 +166,8 @@ class ToolbarComponent extends UITestComponent {
 
         mSolo.clickOnView(backButton);
 
-        // TODO: Wait for something to happen?
+        // TODO: Wait for page load.
+
         return this;
     }
 
@@ -169,6 +178,8 @@ class ToolbarComponent extends UITestComponent {
         assertTrue(forwardButton.getVisibility() == View.VISIBLE);
 
         mSolo.clickOnView(forwardButton);
+
+        // TODO: Wait for page load.
 
         return this;
     }

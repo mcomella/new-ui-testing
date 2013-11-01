@@ -70,6 +70,7 @@ final public class NavigationHelper {
             sTest.TOOLBAR.pressBack();
         } else {
             // TODO: Lower soft keyboard first?
+            // TODO: Solo.goBack
             sTest.getActions().sendSpecialKey(Actions.SpecialKey.BACK);
         }
 

@@ -13,7 +13,7 @@ final class AssertionHelper {
 
     private AssertionHelper() { /* To disallow instantation. */ }
 
-    // TODO: Move this method to a helpers.InitHelper class so it does not get imported with *.
+    // TODO: If InitHelper class is created, move this method to a it so it does not get imported with *.
     public static void init(final UITestContext testContext) {
         mAsserter = testContext.getAsserter();
     }

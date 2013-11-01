@@ -46,7 +46,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     // Base to build raw absolute URLs
     private String mRawBaseUrl;
 
-    // TODO: These aren't constants. Keep capitalized?
+    // TODO: These aren't constants. Keep names capitalized for visibility?
     AboutHomeComponent ABOUTHOME;
     ToolbarComponent TOOLBAR;
 
@@ -73,6 +73,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
 
         // Start the activity
         // TODO: Fix. getActivity() returns null so I call launchActivityWithIntent explicitly.
+        // Perhaps this is because the class' type parameter is "Activity"?
         final String pkgName = getInstrumentation().getTargetContext().getPackageName();
         mActivity = launchActivityWithIntent(pkgName, sLauncherActivityClass, intent);
         //mActivity = getActivity();
@@ -115,6 +116,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         TOOLBAR = new ToolbarComponent(this);
     }
 
+    // TODO: Should the helpers be instance variables?
     private void initHelpers() {
         AssertionHelper.init(this);
         CommonUseHelper.init(this);
@@ -160,7 +162,6 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         mAsserter.dumpLog(message, t);
     }
 
-    // TODO: Why does this return a constant?
     protected Type getTestType() {
         return Type.MOCHITEST;
     }
