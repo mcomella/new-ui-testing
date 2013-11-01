@@ -24,11 +24,11 @@ final class ViewHelper {
 
     /**
      * Finds the View with the given ID at the given root. To find a View among all views, see
-     * Robotium's {@see Solo.getView}.
+     * Robotium's {@see Solo.getView}. Note that only the first View found with the given id
+     * is returned.
      *
-     * TODO: Add comment explaining that this is an optimization to find children of a specific
-     * parent when ids are not unique.
-     * TODO: Comment how this returns the first View with the given ID.
+     * This method can be used to find view which is unique from the given root View, but not
+     * necessarily unique in the View hierarchy.
      */
     public static View findViewById(final View root, final String id) {
         assertNotNull(sTestContext);
