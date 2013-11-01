@@ -91,7 +91,6 @@ class ToolbarComponent extends UITestComponent {
                 return isEditing();
             }
         });
-        assertTrue(isEditing()); // TODO: Redundant.
 
         // TODO: Previous comment: "Failed to get input focus on editing mode"
         WaitHelper.wait(new Condition() {
@@ -116,9 +115,6 @@ class ToolbarComponent extends UITestComponent {
             }
         });
 
-        // TODO: Previous comment: "Failed to update UI state to commit editing mode"
-        assertFalse(isEditing());
-
         return this;
     }
 
@@ -138,9 +134,6 @@ class ToolbarComponent extends UITestComponent {
                 return !isEditing();
             }
         });
-
-        // TODO: Previous comment: "Failed to update UI state to dismiss editing mode"
-        assertFalse(isEditing());
 
         return this;
     }
