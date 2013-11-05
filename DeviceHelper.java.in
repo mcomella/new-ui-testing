@@ -107,7 +107,7 @@ final class DeviceHelper {
         final Solo solo = sTestContext.getSolo();
         final Activity activity = sTestContext.getActivity();
 
-        if (activity.getRequestedOrientation () == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+        if (activity.getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
             solo.setActivityOrientation(Solo.PORTRAIT);
         } else {
             solo.setActivityOrientation(Solo.LANDSCAPE);
