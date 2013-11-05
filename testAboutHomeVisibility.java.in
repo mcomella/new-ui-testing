@@ -19,7 +19,6 @@ public class testAboutHomeVisibility extends UITest {
 
         // Go to blank 01
         NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK01_URL);
-        // TODO: Assertion below failed. Need to wait?
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK01_TITLE));
         assertFalse(ABOUTHOME.isVisible());
 

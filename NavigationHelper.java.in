@@ -54,7 +54,6 @@ final public class NavigationHelper {
     }
 
     // TODO: Ambiguous name? Is CommonUseHelper.goBack() enough? Perhaps w/ doc?
-    // TODO: Can send "Session:Back" to Gecko - but defeats benefit of UI testing.
     public static void goBack() {
         // TODO: Necessary?
         assertNotNull(sTest);

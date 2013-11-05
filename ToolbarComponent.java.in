@@ -122,7 +122,6 @@ class ToolbarComponent extends UITestComponent {
                 mSolo.clickOnView(getGoButton());
             }
         });
-        // TODO: Necessary?
         WaitHelper.wait(isNotEditingCondition);
 
         return this;
