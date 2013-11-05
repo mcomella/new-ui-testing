@@ -39,11 +39,11 @@ class AboutHomeComponent extends UITestComponent {
 
     public boolean hasCurrentPage(final Page page) {
         assertTrue(isVisible());
-        return getHomePagerView().getCurrentItem() == page.ordinal();
+        return (getHomePagerView().getCurrentItem() == page.ordinal());
     }
 
     public boolean isVisible() {
-        return getHomePagerView().getVisibility() == View.VISIBLE;
+        return (getHomePagerView().getVisibility() == View.VISIBLE);
     }
 
     // TODO: Take specific page as parameter rather than swipe in a direction?
@@ -81,7 +81,7 @@ class AboutHomeComponent extends UITestComponent {
         WaitHelper.wait(new Condition() {
             @Override
             public boolean isSatisfied() {
-                return getHomePagerView().getCurrentItem() == expectedIndex;
+                return (getHomePagerView().getCurrentItem() == expectedIndex);
             }
         });
     }
