@@ -167,20 +167,20 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         return Type.MOCHITEST;
     }
 
-    protected final String getAbsoluteUrl(String url) {
+    protected final String getAbsoluteUrl(final String url) {
         return mBaseUrl + "/" + url.replaceAll("(^/)", "");
     }
 
-    protected final String getAbsoluteRawUrl(String url) {
+    protected final String getAbsoluteRawUrl(final String url) {
         return mRawBaseUrl + "/" + url.replaceAll("(^/)", "");
     }
 
-    private static HashMap loadConfigTable(String rootPath) {
+    private static HashMap loadConfigTable(final String rootPath) {
         final String configFile = FennecNativeDriver.getFile(rootPath + "/robotium.config");
         return FennecNativeDriver.convertTextToTable(configFile);
     }
 
-    private static Intent createActivityIntent(HashMap config) {
+    private static Intent createActivityIntent(final HashMap config) {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
 
         final String profile = (String) config.get("profile");
