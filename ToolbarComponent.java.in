@@ -10,6 +10,7 @@ import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 import com.jayway.android.robotium.solo.Condition;
 
 import @ANDROID_PACKAGE_NAME@.Actions;
+import @ANDROID_PACKAGE_NAME@.tests.WaitHelper.InitiatingAction;
 
 import android.view.View;
 import android.widget.EditText;
@@ -85,6 +86,7 @@ class ToolbarComponent extends UITestComponent {
         assertFalse(isEditing());
 
         mSolo.clickOnView(getUrlTitleText(), true);
+        // TODO: isNotEditingCondition.
         // TODO: Previous fail comment: "Failed to update UI state for editing mode".
         WaitHelper.wait(new Condition() {
             @Override
@@ -107,9 +109,17 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent commitEditingMode() {
         assertTrue(isEditing());
 
-        mSolo.clickOnView(getGoButton());
+        // TODO: Does this work for about:home?
+        WaitHelper.waitForPageLoad(new InitiatingAction() {
+            @Override
+            public void doAction() {
+                mSolo.clickOnView(getGoButton());
+            }
+        });
 
         // TODO: Previous comment: "Failed to update UI state to commit editing mode"
+        // TODO: isNotEditingCondition.
+        // TODO: Necessary?
         WaitHelper.wait(new Condition() {
             @Override
             public boolean isSatisfied() {
@@ -139,6 +149,8 @@ class ToolbarComponent extends UITestComponent {
             }
         });
 
+        // TODO: Wait for page load equivalent?
+
         return this;
     }
 
@@ -161,12 +173,16 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent pressBack() {
         final ImageButton backButton = getBackButton();
 
+        // TODO: Assert isTablet? Here or getBackButton. Also, pressForward.
         assertNotNull(backButton);
         assertTrue(backButton.getVisibility() == View.VISIBLE);
 
-        mSolo.clickOnView(backButton);
-
-        // TODO: Wait for page load.
+        WaitHelper.waitForPageLoad(new InitiatingAction() {
+            @Override
+            public void doAction() {
+                mSolo.clickOnView(backButton);
+            }
+        });
 
         return this;
     }
@@ -177,9 +193,12 @@ class ToolbarComponent extends UITestComponent {
         assertNotNull(forwardButton);
         assertTrue(forwardButton.getVisibility() == View.VISIBLE);
 
-        mSolo.clickOnView(forwardButton);
-
-        // TODO: Wait for page load.
+        WaitHelper.waitForPageLoad(new InitiatingAction() {
+            @Override
+            public void doAction() {
+                mSolo.clickOnView(forwardButton);
+            }
+        });
 
         return this;
     }

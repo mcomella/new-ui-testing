@@ -9,6 +9,7 @@ import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import @ANDROID_PACKAGE_NAME@.Actions;
 import @ANDROID_PACKAGE_NAME@.Actions.EventExpecter;
+import @ANDROID_PACKAGE_NAME@.tests.WaitHelper.InitiatingAction;
 
 import android.text.TextUtils;
 
@@ -37,15 +38,8 @@ final public class NavigationHelper {
         assertNotNull(sTest);
         assertNotNull(sTest.TOOLBAR);
 
-        final Actions actions = sTest.getActions();
-        final EventExpecter domContentLoaded = actions.expectGeckoEvent("DOMContentLoaded");
-
         url = adjustIfPredefined(url);
         sTest.TOOLBAR.enterEditingMode().enterUrl(url).commitEditingMode();
-
-        // Wait for the page to load.
-        domContentLoaded.blockForEvent();
-        domContentLoaded.unregisterListener();
     }
 
     // TODO: Doc? How is it adjusted?
@@ -66,15 +60,19 @@ final public class NavigationHelper {
         assertNotNull(sTest);
 
         if (DeviceHelper.isTablet()) {
-            assertNotNull(sTest.TOOLBAR);
-            sTest.TOOLBAR.pressBack();
-        } else {
-            // TODO: Lower soft keyboard first?
-            // TODO: Solo.goBack
-            sTest.getActions().sendSpecialKey(Actions.SpecialKey.BACK);
+            assertNotNull(sTest.TOOLBAR); // TODO: Necessary?
+            sTest.TOOLBAR.pressBack(); // Waits for page load.
+            return;
         }
 
-        // TODO: wait for new page to be fully loaded
+        WaitHelper.waitForPageLoad(new InitiatingAction() {
+            @Override
+            public void doAction() {
+                // TODO: Lower soft keyboard first?
+                // TODO: Solo.goBack
+                sTest.getActions().sendSpecialKey(Actions.SpecialKey.BACK);
+            }
+        });
     }
 
     public static void goForward() {
@@ -83,12 +81,16 @@ final public class NavigationHelper {
 
         if (DeviceHelper.isTablet()) {
             assertNotNull(sTest.TOOLBAR);
-            sTest.TOOLBAR.pressForward();
-        } else {
-            // TODO: Press forward with APPMENU component
+            sTest.TOOLBAR.pressForward(); // Waits for page load.
+            return;
         }
 
-        // TODO: wait for new page to be fully loaded
+        WaitHelper.waitForPageLoad(new InitiatingAction() {
+            @Override
+            public void doAction() {
+                // TODO: Press forward with APPMENU component
+            }
+        });
     }
 
     public static void reload() {

@@ -7,18 +7,42 @@ package @ANDROID_PACKAGE_NAME@.tests;
 
 import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
+import @ANDROID_PACKAGE_NAME@.Actions;
+import @ANDROID_PACKAGE_NAME@.Actions.EventExpecter;
+
 import com.jayway.android.robotium.solo.Condition;
 import com.jayway.android.robotium.solo.Solo;
 
-final class WaitHelper {
-    private static final int DEFAULT_MAX_WAIT_MS = 5000;
+import android.widget.TextView;
 
+final class WaitHelper {
+    /**
+     * Performs the given action to start an event to be waited for. Implementations of this
+     * interface are used in methods that need to check for changes in state from before the
+     * given initiating action to after it.
+     */
+    public static interface InitiatingAction {
+        public void doAction();
+    }
+
+    private static final int DEFAULT_MAX_WAIT_MS = 5000;
+    private static final int PAGE_LOAD_WAIT_MS = 10000;
+    private static final int CHANGE_WAIT_MS = 2000;
+
+    private static UITest sTest;
     private static Solo sSolo;
+    private static Actions sActions;
+
+    private static ChangeVerifier[] sPageLoadVerifiers = new ChangeVerifier[] {
+        new ToolbarTitleTextChangeVerifier()
+    };
 
     private WaitHelper() { /* To disallow instantiation. */ }
 
-    public static void init(final UITestContext testContext) {
-        sSolo = testContext.getSolo();
+    public static void init(final UITest test) {
+        sTest = test;
+        sSolo = test.getSolo();
+        sActions = test.getActions();
     }
 
     /**
@@ -35,5 +59,63 @@ final class WaitHelper {
      */
     public static void wait(final Condition condition, final int waitMillis) {
         assertTrue(sSolo.waitForCondition(condition, waitMillis));
+    }
+
+    static void waitForPageLoad(final InitiatingAction initiatingAction) {
+        // Some changes to the UI occur in response to the same event we listen to for when
+        // the page has finished loading (e.g. a page title update). As such, we ensure this
+        // UI state has changed before returning from this method; here we store the initial
+        // state.
+        final ChangeVerifier[] pageLoadVerifiers = sPageLoadVerifiers;
+        for (final ChangeVerifier verifier : pageLoadVerifiers) {
+            verifier.storeState(sTest);
+        }
+
+        // Wait for the page load event.
+        // TODO: Does this work on about:home?
+        final EventExpecter contentEventExpecter = sActions.expectGeckoEvent("DOMContentLoaded");
+        initiatingAction.doAction();
+        contentEventExpecter.blockForEventDataWithTimeout(PAGE_LOAD_WAIT_MS);
+        contentEventExpecter.unregisterListener();
+
+        // Verify remaining state has changed.
+        for (final ChangeVerifier verifier : pageLoadVerifiers) {
+            // If we timeout, either the state is set to the same value (which is fine), or
+            // the state has not yet changed. Since we can't be sure it will ever change, move
+            // on and let the assertions fail if applicable.
+            sSolo.waitForCondition(new Condition() {
+                @Override
+                public boolean isSatisfied() {
+                    return verifier.hasStateChanged();
+                }
+            }, CHANGE_WAIT_MS);
+        }
+    }
+
+    /**
+     * Implementations of this interface verify that the state of the test has changed from
+     * the invocation of storeState to the invocation of hasStateChanged. A boolean will be
+     * returned from hasStateChanged, indicating this change of status.
+     */
+    private static interface ChangeVerifier {
+        public void storeState(final UITest test);
+        public boolean hasStateChanged();
+    }
+
+    private static class ToolbarTitleTextChangeVerifier implements ChangeVerifier {
+        private ToolbarComponent toolbar;
+        private CharSequence oldTitleText;
+
+        @Override
+        public void storeState(final UITest test) {
+            this.toolbar = test.TOOLBAR;
+            oldTitleText = toolbar.getUrlTitleText().getText();
+        }
+
+        @Override
+        public boolean hasStateChanged() {
+            // TODO: Efficiency? Should we naively cache the View?
+            return !oldTitleText.equals(toolbar.getUrlTitleText().getText());
+        }
     }
 }
