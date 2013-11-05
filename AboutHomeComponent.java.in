@@ -33,7 +33,7 @@ class AboutHomeComponent extends UITestComponent {
         super(testContext);
     }
 
-    ViewPager getHomePagerView() {
+    private ViewPager getHomePagerView() {
         return (ViewPager) mSolo.getView(HOME_PAGER_ID);
     }
 

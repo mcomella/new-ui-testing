@@ -47,40 +47,46 @@ class ToolbarComponent extends UITestComponent {
     /**
      * Returns the root View for the browser toolbar.
      */
-    View getToolbarView() {
+    private View getToolbarView() {
         return mSolo.getView(BROWSER_TOOLBAR_ID);
     }
 
-    EditText getUrlEditText() {
+    private EditText getUrlEditText() {
         return (EditText) ViewHelper.findViewById(getToolbarView(), URL_EDIT_TEXT_ID);
     }
 
-    View getUrlDisplayContainer() {
+    private View getUrlDisplayContainer() {
         return ViewHelper.findViewById(getToolbarView(), URL_DISPLAY_CONTAINER_ID);
     }
 
-    TextView getUrlTitleText() {
+    private TextView getUrlTitleText() {
         return (TextView) ViewHelper.findViewById(getToolbarView(), URL_TITLE_TEXT_ID);
     }
 
     /**
      * Returns the View for the go button in the browser toolbar.
      */
-    ImageButton getGoButton() {
+    private ImageButton getGoButton() {
         return (ImageButton) ViewHelper.findViewById(getToolbarView(), GO_BUTTON_ID);
     }
 
-    ImageButton getBackButton() {
+    private ImageButton getBackButton() {
         return (ImageButton) ViewHelper.findViewById(getToolbarView(), BACK_BUTTON_ID);
     }
 
-    ImageButton getForwardButton() {
+    private ImageButton getForwardButton() {
         return (ImageButton) ViewHelper.findViewById(getToolbarView(), FORWARD_BUTTON_ID);
     }
 
+    public CharSequence getTitle() {
+        // TODO: Assert editing state? May break ToolbarTitleTextChangeVerifier.
+        return getUrlTitleText().getText();
+    }
+
+    // TODO: Is this needed with getTitle()?
     public boolean hasTitle(final String expected) {
         // TODO: How is this affected by the showURL preference?
-        assertFalse(isEditing());
+        assertFalse(isEditing()); // TODO: Causes a race condition in wait for page load?
         return getUrlTitleText().getText().equals(expected);
     }
 

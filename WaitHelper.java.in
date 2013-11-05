@@ -109,13 +109,13 @@ final class WaitHelper {
         @Override
         public void storeState(final UITest test) {
             this.toolbar = test.TOOLBAR;
-            oldTitleText = toolbar.getUrlTitleText().getText();
+            oldTitleText = toolbar.getTitle();
         }
 
         @Override
         public boolean hasStateChanged() {
             // TODO: Efficiency? Should we naively cache the View?
-            return !oldTitleText.equals(toolbar.getUrlTitleText().getText());
+            return !oldTitleText.equals(toolbar.getTitle());
         }
     }
 }
