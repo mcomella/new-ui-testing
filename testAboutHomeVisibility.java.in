@@ -12,31 +12,31 @@ public class testAboutHomeVisibility extends UITest {
     public void testAboutHomeVisibility() {
         GeckoHelper.blockForReady();
 
-        // Check initial state with about:home
+        // Check initial state on about:home.
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.ABOUT_HOME_TITLE));
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
 
-        // Go to blank 01
+        // Go to blank 01.
         NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK01_URL);
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK01_TITLE));
         assertFalse(ABOUTHOME.isVisible());
 
-        // Go to blank 02
+        // Go to blank 02.
         NavigationHelper.enterAndLoadUrl(NavigationHelper.BLANK02_URL);
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.BLANK02_TITLE));
         assertFalse(ABOUTHOME.isVisible());
 
-        // Enter editing mode, about:home UI should be visible
+        // Enter editing mode, where the about:home UI should be visible.
         TOOLBAR.enterEditingMode();
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));
 
-        // Dismiss editing mode, about:home UI should be gone
+        // Dismiss editing mode, where the about:home UI should be gone.
         TOOLBAR.dismissEditingMode();
         assertFalse(ABOUTHOME.isVisible());
 
-        // Loading about:home should show about:home again
+        // Loading about:home should show about:home again.
         NavigationHelper.enterAndLoadUrl(NavigationHelper.ABOUT_HOME_URL);
         assertTrue(TOOLBAR.hasTitle(NavigationHelper.ABOUT_HOME_TITLE));
         assertTrue(ABOUTHOME.isVisible());
