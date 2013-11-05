@@ -100,10 +100,8 @@ class ToolbarComponent extends UITestComponent {
         assertFalse(isEditing());
 
         mSolo.clickOnView(getUrlTitleText(), true);
-        // TODO: Previous fail comment: "Failed to update UI state for editing mode".
-        WaitHelper.wait(isEditingCondition);
 
-        // TODO: Previous comment: "Failed to get input focus on editing mode"
+        WaitHelper.wait(isEditingCondition);
         WaitHelper.wait(new Condition() {
             @Override
             public boolean isSatisfied() {
@@ -124,8 +122,6 @@ class ToolbarComponent extends UITestComponent {
                 mSolo.clickOnView(getGoButton());
             }
         });
-
-        // TODO: Previous comment: "Failed to update UI state to commit editing mode"
         // TODO: Necessary?
         WaitHelper.wait(isNotEditingCondition);
 
@@ -143,7 +139,6 @@ class ToolbarComponent extends UITestComponent {
         // TODO: Solo.goBack.
         mActions.sendSpecialKey(Actions.SpecialKey.BACK);
 
-        // TODO: Previous comment: "Failed to update UI state to dismiss editing mode"
         WaitHelper.wait(isNotEditingCondition);
 
         // TODO: Wait for page load equivalent?
