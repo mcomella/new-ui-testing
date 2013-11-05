@@ -8,6 +8,7 @@ package @ANDROID_PACKAGE_NAME@.tests;
 import @ANDROID_PACKAGE_NAME@.Assert;
 
 // TODO: Should we use mAsserter names? It would make the API inconsistent with JUnit.
+// TODO: Add ispixel assertions.
 final class AssertionHelper {
     private static Assert mAsserter;
 
