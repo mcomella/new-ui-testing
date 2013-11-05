@@ -29,7 +29,7 @@ class AboutHomeComponent extends UITestComponent {
     // TODO: Import R directly (nalexander said it can be done after preprocessing is rm).
     private static final String HOME_PAGER_ID = "home_pager";
 
-    public AboutHomeComponent(UITestContext testContext) {
+    public AboutHomeComponent(final UITestContext testContext) {
         super(testContext);
     }
 
@@ -38,6 +38,7 @@ class AboutHomeComponent extends UITestComponent {
     }
 
     public boolean hasCurrentPage(final Page page) {
+        assertTrue(isVisible());
         return getHomePagerView().getCurrentItem() == page.ordinal();
     }
 

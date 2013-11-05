@@ -79,13 +79,13 @@ class ToolbarComponent extends UITestComponent {
     }
 
     public boolean hasTitle(final String expected) {
-        // TODO: Assert this view is visible to the user.
         // TODO: How is this affected by the showURL preference?
+        assertFalse(isEditing());
         return getUrlTitleText().getText().equals(expected);
     }
 
     public boolean hasUrl(final String expected) {
-        // TODO: Assert that this view is visible to the user.
+        assertTrue(isEditing());
         return getUrlEditText().getText().equals(expected);
     }
 
