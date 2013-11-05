@@ -26,7 +26,21 @@ class ToolbarComponent extends UITestComponent {
     private static final String BACK_BUTTON_ID = "back";
     private static final String FORWARD_BUTTON_ID = "forward";
 
-    public ToolbarComponent(UITestContext testContext) {
+    private final Condition isEditingCondition = new Condition() {
+        @Override
+        public boolean isSatisfied() {
+            return isEditing();
+        }
+    };
+
+    private final Condition isNotEditingCondition = new Condition() {
+        @Override
+        public boolean isSatisfied() {
+            return !isEditing();
+        }
+    };
+
+    public ToolbarComponent(final UITestContext testContext) {
         super(testContext);
     }
 
@@ -86,14 +100,8 @@ class ToolbarComponent extends UITestComponent {
         assertFalse(isEditing());
 
         mSolo.clickOnView(getUrlTitleText(), true);
-        // TODO: isNotEditingCondition.
         // TODO: Previous fail comment: "Failed to update UI state for editing mode".
-        WaitHelper.wait(new Condition() {
-            @Override
-            public boolean isSatisfied() {
-                return isEditing();
-            }
-        });
+        WaitHelper.wait(isEditingCondition);
 
         // TODO: Previous comment: "Failed to get input focus on editing mode"
         WaitHelper.wait(new Condition() {
@@ -118,14 +126,8 @@ class ToolbarComponent extends UITestComponent {
         });
 
         // TODO: Previous comment: "Failed to update UI state to commit editing mode"
-        // TODO: isNotEditingCondition.
         // TODO: Necessary?
-        WaitHelper.wait(new Condition() {
-            @Override
-            public boolean isSatisfied() {
-                return !isEditing();
-            }
-        });
+        WaitHelper.wait(isNotEditingCondition);
 
         return this;
     }
@@ -142,12 +144,7 @@ class ToolbarComponent extends UITestComponent {
         mActions.sendSpecialKey(Actions.SpecialKey.BACK);
 
         // TODO: Previous comment: "Failed to update UI state to dismiss editing mode"
-        WaitHelper.wait(new Condition() {
-            @Override
-            public boolean isSatisfied() {
-                return !isEditing();
-            }
-        });
+        WaitHelper.wait(isNotEditingCondition);
 
         // TODO: Wait for page load equivalent?
 
