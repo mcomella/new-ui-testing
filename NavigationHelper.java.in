@@ -14,19 +14,13 @@ import @ANDROID_PACKAGE_NAME@.tests.WaitHelper.InitiatingAction;
 import android.text.TextUtils;
 
 final public class NavigationHelper {
-    static final String ABOUT_HOME_URL = "about:home";
-    static final String ABOUT_HOME_TITLE = "";
-
-    static final String BLANK01_URL = "/robocop/robocop_blank_01.html";
-    static final String BLANK01_TITLE = "Browser Blank Page 01";
-
-    static final String BLANK02_URL = "/robocop/robocop_blank_02.html";
-    static final String BLANK02_TITLE = "Browser Blank Page 02";
-
-    static final String BLANK03_URL = "/robocop/robocop_blank_03.html";
-    static final String BLANK03_TITLE = "Browser Blank Page 03";
-
     private static UITest sTest;
+
+    private static String[] sPredefinedUrls = new String[] {
+        StringHelper.ROBOCOP_BLANK_PAGE_01_URL,
+        StringHelper.ROBOCOP_BLANK_PAGE_02_URL,
+        StringHelper.ROBOCOP_BLANK_PAGE_03_URL
+    };
 
     // TODO: Should be UITestContext.
     public static void init(final UITest test) {
@@ -44,10 +38,10 @@ final public class NavigationHelper {
 
     // TODO: Doc? How is it adjusted?
     private static String adjustIfPredefined(final String url) {
-        if (TextUtils.equals(url, BLANK01_URL) ||
-            TextUtils.equals(url, BLANK02_URL) ||
-            TextUtils.equals(url, BLANK03_URL)) {
-            return sTest.getAbsoluteUrl(url);
+        for (final String predefinedUrl : sPredefinedUrls) {
+            if (TextUtils.equals(url, predefinedUrl)) {
+                return sTest.getAbsoluteUrl(url);
+            }
         }
 
         return url;
