@@ -30,6 +30,7 @@ final class DeviceHelper {
     }
 
     private static UITestContext sTestContext;
+    private static Solo sSolo;
 
     private static Type sDeviceType;
     private static AndroidPlatformVersion sAndroidVersion;
@@ -41,6 +42,7 @@ final class DeviceHelper {
 
     public static void init(final UITestContext context) {
         sTestContext = context;
+        sSolo = sTestContext.getSolo();
 
         setAndroidVersion();
         setScreenDimensions();
@@ -102,15 +104,11 @@ final class DeviceHelper {
         return (sDeviceType == Type.TABLET);
     }
 
-    // TODO: Take explicit rotation as param?
-    public static void rotate() {
-        final Solo solo = sTestContext.getSolo();
-        final Activity activity = sTestContext.getActivity();
+    public static void setLandscapeRotation() {
+        sSolo.setActivityOrientation(Solo.LANDSCAPE);
+    }
 
-        if (activity.getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-            solo.setActivityOrientation(Solo.PORTRAIT);
-        } else {
-            solo.setActivityOrientation(Solo.LANDSCAPE);
-        }
+    public static void setPortraitOrientation() {
+        sSolo.setActivityOrientation(Solo.LANDSCAPE);
     }
 }
