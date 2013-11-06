@@ -7,15 +7,11 @@ package @ANDROID_PACKAGE_NAME@.tests;
 
 import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
-import @ANDROID_PACKAGE_NAME@.Actions;
 import @ANDROID_PACKAGE_NAME@.Actions.EventExpecter;
 
 import com.jayway.android.robotium.solo.Condition;
-import com.jayway.android.robotium.solo.Solo;
 
-import android.widget.TextView;
-
-final class WaitHelper {
+final class WaitHelper extends BaseHelper {
     /**
      * Performs the given action to start an event to be waited for. Implementations of this
      * interface are used in methods that need to check for changes in state from before the
@@ -29,24 +25,14 @@ final class WaitHelper {
     private static final int PAGE_LOAD_WAIT_MS = 10000;
     private static final int CHANGE_WAIT_MS = 2000;
 
-    private static UITest sTest;
-    private static Solo sSolo;
-    private static Actions sActions;
-
     private static ChangeVerifier[] sPageLoadVerifiers = new ChangeVerifier[] {
         new ToolbarTitleTextChangeVerifier()
     };
 
     private WaitHelper() { /* To disallow instantiation. */ }
 
-    public static void init(final UITest test) {
-        sTest = test;
-        sSolo = test.getSolo();
-        sActions = test.getActions();
-    }
-
     /**
-     * Waits for the given {@link Solo.Condition} using the default wait duration; will throw an
+     * Waits for the given {@link solo.Condition} using the default wait duration; will throw an
      * AssertionError if the duration is elapsed and the condition is not satisfied.
      */
     public static void waitFor(String message, final Condition condition) {
@@ -55,7 +41,7 @@ final class WaitHelper {
     }
 
     /**
-     * Waits for the given {@link Solo.Condition} using the given wait duration; will throw an
+     * Waits for the given {@link solo.Condition} using the given wait duration; will throw an
      * AssertionError if the duration is elapsed and the condition is not satisfied.
      */
     public static void waitFor(String message, final Condition condition, final int waitMillis) {
@@ -64,13 +50,15 @@ final class WaitHelper {
     }
 
     static void waitForPageLoad(final InitiatingAction initiatingAction) {
+        assertNotNull("Asserting initiatingAction is not null", initiatingAction);
+
         // Some changes to the UI occur in response to the same event we listen to for when
         // the page has finished loading (e.g. a page title update). As such, we ensure this
         // UI state has changed before returning from this method; here we store the initial
         // state.
         final ChangeVerifier[] pageLoadVerifiers = sPageLoadVerifiers;
         for (final ChangeVerifier verifier : pageLoadVerifiers) {
-            verifier.storeState(sTest);
+            verifier.storeState();
         }
 
         // Wait for the page load event.
@@ -101,24 +89,22 @@ final class WaitHelper {
      * returned from hasStateChanged, indicating this change of status.
      */
     private static interface ChangeVerifier {
-        public void storeState(final UITest test);
+        public void storeState();
         public boolean hasStateChanged();
     }
 
     private static class ToolbarTitleTextChangeVerifier implements ChangeVerifier {
-        private ToolbarComponent toolbar;
         private CharSequence oldTitleText;
 
         @Override
-        public void storeState(final UITest test) {
-            this.toolbar = test.TOOLBAR;
-            oldTitleText = toolbar.getTitle();
+        public void storeState() {
+            oldTitleText = TOOLBAR.getTitle();
         }
 
         @Override
         public boolean hasStateChanged() {
             // TODO: Efficiency? Should we naively cache the View?
-            return !oldTitleText.equals(toolbar.getTitle());
+            return !oldTitleText.equals(TOOLBAR.getTitle());
         }
     }
 }
