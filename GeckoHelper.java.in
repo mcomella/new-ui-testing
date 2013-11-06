@@ -5,36 +5,24 @@
 
 package @ANDROID_PACKAGE_NAME@.tests;
 
-import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
-
-import @ANDROID_PACKAGE_NAME@.Actions;
 import @ANDROID_PACKAGE_NAME@.Actions.EventExpecter;
 
 import java.lang.Class;
 import java.lang.ClassLoader;
 import java.lang.reflect.Method;
 
-final class GeckoHelper {
+final class GeckoHelper extends BaseHelper {
     private static final String GECKO_THREAD_CLASS = "org.mozilla.gecko.GeckoThread";
     private static final String LAUNCH_STATE_CLASS = GECKO_THREAD_CLASS + "$LaunchState";
 
-    private static UITest sTest;
-
     private GeckoHelper() { /* To disallow instantiation. */ }
-
-    // TODO: Should be UITestContext.
-    public static void init(final UITest test) {
-        sTest = test;
-    }
 
     public static void blockForReady() {
         try {
-            final Actions actions = sTest.getActions();
-
-            final EventExpecter geckoReady = actions.expectGeckoEvent("Gecko:Ready");
+            final EventExpecter geckoReady = sActions.expectGeckoEvent("Gecko:Ready");
 
             // TODO: Bug 709230: Remove reflection?
-            final ClassLoader cl = sTest.getActivity().getClassLoader();
+            final ClassLoader cl = sActivity.getClassLoader();
             final Class geckoThreadClass = cl.loadClass(GECKO_THREAD_CLASS);
             final Class launchStateClass = cl.loadClass(LAUNCH_STATE_CLASS);
             final Method checkLaunchStateMethod =
@@ -48,7 +36,7 @@ final class GeckoHelper {
 
             geckoReady.unregisterListener();
         } catch (Exception e) {
-            sTest.dumpLog("Exception in blockForGeckoReady", e);
+            sContext.dumpLog("Exception in blockForGeckoReady", e);
         }
     }
 }
