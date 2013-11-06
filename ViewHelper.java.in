@@ -5,22 +5,13 @@
 
 package @ANDROID_PACKAGE_NAME@.tests;
 
+import @ANDROID_PACKAGE_NAME@.Element;
 import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
-import @ANDROID_PACKAGE_NAME@.Driver;
-import @ANDROID_PACKAGE_NAME@.Element;
-
-import android.app.Activity;
 import android.view.View;
 
-final class ViewHelper {
-    private static UITestContext sTestContext;
-
+final class ViewHelper extends BaseHelper {
     private ViewHelper() { /* To disallow instantiation. */ }
-
-    public static void init(final UITestContext testContext) {
-        sTestContext = testContext;
-    }
 
     /**
      * Finds the View with the given ID at the given root. To find a View among all views, see
@@ -31,12 +22,10 @@ final class ViewHelper {
      * necessarily unique in the View hierarchy.
      */
     public static View findViewById(final View root, final String id) {
-        assertNotNull("Asserting that test context is not null", sTestContext);
+        assertNotNull("Asserting the root view is not null", root);
+        assertNotNull("Asserting the id is not null", id);
 
-        final Activity activity = sTestContext.getActivity();
-        final Driver driver = sTestContext.getDriver();
-
-        final Element element = driver.findElement(activity, id);
+        final Element element = sDriver.findElement(sActivity, id);
         return root.findViewById(element.getId());
     }
 }
