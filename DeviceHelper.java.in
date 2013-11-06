@@ -64,12 +64,14 @@ final class DeviceHelper {
         final Activity activity = sTestContext.getActivity();
         final DisplayMetrics dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+
         sScreenHeight = dm.heightPixels;
         sScreenWidth = dm.widthPixels;
     }
 
     private static void setDeviceType() {
         final Activity activity = sTestContext.getActivity();
+
         boolean isTablet = false;
         try {
             // TODO: Bug 709230: Remove reflection?

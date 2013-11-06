@@ -13,6 +13,7 @@ public class testAboutHomeVisibility extends UITest {
         GeckoHelper.blockForReady();
 
         // Check initial state on about:home.
+        // TODO: assertTitle(...)
         assertTrue(TOOLBAR.hasTitle(StringHelper.ABOUT_HOME_TITLE));
         assertTrue(ABOUTHOME.isVisible());
         assertTrue(ABOUTHOME.hasCurrentPage(Page.TOP_SITES));

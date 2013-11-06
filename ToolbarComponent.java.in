@@ -136,11 +136,13 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent dismissEditingMode() {
         assertTrue(isEditing());
 
+        // TODO: Use isInputMethodTarget to match enterEditingMode?
         if (getUrlEditText().hasFocus()) {
             // Drop the soft keyboard.
             // TODO: Solo.hideSoftKeyboard? Seemed to work strangely.
             mActions.sendSpecialKey(Actions.SpecialKey.BACK);
         }
+
         // TODO: Solo.goBack.
         mActions.sendSpecialKey(Actions.SpecialKey.BACK);
 
@@ -169,7 +171,7 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent pressBackButton() {
         final ImageButton backButton = getBackButton();
 
-        // TODO: Assert isTablet? Here or getBackButton. Also, pressForward.
+        // TODO: Assert isTablet? Here or in getBackButton. Also, pressForwardButton.
         assertNotNull(backButton);
         assertTrue(backButton.getVisibility() == View.VISIBLE);
 

@@ -74,6 +74,7 @@ class AboutHomeComponent extends UITestComponent {
         // Swiping left goes to next, swiping right goes to previous
         final int unboundedPageIndex = pageIndex + (direction == Solo.LEFT ? 1 : -1);
         final int expectedPageIndex = Math.min(Math.max(0, unboundedPageIndex), adapter.getCount() - 1);
+
         waitForPageIndex(expectedPageIndex);
     }
 

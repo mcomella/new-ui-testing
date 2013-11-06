@@ -15,6 +15,7 @@ import com.jayway.android.robotium.solo.Solo;
 
 import android.widget.TextView;
 
+// TODO: Add `errorMessage` param to wait methods.
 final class WaitHelper {
     /**
      * Performs the given action to start an event to be waited for. Implementations of this
