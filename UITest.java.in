@@ -95,7 +95,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         mBaseUrl = ((String) config.get("host")).replaceAll("(/$)", "");
         mRawBaseUrl = ((String) config.get("rawhost")).replaceAll("(/$)", "");
 
-        initComponents();
+        initComponents(); // Helpers depend on components so initialize them first.
         initHelpers();
     }
 
@@ -117,8 +117,9 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     }
 
     private void initHelpers() {
+        // Other helpers depend on BaseHelper, so initialize it first.
         BaseHelper.init(this);
-        CommonUseHelper.init(this);
+
         DeviceHelper.init(this);
         GeckoHelper.init(this);
         NavigationHelper.init(this);
