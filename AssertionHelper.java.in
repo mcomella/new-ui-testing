@@ -8,38 +8,31 @@ package @ANDROID_PACKAGE_NAME@.tests;
 import @ANDROID_PACKAGE_NAME@.Assert;
 
 // TODO: Add ispixel assertions.
-final class AssertionHelper {
-    private static Assert mAsserter;
-
+final class AssertionHelper extends BaseHelper {
     private AssertionHelper() { /* To disallow instantation. */ }
 
-    // TODO: If InitHelper class is created, move this method to a it so it does not get imported with *.
-    public static void init(final UITestContext testContext) {
-        mAsserter = testContext.getAsserter();
-    }
-
     public static void assertEquals(final String message, final Object expected, final Object actual) {
-        mAsserter.is(actual, expected, message);
+        sAsserter.is(actual, expected, message);
     }
 
     public static void assertEquals(final String message, final int expected, final int actual) {
-        mAsserter.is(actual, expected, message);
+        sAsserter.is(actual, expected, message);
     }
 
     public static void assertFalse(final String message, final boolean actual) {
         // TODO: What is diag? (Also assertTrue)
-        mAsserter.ok(!actual, message, "");
+        sAsserter.ok(!actual, message, "");
     }
 
     public static void assertNotNull(final String message, final Object actual) {
-        mAsserter.isnot(actual, null, message);
+        sAsserter.isnot(actual, null, message);
     }
 
     public static void assertNull(final String message, final Object actual) {
-        mAsserter.is(actual, null, message);
+        sAsserter.is(actual, null, message);
     }
 
     public static void assertTrue(final String message, final boolean actual) {
-        mAsserter.ok(actual, message, "");
+        sAsserter.ok(actual, message, "");
     }
 }
