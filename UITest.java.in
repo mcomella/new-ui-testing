@@ -116,8 +116,8 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         TOOLBAR = new ToolbarComponent(this);
     }
 
-    // TODO: Should the helpers be instance variables?
     private void initHelpers() {
+        BaseHelper.init(this);
         AssertionHelper.init(this);
         CommonUseHelper.init(this);
         DeviceHelper.init(this);

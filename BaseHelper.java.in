@@ -1,0 +1,29 @@
+#filter substitution
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package @ANDROID_PACKAGE_NAME@.tests;
+
+import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
+
+import @ANDROID_PACKAGE_NAME@.Actions;
+import @ANDROID_PACKAGE_NAME@.Driver;
+
+import com.jayway.android.robotium.solo.Solo;
+
+public class BaseHelper {
+    protected static UITestContext sContext;
+    protected static Solo sSolo;
+    protected static Driver sDriver;
+    protected static Actions sActions;
+
+    protected BaseHelper() { /* Do not instantiate - protected to allow access from subclasses. */ }
+
+    public static void init(final UITestContext context) {
+        sContext = context;
+        sSolo = sContext.getSolo();
+        sDriver = sContext.getDriver();
+        sActions = sContext.getActions();
+    }
+}
