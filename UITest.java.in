@@ -120,7 +120,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         // Other helpers depend on BaseHelper, so initialize it first.
         BaseHelper.init(this);
 
-        DeviceHelper.init(this);
+        DeviceHelper.init();
         GeckoHelper.init(this);
         NavigationHelper.init(this);
         ViewHelper.init(this);

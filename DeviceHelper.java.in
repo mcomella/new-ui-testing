@@ -15,7 +15,7 @@ import java.lang.Class;
 import java.lang.ClassLoader;
 import java.lang.reflect.Method;
 
-final class DeviceHelper {
+final class DeviceHelper extends BaseHelper {
     private static final String APP_SHELL_CLASS = "org.mozilla.gecko.GeckoAppShell";
 
     public enum Type {
@@ -29,21 +29,15 @@ final class DeviceHelper {
         v4x
     }
 
-    private static UITestContext sTestContext;
-    private static Solo sSolo;
-
     private static Type sDeviceType;
     private static PlatformVersion sAndroidVersion;
 
     private static int sScreenHeight;
     private static int sScreenWidth;
 
-    public DeviceHelper() { /* To disallow instantiation. */ }
+    private DeviceHelper() { /* To disallow instantiation. */ }
 
-    public static void init(final UITestContext context) {
-        sTestContext = context;
-        sSolo = sTestContext.getSolo();
-
+    public static void init() {
         setAndroidVersion();
         setScreenDimensions();
         setDeviceType();
@@ -61,7 +55,7 @@ final class DeviceHelper {
     }
 
     private static void setScreenDimensions() {
-        final Activity activity = sTestContext.getActivity();
+        final Activity activity = sContext.getActivity();
         final DisplayMetrics dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -70,7 +64,7 @@ final class DeviceHelper {
     }
 
     private static void setDeviceType() {
-        final Activity activity = sTestContext.getActivity();
+        final Activity activity = sContext.getActivity();
 
         boolean isTablet = false;
         try {
@@ -80,7 +74,7 @@ final class DeviceHelper {
             final Method isTabletMethod = appShellClass.getMethod("isTablet");
             isTablet = ((Boolean) isTabletMethod.invoke(null)).booleanValue();
         } catch (Exception e) {
-            sTestContext.dumpLog("Exception in detectDevice", e);
+            sContext.dumpLog("Exception in detectDevice", e);
         }
 
         sDeviceType = (isTablet ? Type.TABLET : Type.PHONE);
