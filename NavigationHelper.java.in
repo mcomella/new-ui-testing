@@ -57,7 +57,7 @@ final public class NavigationHelper {
 
         if (DeviceHelper.isTablet()) {
             assertNotNull(sTest.TOOLBAR); // TODO: Necessary?
-            sTest.TOOLBAR.pressBack(); // Waits for page load.
+            sTest.TOOLBAR.pressBackButton(); // Waits for page load.
             return;
         }
 
@@ -72,12 +72,12 @@ final public class NavigationHelper {
     }
 
     public static void goForward() {
-        // TODO: Necessary?
+        // TODO: Necessary? Perhaps assertInitialized?
         assertNotNull(sTest);
 
         if (DeviceHelper.isTablet()) {
             assertNotNull(sTest.TOOLBAR);
-            sTest.TOOLBAR.pressForward(); // Waits for page load.
+            sTest.TOOLBAR.pressForwardButton(); // Waits for page load.
             return;
         }
 

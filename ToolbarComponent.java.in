@@ -166,8 +166,7 @@ class ToolbarComponent extends UITestComponent {
         return this;
     }
 
-    // TODO: Ambiguous name? pressBackButton? Add doc or is Component.pressBack descriptive enough?
-    public ToolbarComponent pressBack() {
+    public ToolbarComponent pressBackButton() {
         final ImageButton backButton = getBackButton();
 
         // TODO: Assert isTablet? Here or getBackButton. Also, pressForward.
@@ -184,7 +183,7 @@ class ToolbarComponent extends UITestComponent {
         return this;
     }
 
-    public ToolbarComponent pressForward() {
+    public ToolbarComponent pressForwardButton() {
         final ImageButton forwardButton = getForwardButton();
 
         assertNotNull(forwardButton);
