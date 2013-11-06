@@ -111,7 +111,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         super.tearDown();
     }
 
-    private void initComponents() throws Exception {
+    private void initComponents() {
         ABOUTHOME = new AboutHomeComponent(this);
         TOOLBAR = new ToolbarComponent(this);
     }
