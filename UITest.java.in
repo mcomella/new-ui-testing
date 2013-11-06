@@ -154,12 +154,12 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     }
 
     @Override
-    public void dumpLog(String message) {
+    public void dumpLog(final String message) {
         mAsserter.dumpLog(message);
     }
 
     @Override
-    public void dumpLog(String message, Throwable t) {
+    public void dumpLog(final String message, final Throwable t) {
         mAsserter.dumpLog(message, t);
     }
 
