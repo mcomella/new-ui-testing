@@ -15,7 +15,6 @@ import com.jayway.android.robotium.solo.Solo;
 
 import android.widget.TextView;
 
-// TODO: Add `errorMessage` param to wait methods.
 final class WaitHelper {
     /**
      * Performs the given action to start an event to be waited for. Implementations of this
@@ -50,16 +49,18 @@ final class WaitHelper {
      * Waits for the given {@link Solo.Condition} using the default wait duration; will throw an
      * AssertionError if the duration is elapsed and the condition is not satisfied.
      */
-    public static void wait(final Condition condition) {
-        assertTrue(sSolo.waitForCondition(condition, DEFAULT_MAX_WAIT_MS));
+    public static void waitFor(String message, final Condition condition) {
+        message = "Waiting for " + message + ".";
+        assertTrue(message, sSolo.waitForCondition(condition, DEFAULT_MAX_WAIT_MS));
     }
 
     /**
      * Waits for the given {@link Solo.Condition} using the given wait duration; will throw an
      * AssertionError if the duration is elapsed and the condition is not satisfied.
      */
-    public static void wait(final Condition condition, final int waitMillis) {
-        assertTrue(sSolo.waitForCondition(condition, waitMillis));
+    public static void waitFor(String message, final Condition condition, final int waitMillis) {
+        message = "Waiting for " + message + " with timeout " + waitMillis + ".";
+        assertTrue(message, sSolo.waitForCondition(condition, waitMillis));
     }
 
     static void waitForPageLoad(final InitiatingAction initiatingAction) {
@@ -74,6 +75,7 @@ final class WaitHelper {
 
         // Wait for the page load event.
         // TODO: Does this work on about:home?
+        // TODO: Assert that the page has actually loaded?
         final EventExpecter contentEventExpecter = sActions.expectGeckoEvent("DOMContentLoaded");
         initiatingAction.doAction();
         contentEventExpecter.blockForEventDataWithTimeout(PAGE_LOAD_WAIT_MS);

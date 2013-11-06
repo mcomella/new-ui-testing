@@ -26,7 +26,7 @@ final class GestureHelper {
     }
 
     private static void swipeOnScreen(final int direction) {
-        assertNotNull(sTestContext);
+        assertNotNull("Asserting the test context is not null", sTestContext);
 
         final Driver driver = sTestContext.getDriver();
         final int halfWidth = driver.getGeckoWidth() / 2;

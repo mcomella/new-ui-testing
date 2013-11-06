@@ -29,8 +29,8 @@ final public class NavigationHelper {
 
     public static void enterAndLoadUrl(String url) {
         // TODO: Are these necessary? Perhaps assertInitialized() instead?
-        assertNotNull(sTest);
-        assertNotNull(sTest.TOOLBAR);
+        assertNotNull("Asserting UITest instance is not null", sTest);
+        assertNotNull("Asserting that Toolbar is not null", sTest.TOOLBAR);
 
         url = adjustIfPredefined(url);
         sTest.TOOLBAR.enterEditingMode().enterUrl(url).commitEditingMode();
@@ -53,10 +53,10 @@ final public class NavigationHelper {
     // TODO: Ambiguous name? Is CommonUseHelper.goBack() enough? Perhaps w/ doc?
     public static void goBack() {
         // TODO: Necessary?
-        assertNotNull(sTest);
+        assertNotNull("Asserting UITest instance is not null", sTest);
 
         if (DeviceHelper.isTablet()) {
-            assertNotNull(sTest.TOOLBAR); // TODO: Necessary?
+            assertNotNull("Asserting that Toolbar is not null", sTest.TOOLBAR); // TODO: Necessary?
             sTest.TOOLBAR.pressBackButton(); // Waits for page load.
             return;
         }
@@ -73,10 +73,10 @@ final public class NavigationHelper {
 
     public static void goForward() {
         // TODO: Necessary? Perhaps assertInitialized?
-        assertNotNull(sTest);
+        assertNotNull("Asserting UITest instance is not null", sTest);
 
         if (DeviceHelper.isTablet()) {
-            assertNotNull(sTest.TOOLBAR);
+            assertNotNull("Asserting that Toolbar is not null", sTest.TOOLBAR);
             sTest.TOOLBAR.pressForwardButton(); // Waits for page load.
             return;
         }

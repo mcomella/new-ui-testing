@@ -26,22 +26,27 @@ class ToolbarComponent extends UITestComponent {
     private static final String BACK_BUTTON_ID = "back";
     private static final String FORWARD_BUTTON_ID = "forward";
 
-    private final Condition isEditingCondition = new Condition() {
-        @Override
-        public boolean isSatisfied() {
-            return isEditing();
-        }
-    };
-
-    private final Condition isNotEditingCondition = new Condition() {
-        @Override
-        public boolean isSatisfied() {
-            return !isEditing();
-        }
-    };
-
     public ToolbarComponent(final UITestContext testContext) {
         super(testContext);
+    }
+
+    public void assertIsEditing() {
+        assertTrue("Asserting that the toolbar is in the editing state", isEditing());
+    }
+
+    public void assertIsNotEditing() {
+        assertFalse("Asserting that the toolbar is not in the editing state", isEditing());
+    }
+
+    public void assertTitle(final String expected) {
+        // TODO: How is this affected by the showURL preference?
+        assertIsNotEditing(); // TODO: Causes a race condition in wait for page load?
+        assertEquals("Asserting the Toolbar title", expected, getTitle());
+    }
+
+    public void assertUrl(final String expected) {
+        assertIsEditing();
+        assertEquals("Asserting the Toolbar url", expected, getUrlEditText().getText());
     }
 
     /**
@@ -83,18 +88,6 @@ class ToolbarComponent extends UITestComponent {
         return getUrlTitleText().getText();
     }
 
-    // TODO: Is this needed with getTitle()?
-    public boolean hasTitle(final String expected) {
-        // TODO: How is this affected by the showURL preference?
-        assertFalse(isEditing()); // TODO: Causes a race condition in wait for page load?
-        return getUrlTitleText().getText().equals(expected);
-    }
-
-    public boolean hasUrl(final String expected) {
-        assertTrue(isEditing());
-        return getUrlEditText().getText().equals(expected);
-    }
-
     public boolean isEditing() {
         // TODO: DisplayContainer vs. TitleText. What is the difference?
         return getUrlDisplayContainer().getVisibility() != View.VISIBLE &&
@@ -103,12 +96,12 @@ class ToolbarComponent extends UITestComponent {
     }
 
     public ToolbarComponent enterEditingMode() {
-        assertFalse(isEditing());
+        assertIsNotEditing();
 
         mSolo.clickOnView(getUrlTitleText(), true);
 
-        WaitHelper.wait(isEditingCondition);
-        WaitHelper.wait(new Condition() {
+        waitForEditing();
+        WaitHelper.waitFor("UrlEditText to be input method target", new Condition() {
             @Override
             public boolean isSatisfied() {
                 return getUrlEditText().isInputMethodTarget();
@@ -119,7 +112,7 @@ class ToolbarComponent extends UITestComponent {
     }
 
     public ToolbarComponent commitEditingMode() {
-        assertTrue(isEditing());
+        assertIsEditing();
 
         // TODO: Does this work for about:home?
         WaitHelper.waitForPageLoad(new InitiatingAction() {
@@ -128,13 +121,13 @@ class ToolbarComponent extends UITestComponent {
                 mSolo.clickOnView(getGoButton());
             }
         });
-        WaitHelper.wait(isNotEditingCondition);
+        waitForNotEditing();
 
         return this;
     }
 
     public ToolbarComponent dismissEditingMode() {
-        assertTrue(isEditing());
+        assertIsEditing();
 
         // TODO: Use isInputMethodTarget to match enterEditingMode?
         if (getUrlEditText().hasFocus()) {
@@ -146,7 +139,7 @@ class ToolbarComponent extends UITestComponent {
         // TODO: Solo.goBack.
         mActions.sendSpecialKey(Actions.SpecialKey.BACK);
 
-        WaitHelper.wait(isNotEditingCondition);
+        waitForNotEditing();
 
         // TODO: Wait for page load equivalent?
 
@@ -154,8 +147,9 @@ class ToolbarComponent extends UITestComponent {
     }
 
     public ToolbarComponent enterUrl(final String url) {
-        assertTrue(isEditing());
-        assertTrue(getUrlEditText().isInputMethodTarget());
+        assertIsEditing();
+        assertTrue("Asserting that the UrlEditText is the input method target",
+                getUrlEditText().isInputMethodTarget());
 
         // TODO: Robotium's methods caused NPE. Note that Robotium's methods are less
         // user-like, however, and does not clear text if the text is highlighted
@@ -172,8 +166,9 @@ class ToolbarComponent extends UITestComponent {
         final ImageButton backButton = getBackButton();
 
         // TODO: Assert isTablet? Here or in getBackButton. Also, pressForwardButton.
-        assertNotNull(backButton);
-        assertTrue(backButton.getVisibility() == View.VISIBLE);
+        assertNotNull("Asserting that the back button View is not null", backButton);
+        assertEquals("Asserting that the back button is visible",
+                View.VISIBLE, backButton.getVisibility());
 
         WaitHelper.waitForPageLoad(new InitiatingAction() {
             @Override
@@ -188,8 +183,9 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent pressForwardButton() {
         final ImageButton forwardButton = getForwardButton();
 
-        assertNotNull(forwardButton);
-        assertTrue(forwardButton.getVisibility() == View.VISIBLE);
+        assertNotNull("Asserting that the forward button View is not null", forwardButton);
+        assertEquals("Asserting that the forward button is visible",
+                View.VISIBLE, forwardButton.getVisibility());
 
         WaitHelper.waitForPageLoad(new InitiatingAction() {
             @Override
@@ -199,5 +195,23 @@ class ToolbarComponent extends UITestComponent {
         });
 
         return this;
+    }
+
+    private void waitForEditing() {
+        WaitHelper.waitFor("Toolbar to enter editing mode", new Condition() {
+            @Override
+            public boolean isSatisfied() {
+                return isEditing();
+            }
+        });
+    }
+
+    private void waitForNotEditing() {
+        WaitHelper.waitFor("Toolbar to exit editing mode", new Condition() {
+            @Override
+            public boolean isSatisfied() {
+                return !isEditing();
+            }
+        });
     }
 }

@@ -11,24 +11,24 @@ public class testNewTabHistory extends UITest {
         GeckoHelper.blockForReady();
 
         NavigationHelper.enterAndLoadUrl(StringHelper.ROBOCOP_BLANK_PAGE_01_URL);
-        assertTrue(TOOLBAR.hasTitle(StringHelper.ROBOCOP_BLANK_PAGE_01_TITLE));
+        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_01_TITLE);
 
         NavigationHelper.enterAndLoadUrl(StringHelper.ROBOCOP_BLANK_PAGE_02_URL);
-        assertTrue(TOOLBAR.hasTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE));
+        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
 
         NavigationHelper.enterAndLoadUrl(StringHelper.ROBOCOP_BLANK_PAGE_03_URL);
-        assertTrue(TOOLBAR.hasTitle(StringHelper.ROBOCOP_BLANK_PAGE_03_TITLE));
+        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_03_TITLE);
 
         NavigationHelper.goBack();
-        assertTrue(TOOLBAR.hasTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE));
+        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
 
         NavigationHelper.goBack();
-        assertTrue(TOOLBAR.hasTitle(StringHelper.ROBOCOP_BLANK_PAGE_01_TITLE));
+        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_01_TITLE);
 
         NavigationHelper.goForward();
-        assertTrue(TOOLBAR.hasTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE));
+        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
 
         NavigationHelper.reload();
-        assertTrue(TOOLBAR.hasTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE));
+        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
     }
 }

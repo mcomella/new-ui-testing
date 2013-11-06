@@ -31,7 +31,7 @@ final class ViewHelper {
      * necessarily unique in the View hierarchy.
      */
     public static View findViewById(final View root, final String id) {
-        assertNotNull(sTestContext);
+        assertNotNull("Asserting that test context is not null", sTestContext);
 
         final Activity activity = sTestContext.getActivity();
         final Driver driver = sTestContext.getDriver();

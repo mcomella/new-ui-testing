@@ -37,13 +37,22 @@ class AboutHomeComponent extends UITestComponent {
         return (ViewPager) mSolo.getView(HOME_PAGER_ID);
     }
 
-    public boolean hasCurrentPage(final Page page) {
-        assertTrue(isVisible());
-        return (getHomePagerView().getCurrentItem() == page.ordinal());
+    public void assertCurrentPage(final Page page) {
+        assertVisible();
+        assertEquals("Asserting the current HomePager page",
+                page.ordinal(), getHomePagerView().getCurrentItem());
     }
 
-    public boolean isVisible() {
-        return (getHomePagerView().getVisibility() == View.VISIBLE);
+    public void assertNotVisible() {
+        // TODO: assertFalse is inconsistent with assertVisible but probably better
+        // than adding assertNotEquals and being inconsistent with JUnit.
+        assertFalse("Asserting that the HomePager is not visible",
+                getHomePagerView().getVisibility() == View.VISIBLE);
+    }
+
+    public void assertVisible() {
+        assertEquals("Asserting that the HomePager is visible",
+                View.VISIBLE, getHomePagerView().getVisibility());
     }
 
     // TODO: Take specific page as parameter rather than swipe in a direction?
@@ -59,7 +68,7 @@ class AboutHomeComponent extends UITestComponent {
     }
 
     private void swipe(int direction) {
-        assertTrue(isVisible());
+        assertVisible();
 
         final int pageIndex = getHomePagerView().getCurrentItem();
         if (direction == Solo.LEFT) {
@@ -69,7 +78,7 @@ class AboutHomeComponent extends UITestComponent {
         }
 
         final PagerAdapter adapter = getHomePagerView().getAdapter();
-        assertNotNull(adapter);
+        assertNotNull("Asserting the HomePager's PagerAdapter is not null", adapter);
 
         // Swiping left goes to next, swiping right goes to previous
         final int unboundedPageIndex = pageIndex + (direction == Solo.LEFT ? 1 : -1);
@@ -79,7 +88,7 @@ class AboutHomeComponent extends UITestComponent {
     }
 
     private void waitForPageIndex(final int expectedIndex) {
-        WaitHelper.wait(new Condition() {
+        WaitHelper.waitFor("a specific HomePager page", new Condition() {
             @Override
             public boolean isSatisfied() {
                 return (getHomePagerView().getCurrentItem() == expectedIndex);

@@ -7,8 +7,6 @@ package @ANDROID_PACKAGE_NAME@.tests;
 
 import @ANDROID_PACKAGE_NAME@.Assert;
 
-// TODO: Should we use mAsserter names (rename to "errorMessage"?)? It would make the API
-// inconsistent with JUnit.
 // TODO: Add ispixel assertions.
 final class AssertionHelper {
     private static Assert mAsserter;
@@ -20,28 +18,28 @@ final class AssertionHelper {
         mAsserter = testContext.getAsserter();
     }
 
-    public static void assertEquals(final Object expected, final Object actual) {
-        mAsserter.is(actual, expected, "");
+    public static void assertEquals(final String message, final Object expected, final Object actual) {
+        mAsserter.is(actual, expected, message);
     }
 
-    public static void assertEquals(final int expected, final int actual) {
-        mAsserter.is(actual, expected, "");
+    public static void assertEquals(final String message, final int expected, final int actual) {
+        mAsserter.is(actual, expected, message);
     }
 
-    public static void assertFalse(final boolean actual) {
+    public static void assertFalse(final String message, final boolean actual) {
         // TODO: What is diag? (Also assertTrue)
-        mAsserter.ok(!actual, "", "");
+        mAsserter.ok(!actual, message, "");
     }
 
-    public static void assertNotNull(final Object actual) {
-        mAsserter.isnot(actual, null, "");
+    public static void assertNotNull(final String message, final Object actual) {
+        mAsserter.isnot(actual, null, message);
     }
 
-    public static void assertNull(final Object actual) {
-        mAsserter.is(actual, null, "");
+    public static void assertNull(final String message, final Object actual) {
+        mAsserter.is(actual, null, message);
     }
 
-    public static void assertTrue(final boolean actual) {
-        mAsserter.ok(actual, "", "");
+    public static void assertTrue(final String message, final boolean actual) {
+        mAsserter.ok(actual, message, "");
     }
 }
