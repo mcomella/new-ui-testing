@@ -36,7 +36,10 @@ final public class NavigationHelper {
         sTest.TOOLBAR.enterEditingMode().enterUrl(url).commitEditingMode();
     }
 
-    // TODO: Doc? How is it adjusted?
+    /**
+     * Returns a new URL with the docshell HTTP server host prefix if the given url is
+     * predefined, otherwise returns the given url.
+     */
     private static String adjustIfPredefined(final String url) {
         for (final String predefinedUrl : sPredefinedUrls) {
             if (TextUtils.equals(url, predefinedUrl)) {
