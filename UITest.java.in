@@ -161,6 +161,20 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         mAsserter.dumpLog(message, t);
     }
 
+    @Override
+    public UITestComponent getComponent(final Component component) {
+        switch (component) {
+        case ABOUTHOME:
+            return ABOUTHOME;
+        case TOOLBAR:
+            return TOOLBAR;
+
+        default:
+            fail("Unknown component, " + component + ".");
+            return null; // Should not reach this statement but required by javac.
+        }
+    }
+
     protected Type getTestType() {
         return Type.MOCHITEST;
     }

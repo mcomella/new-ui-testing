@@ -24,4 +24,11 @@ interface UITestContext {
 
     public void dumpLog(final String message);
     public void dumpLog(final String message, final Throwable t);
+
+    public UITestComponent getComponent(final Component component);
+
+    public static enum Component {
+        ABOUTHOME,
+        TOOLBAR
+    }
 }

@@ -35,4 +35,9 @@ final class AssertionHelper extends BaseHelper {
     public static void assertTrue(final String message, final boolean actual) {
         sAsserter.ok(actual, message, "");
     }
+
+    public static void fail(final String message) {
+        // TODO: diag?
+        sAsserter.ok(false, message, "");
+    }
 }
