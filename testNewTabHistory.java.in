@@ -4,8 +4,6 @@ package @ANDROID_PACKAGE_NAME@.tests;
 // TODO: Elaborate on test desc and use /**.
 /* Test correct state for URL bar after loading pages.
  */
-/* Test correct state for URL bar after loading pages.
- */
 public class testNewTabHistory extends UITest {
     public void testNewTabHistory() {
         GeckoHelper.blockForReady();

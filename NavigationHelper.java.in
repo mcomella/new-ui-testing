@@ -42,7 +42,6 @@ final public class NavigationHelper extends BaseHelper {
         return url;
     }
 
-    // TODO: Ambiguous name? Is NavigationHelper.goBack() enough? Perhaps w/ doc?
     public static void goBack() {
         // TODO: Assert !editing?
         if (DeviceHelper.isTablet()) {

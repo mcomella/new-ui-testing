@@ -92,7 +92,6 @@ class ToolbarComponent extends UITestComponent {
     }
 
     public boolean isEditing() {
-        // TODO: DisplayContainer vs. TitleText. What is the difference?
         return getUrlDisplayContainer().getVisibility() != View.VISIBLE &&
                 getUrlEditText().getVisibility() == View.VISIBLE &&
                 getGoButton().getVisibility() == View.VISIBLE;
