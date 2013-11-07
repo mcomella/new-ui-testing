@@ -118,7 +118,6 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent commitEditingMode() {
         assertIsEditing();
 
-        // TODO: Does this work for about:home?
         WaitHelper.waitForPageLoad(new InitiatingAction() {
             @Override
             public void doAction() {
@@ -133,15 +132,14 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent dismissEditingMode() {
         assertIsEditing();
 
-        // TODO: Use isInputMethodTarget to match enterEditingMode?
-        if (getUrlEditText().hasFocus()) {
+        if (getUrlEditText().isInputMethodTarget()) {
             // Drop the soft keyboard.
-            // TODO: Solo.hideSoftKeyboard? Seemed to work strangely.
-            mActions.sendSpecialKey(Actions.SpecialKey.BACK);
+            // TODO: Solo.hideSoftKeyboard() does not clear focus, causing unexpected
+            // behavior, but we may want to use it over goBack().
+            sSolo.goBack();
         }
 
-        // TODO: Solo.goBack.
-        mActions.sendSpecialKey(Actions.SpecialKey.BACK);
+        sSolo.goBack();
 
         waitForNotEditing();
 

@@ -44,7 +44,7 @@ final public class NavigationHelper extends BaseHelper {
 
     // TODO: Ambiguous name? Is NavigationHelper.goBack() enough? Perhaps w/ doc?
     public static void goBack() {
-
+        // TODO: Assert !editing?
         if (DeviceHelper.isTablet()) {
             TOOLBAR.pressBackButton(); // Waits for page load.
             return;
@@ -53,9 +53,10 @@ final public class NavigationHelper extends BaseHelper {
         WaitHelper.waitForPageLoad(new InitiatingAction() {
             @Override
             public void doAction() {
-                // TODO: Lower soft keyboard first?
-                // TODO: Solo.goBack
-                sActions.sendSpecialKey(Actions.SpecialKey.BACK);
+                // TODO: Lower soft keyboard first if applicable. Note that
+                // Solo.hideSoftKeyboard() does not clear focus (which might be fine since
+                // Gecko would be the element focused).
+                sSolo.goBack();
             }
         });
     }
