@@ -147,6 +147,8 @@ class ToolbarComponent extends UITestComponent {
     }
 
     public ToolbarComponent enterUrl(final String url) {
+        assertNotNull("Asserting url is not null", url);
+
         assertIsEditing();
         assertTrue("Asserting that the UrlEditText is the input method target",
                 getUrlEditText().isInputMethodTarget());
