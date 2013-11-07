@@ -46,7 +46,6 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     // Base to build raw absolute URLs
     private String mRawBaseUrl;
 
-    // TODO: These aren't constants. Keep names capitalized for visibility?
     AboutHomeComponent ABOUTHOME;
     ToolbarComponent TOOLBAR;
 
