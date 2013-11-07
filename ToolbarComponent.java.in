@@ -9,7 +9,6 @@ import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import com.jayway.android.robotium.solo.Condition;
 
-import @ANDROID_PACKAGE_NAME@.Actions;
 import @ANDROID_PACKAGE_NAME@.tests.WaitHelper.InitiatingAction;
 
 import android.view.View;
@@ -136,10 +135,10 @@ class ToolbarComponent extends UITestComponent {
             // Drop the soft keyboard.
             // TODO: Solo.hideSoftKeyboard() does not clear focus, causing unexpected
             // behavior, but we may want to use it over goBack().
-            sSolo.goBack();
+            mSolo.goBack();
         }
 
-        sSolo.goBack();
+        mSolo.goBack();
 
         waitForNotEditing();
 
@@ -152,16 +151,13 @@ class ToolbarComponent extends UITestComponent {
         assertNotNull("Asserting url is not null", url);
 
         assertIsEditing();
-        assertTrue("Asserting that the UrlEditText is the input method target",
-                getUrlEditText().isInputMethodTarget());
 
-        // TODO: Robotium's methods caused NPE. Note that Robotium's methods are less
-        // user-like, however, and does not clear text if the text is highlighted
-        // and a key is pressed. May need to add an extra test for this behavior.
-        //final EditText urlEditText = getUrlEditText();
-        //mSolo.clearEditText(urlEditText);
-        //mSolo.enterText(urlEditText, url);
-        mActions.sendKeys(url);
+        final EditText urlEditText = getUrlEditText();
+        assertTrue("Asserting that the UrlEditText is the input method target",
+                urlEditText.isInputMethodTarget());
+
+        mSolo.clearEditText(urlEditText);
+        mSolo.enterText(urlEditText, url);
 
         return this;
     }
