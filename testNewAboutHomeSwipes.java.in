@@ -13,8 +13,8 @@ public class testNewAboutHomeSwipes extends UITest {
     public void testNewAboutHomeSwipes() {
         GeckoHelper.blockForReady();
 
-        ABOUTHOME.assertVisible();
-        ABOUTHOME.assertCurrentPage(Page.TOP_SITES);
+        ABOUTHOME.assertVisible()
+                 .assertCurrentPage(Page.TOP_SITES);
 
         ABOUTHOME.swipeToNext();
         ABOUTHOME.assertCurrentPage(Page.BOOKMARKS);

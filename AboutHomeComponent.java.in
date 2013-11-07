@@ -37,22 +37,25 @@ class AboutHomeComponent extends UITestComponent {
         return (ViewPager) mSolo.getView(HOME_PAGER_ID);
     }
 
-    public void assertCurrentPage(final Page page) {
+    public AboutHomeComponent assertCurrentPage(final Page page) {
         assertVisible();
         assertEquals("Asserting the current HomePager page",
                 page.ordinal(), getHomePagerView().getCurrentItem());
+        return this;
     }
 
-    public void assertNotVisible() {
+    public AboutHomeComponent assertNotVisible() {
         // TODO: assertFalse is inconsistent with assertVisible but probably better
         // than adding assertNotEquals and being inconsistent with JUnit.
         assertFalse("Asserting that the HomePager is not visible",
                 getHomePagerView().getVisibility() == View.VISIBLE);
+        return this;
     }
 
-    public void assertVisible() {
+    public AboutHomeComponent assertVisible() {
         assertEquals("Asserting that the HomePager is visible",
                 View.VISIBLE, getHomePagerView().getVisibility());
+        return this;
     }
 
     // TODO: Take specific page as parameter rather than swipe in a direction?

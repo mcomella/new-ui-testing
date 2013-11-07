@@ -30,23 +30,27 @@ class ToolbarComponent extends UITestComponent {
         super(testContext);
     }
 
-    public void assertIsEditing() {
+    public ToolbarComponent assertIsEditing() {
         assertTrue("Asserting that the toolbar is in the editing state", isEditing());
+        return this;
     }
 
-    public void assertIsNotEditing() {
+    public ToolbarComponent assertIsNotEditing() {
         assertFalse("Asserting that the toolbar is not in the editing state", isEditing());
+        return this;
     }
 
-    public void assertTitle(final String expected) {
+    public ToolbarComponent assertTitle(final String expected) {
         // TODO: How is this affected by the showURL preference?
         assertIsNotEditing(); // TODO: Causes a race condition in wait for page load?
         assertEquals("Asserting the Toolbar title", expected, getTitle());
+        return this;
     }
 
-    public void assertUrl(final String expected) {
+    public ToolbarComponent assertUrl(final String expected) {
         assertIsEditing();
         assertEquals("Asserting the Toolbar url", expected, getUrlEditText().getText());
+        return this;
     }
 
     /**
