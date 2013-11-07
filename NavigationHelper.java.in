@@ -8,32 +8,22 @@ package @ANDROID_PACKAGE_NAME@.tests;
 import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
 
 import @ANDROID_PACKAGE_NAME@.Actions;
-import @ANDROID_PACKAGE_NAME@.Actions.EventExpecter;
 import @ANDROID_PACKAGE_NAME@.tests.WaitHelper.InitiatingAction;
 
 import android.text.TextUtils;
 
-final public class NavigationHelper {
-    private static UITest sTest;
-
+final public class NavigationHelper extends BaseHelper {
     private static String[] sPredefinedUrls = new String[] {
         StringHelper.ROBOCOP_BLANK_PAGE_01_URL,
         StringHelper.ROBOCOP_BLANK_PAGE_02_URL,
         StringHelper.ROBOCOP_BLANK_PAGE_03_URL
     };
 
-    // TODO: Should be UITestContext.
-    public static void init(final UITest test) {
-        sTest = test;
-    }
-
     public static void enterAndLoadUrl(String url) {
-        // TODO: Are these necessary? Perhaps assertInitialized() instead?
-        assertNotNull("Asserting UITest instance is not null", sTest);
-        assertNotNull("Asserting that Toolbar is not null", sTest.TOOLBAR);
+        assertNotNull("Asserting url is not null", url);
 
         url = adjustIfPredefined(url);
-        sTest.TOOLBAR.enterEditingMode().enterUrl(url).commitEditingMode();
+        TOOLBAR.enterEditingMode().enterUrl(url).commitEditingMode();
     }
 
     /**
@@ -41,23 +31,22 @@ final public class NavigationHelper {
      * predefined, otherwise returns the given url.
      */
     private static String adjustIfPredefined(final String url) {
+        assertNotNull("Asserting url is not null", url);
+
         for (final String predefinedUrl : sPredefinedUrls) {
             if (TextUtils.equals(url, predefinedUrl)) {
-                return sTest.getAbsoluteUrl(url);
+                return sContext.getAbsoluteUrl(url);
             }
         }
 
         return url;
     }
 
-    // TODO: Ambiguous name? Is CommonUseHelper.goBack() enough? Perhaps w/ doc?
+    // TODO: Ambiguous name? Is NavigationHelper.goBack() enough? Perhaps w/ doc?
     public static void goBack() {
-        // TODO: Necessary?
-        assertNotNull("Asserting UITest instance is not null", sTest);
 
         if (DeviceHelper.isTablet()) {
-            assertNotNull("Asserting that Toolbar is not null", sTest.TOOLBAR); // TODO: Necessary?
-            sTest.TOOLBAR.pressBackButton(); // Waits for page load.
+            TOOLBAR.pressBackButton(); // Waits for page load.
             return;
         }
 
@@ -66,18 +55,14 @@ final public class NavigationHelper {
             public void doAction() {
                 // TODO: Lower soft keyboard first?
                 // TODO: Solo.goBack
-                sTest.getActions().sendSpecialKey(Actions.SpecialKey.BACK);
+                sActions.sendSpecialKey(Actions.SpecialKey.BACK);
             }
         });
     }
 
     public static void goForward() {
-        // TODO: Necessary? Perhaps assertInitialized?
-        assertNotNull("Asserting UITest instance is not null", sTest);
-
         if (DeviceHelper.isTablet()) {
-            assertNotNull("Asserting that Toolbar is not null", sTest.TOOLBAR);
-            sTest.TOOLBAR.pressForwardButton(); // Waits for page load.
+            TOOLBAR.pressForwardButton(); // Waits for page load.
             return;
         }
 

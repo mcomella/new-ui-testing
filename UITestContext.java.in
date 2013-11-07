@@ -25,6 +25,9 @@ interface UITestContext {
     public void dumpLog(final String message);
     public void dumpLog(final String message, final Throwable t);
 
+    public String getAbsoluteUrl(final String url);
+    public String getAbsoluteRawUrl(final String url);
+
     public UITestComponent getComponent(final Component component);
 
     public static enum Component {
