@@ -95,8 +95,7 @@ class ToolbarComponent extends UITestComponent {
 
     public boolean isEditing() {
         return getUrlDisplayContainer().getVisibility() != View.VISIBLE &&
-                getUrlEditText().getVisibility() == View.VISIBLE &&
-                getGoButton().getVisibility() == View.VISIBLE;
+                getUrlEditText().getVisibility() == View.VISIBLE;
     }
 
     public ToolbarComponent enterEditingMode() {
