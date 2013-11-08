@@ -42,6 +42,8 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent assertTitle(final String expected) {
         // TODO: How is this affected by the showURL preference?
         assertIsNotEditing(); // TODO: Causes a race condition in wait for page load?
+        // Verify is or is not editing in waitForPageLoad? Maybe custom register Verifiers
+        // as arg to waitForPageLoad? Or waitForPageLoad(boolean isEditing);
         assertEquals("Asserting the Toolbar title", expected, getTitle());
         return this;
     }
