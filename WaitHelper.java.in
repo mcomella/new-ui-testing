@@ -62,8 +62,6 @@ final class WaitHelper extends BaseHelper {
         }
 
         // Wait for the page load event.
-        // TODO: Does this work on about:home?
-        // TODO: Assert that the page has actually loaded?
         final EventExpecter contentEventExpecter = sActions.expectGeckoEvent("DOMContentLoaded");
         initiatingAction.doAction();
         contentEventExpecter.blockForEventDataWithTimeout(PAGE_LOAD_WAIT_MS);
