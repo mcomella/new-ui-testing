@@ -106,7 +106,7 @@ final class WaitHelper extends BaseHelper {
 
         @Override
         public boolean hasStateChanged() {
-            // TODO: Efficiency? Should we naively cache the View?
+            // TODO: Robocop sleeps .5 sec between calls. Cache title view?
             return !oldTitleText.equals(TOOLBAR.getTitle());
         }
     }
