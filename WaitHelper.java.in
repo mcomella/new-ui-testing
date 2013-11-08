@@ -74,12 +74,17 @@ final class WaitHelper extends BaseHelper {
             // If we timeout, either the state is set to the same value (which is fine), or
             // the state has not yet changed. Since we can't be sure it will ever change, move
             // on and let the assertions fail if applicable.
-            sSolo.waitForCondition(new Condition() {
+            final boolean hasTimedOut = !sSolo.waitForCondition(new Condition() {
                 @Override
                 public boolean isSatisfied() {
                     return verifier.hasStateChanged();
                 }
             }, CHANGE_WAIT_MS);
+
+            if (hasTimedOut) {
+                // TODO: Bug 709230: Remove reflection?
+                sContext.dumpLog(verifier.getClass().getName() + " timed out.");
+            }
         }
     }
 
