@@ -79,10 +79,12 @@ class ToolbarComponent extends UITestComponent {
     }
 
     private ImageButton getBackButton() {
+        DeviceHelper.assertIsTablet();
         return (ImageButton) ViewHelper.findViewById(getToolbarView(), BACK_BUTTON_ID);
     }
 
     private ImageButton getForwardButton() {
+        DeviceHelper.assertIsTablet();
         return (ImageButton) ViewHelper.findViewById(getToolbarView(), FORWARD_BUTTON_ID);
     }
 
@@ -164,7 +166,6 @@ class ToolbarComponent extends UITestComponent {
     public ToolbarComponent pressBackButton() {
         final ImageButton backButton = getBackButton();
 
-        // TODO: Assert isTablet? Here or in getBackButton. Also, pressForwardButton.
         assertNotNull("Asserting that the back button View is not null", backButton);
         assertEquals("Asserting that the back button is visible",
                 View.VISIBLE, backButton.getVisibility());

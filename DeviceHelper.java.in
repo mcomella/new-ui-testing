@@ -5,6 +5,8 @@
 
 package @ANDROID_PACKAGE_NAME@.tests;
 
+import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
+
 import com.jayway.android.robotium.solo.Solo;
 
 import android.app.Activity;
@@ -36,6 +38,10 @@ final class DeviceHelper extends BaseHelper {
     private static int sScreenWidth;
 
     private DeviceHelper() { /* To disallow instantiation. */ }
+
+    public static void assertIsTablet() {
+        assertTrue("Asserting that the device is a tablet", isTablet());
+    }
 
     public static void init() {
         setAndroidVersion();
