@@ -41,5 +41,7 @@ public class testAboutHomeVisibility extends UITest {
         TOOLBAR.assertTitle(StringHelper.ABOUT_HOME_TITLE);
         ABOUTHOME.assertVisible()
                  .assertCurrentPage(Page.TOP_SITES);
+
+        // TODO: Type in a url and assert the go button is visible.
     }
 }

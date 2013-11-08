@@ -142,8 +142,6 @@ class ToolbarComponent extends UITestComponent {
 
         waitForNotEditing();
 
-        // TODO: Wait for page load equivalent?
-
         return this;
     }
 

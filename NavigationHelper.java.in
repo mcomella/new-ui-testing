@@ -75,7 +75,8 @@ final public class NavigationHelper extends BaseHelper {
     }
 
     public static void reload() {
-        // TODO: On tablets, press reload in TOOLBAR.
+        // TODO: On tablets, press reload in TOOLBAR. Note that this is technically
+        // an app menu item so tread carefully.
         //       On phones, press reload in APPMENU.
     }
 }
