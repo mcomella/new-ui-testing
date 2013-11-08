@@ -162,32 +162,24 @@ class ToolbarComponent extends UITestComponent {
 
     public ToolbarComponent pressBackButton() {
         final ImageButton backButton = getBackButton();
-
-        assertNotNull("Asserting that the back button View is not null", backButton);
-        assertEquals("Asserting that the back button is visible",
-                View.VISIBLE, backButton.getVisibility());
-
-        WaitHelper.waitForPageLoad(new InitiatingAction() {
-            @Override
-            public void doAction() {
-                mSolo.clickOnView(backButton);
-            }
-        });
-
-        return this;
+        return pressButton(backButton, "back");
     }
 
     public ToolbarComponent pressForwardButton() {
         final ImageButton forwardButton = getForwardButton();
+        return pressButton(forwardButton, "forward");
+    }
 
-        assertNotNull("Asserting that the forward button View is not null", forwardButton);
-        assertEquals("Asserting that the forward button is visible",
-                View.VISIBLE, forwardButton.getVisibility());
+    private ToolbarComponent pressButton(final View view, final String buttonName) {
+        assertNotNull("Asserting that the " + buttonName + " button View is not null", view);
+        assertTrue("Asserting that the " + buttonName + " button is enabled", view.isEnabled());
+        assertEquals("Asserting that the " + buttonName + " button is visible",
+                View.VISIBLE, view.getVisibility());
 
         WaitHelper.waitForPageLoad(new InitiatingAction() {
             @Override
             public void doAction() {
-                mSolo.clickOnView(forwardButton);
+                mSolo.clickOnView(view);
             }
         });
 
