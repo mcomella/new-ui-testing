@@ -1,11 +1,10 @@
-#filter substitution
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package @ANDROID_PACKAGE_NAME@.tests;
+package org.mozilla.gecko.tests;
 
-import @ANDROID_PACKAGE_NAME@.Assert;
+import org.mozilla.gecko.Assert;
 
 // TODO: Add ispixel assertions.
 final class AssertionHelper extends BaseHelper {

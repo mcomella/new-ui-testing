@@ -1,14 +1,13 @@
-#filter substitution
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package @ANDROID_PACKAGE_NAME@.tests;
+package org.mozilla.gecko.tests;
 
-import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
+import static org.mozilla.gecko.tests.AssertionHelper.*;
 
-import @ANDROID_PACKAGE_NAME@.Actions;
-import @ANDROID_PACKAGE_NAME@.tests.WaitHelper.InitiatingAction;
+import org.mozilla.gecko.Actions;
+import org.mozilla.gecko.tests.WaitHelper.InitiatingAction;
 
 import android.text.TextUtils;
 

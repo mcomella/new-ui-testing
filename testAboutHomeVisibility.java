@@ -1,9 +1,8 @@
-#filter substitution
-package @ANDROID_PACKAGE_NAME@.tests;
+package org.mozilla.gecko.tests;
 
-import static @ANDROID_PACKAGE_NAME@.tests.AssertionHelper.*;
+import static org.mozilla.gecko.tests.AssertionHelper.*;
 
-import @ANDROID_PACKAGE_NAME@.tests.AboutHomeComponent.Page;
+import org.mozilla.gecko.tests.AboutHomeComponent.Page;
 
 // TODO: Elaborate on test desc and use /**.
 /* Test correct state for URL bar after loading pages.

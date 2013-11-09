@@ -1,5 +1,4 @@
-#filter substitution
-package @ANDROID_PACKAGE_NAME@.tests;
+package org.mozilla.gecko.tests;
 
 // TODO: Class name confusing with history list.
 // TODO: Elaborate on test desc and use /**.

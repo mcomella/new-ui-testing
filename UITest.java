@@ -1,18 +1,18 @@
-#filter substitution
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package @ANDROID_PACKAGE_NAME@.tests;
+package org.mozilla.gecko.tests;
 
-import @ANDROID_PACKAGE_NAME@.Actions;
-import @ANDROID_PACKAGE_NAME@.Assert;
-import @ANDROID_PACKAGE_NAME@.Driver;
-import @ANDROID_PACKAGE_NAME@.FennecInstrumentationTestRunner;
-import @ANDROID_PACKAGE_NAME@.FennecMochitestAssert;
-import @ANDROID_PACKAGE_NAME@.FennecNativeActions;
-import @ANDROID_PACKAGE_NAME@.FennecNativeDriver;
-import @ANDROID_PACKAGE_NAME@.FennecTalosAssert;
+import org.mozilla.gecko.Actions;
+import org.mozilla.gecko.Assert;
+import org.mozilla.gecko.Driver;
+import org.mozilla.gecko.FennecInstrumentationTestRunner;
+import org.mozilla.gecko.FennecMochitestAssert;
+import org.mozilla.gecko.FennecNativeActions;
+import org.mozilla.gecko.FennecNativeDriver;
+import org.mozilla.gecko.FennecTalosAssert;
+import org.mozilla.gecko.TestConstants;
 
 import com.jayway.android.robotium.solo.Solo;
 
@@ -30,7 +30,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         TALOS
     }
 
-    private static final String LAUNCHER_ACTIVITY ="@ANDROID_PACKAGE_NAME@.App";
+    private static final String LAUNCHER_ACTIVITY = TestConstants.ANDROID_PACKAGE_NAME + ".App";
     private static final String TARGET_PACKAGE_ID = "org.mozilla.gecko";
 
     private final static Class<Activity> sLauncherActivityClass;
