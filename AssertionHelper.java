@@ -7,7 +7,7 @@ package org.mozilla.gecko.tests;
 import org.mozilla.gecko.Assert;
 
 // TODO: Add ispixel assertions.
-final class AssertionHelper extends BaseHelper {
+public final class AssertionHelper extends BaseHelper {
     private AssertionHelper() { /* To disallow instantation. */ }
 
     public static void assertEquals(final String message, final Object expected, final Object actual) {

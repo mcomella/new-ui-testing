@@ -9,7 +9,7 @@ import static org.mozilla.gecko.tests.AssertionHelper.*;
 
 import android.view.View;
 
-final class ViewHelper extends BaseHelper {
+public final class ViewHelper extends BaseHelper {
     private ViewHelper() { /* To disallow instantiation. */ }
 
     /**

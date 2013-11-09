@@ -2,11 +2,15 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package org.mozilla.gecko.tests;
+package org.mozilla.gecko.tests.components;
 
 import static org.mozilla.gecko.tests.AssertionHelper.*;
 
 import org.mozilla.gecko.Actions;
+import org.mozilla.gecko.tests.GestureHelper;
+import org.mozilla.gecko.tests.UITestContext;
+import org.mozilla.gecko.tests.ViewHelper;
+import org.mozilla.gecko.tests.WaitHelper;
 
 import com.jayway.android.robotium.solo.Condition;
 import com.jayway.android.robotium.solo.Solo;
@@ -15,10 +19,10 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-class AboutHomeComponent extends UITestComponent {
+public class AboutHomeComponent extends UITestComponent {
     // TODO: Can we just import the enum directly?
     // This enum should be kept in sync with ...home.HomePager.Page.
-    public enum Page {
+    public static enum Page {
         HISTORY,
         TOP_SITES,
         BOOKMARKS,

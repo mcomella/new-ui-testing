@@ -11,6 +11,6 @@ package org.mozilla.gecko.tests;
  * To prevent code crufting, this should not be a miscellaneous "dump everything!" class - new
  * Components should be freely created, even for lone methods.
  */
-final class CommonUseHelper extends BaseHelper {
+public final class CommonUseHelper extends BaseHelper {
     private CommonUseHelper() { /* To disallow instantiation. */ }
 }

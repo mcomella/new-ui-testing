@@ -2,14 +2,15 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package org.mozilla.gecko.tests;
+package org.mozilla.gecko.tests.components;
 
 import org.mozilla.gecko.Actions;
+import org.mozilla.gecko.tests.UITestContext;
 
 import com.jayway.android.robotium.solo.Solo;
 
 // TODO: Rename to BaseComponent when packages are created.
-abstract class UITestComponent {
+public abstract class UITestComponent {
     private final UITestContext mTestContext;
     protected final Solo mSolo;
     protected final Actions mActions;

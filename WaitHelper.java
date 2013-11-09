@@ -10,7 +10,7 @@ import org.mozilla.gecko.Actions.EventExpecter;
 
 import com.jayway.android.robotium.solo.Condition;
 
-final class WaitHelper extends BaseHelper {
+public final class WaitHelper extends BaseHelper {
     /**
      * Performs the given action to start an event to be waited for. Implementations of this
      * interface are used in methods that need to check for changes in state from before the
@@ -48,7 +48,7 @@ final class WaitHelper extends BaseHelper {
         assertTrue(message, sSolo.waitForCondition(condition, waitMillis));
     }
 
-    static void waitForPageLoad(final InitiatingAction initiatingAction) {
+    public static void waitForPageLoad(final InitiatingAction initiatingAction) {
         assertNotNull("Asserting initiatingAction is not null", initiatingAction);
 
         // Some changes to the UI occur in response to the same event we listen to for when

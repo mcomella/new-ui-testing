@@ -16,7 +16,7 @@ import java.lang.Class;
 import java.lang.ClassLoader;
 import java.lang.reflect.Method;
 
-final class DeviceHelper extends BaseHelper {
+public final class DeviceHelper extends BaseHelper {
     private static final String APP_SHELL_CLASS = "org.mozilla.gecko.GeckoAppShell";
 
     public enum Type {

@@ -2,7 +2,7 @@ package org.mozilla.gecko.tests;
 
 import static org.mozilla.gecko.tests.AssertionHelper.*;
 
-import org.mozilla.gecko.tests.AboutHomeComponent.Page;
+import org.mozilla.gecko.tests.components.AboutHomeComponent.Page;
 
 // TODO: Elaborate on test desc and use /**.
 /* Test correct state for URL bar after loading pages.

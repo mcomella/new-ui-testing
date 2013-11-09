@@ -7,13 +7,15 @@ package org.mozilla.gecko.tests;
 import org.mozilla.gecko.Actions;
 import org.mozilla.gecko.Assert;
 import org.mozilla.gecko.Driver;
+import org.mozilla.gecko.tests.components.AboutHomeComponent;
+import org.mozilla.gecko.tests.components.ToolbarComponent;
 import org.mozilla.gecko.tests.UITestContext.Component;
 
 import com.jayway.android.robotium.solo.Solo;
 
 import android.app.Activity;
 
-public class BaseHelper {
+class BaseHelper {
     protected static UITestContext sContext;
 
     // TODO: These are included when AssertionHelper is imported statically. Make sure they're

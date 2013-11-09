@@ -10,7 +10,7 @@ import java.lang.Class;
 import java.lang.ClassLoader;
 import java.lang.reflect.Method;
 
-final class GeckoHelper extends BaseHelper {
+public final class GeckoHelper extends BaseHelper {
     private static final String GECKO_THREAD_CLASS = "org.mozilla.gecko.GeckoThread";
     private static final String LAUNCH_STATE_CLASS = GECKO_THREAD_CLASS + "$LaunchState";
 

@@ -7,13 +7,14 @@ package org.mozilla.gecko.tests;
 import org.mozilla.gecko.Actions;
 import org.mozilla.gecko.Assert;
 import org.mozilla.gecko.Driver;
+import org.mozilla.gecko.tests.components.UITestComponent;
 
 import com.jayway.android.robotium.solo.Solo;
 
 import android.app.Activity;
 import android.app.Instrumentation;
 
-interface UITestContext {
+public interface UITestContext {
     public Activity getActivity();
     public Solo getSolo();
     public Assert getAsserter();

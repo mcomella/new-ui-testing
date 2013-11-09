@@ -8,7 +8,7 @@ import static org.mozilla.gecko.tests.AssertionHelper.*;
 
 import com.jayway.android.robotium.solo.Solo;
 
-final class GestureHelper extends BaseHelper {
+public final class GestureHelper extends BaseHelper {
     private static int DEFAULT_DRAG_STEP_COUNT = 10;
 
     private GestureHelper() { /* To disallow instantation. */ }
