@@ -19,7 +19,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-public class AboutHomeComponent extends UITestComponent {
+public class AboutHomeComponent extends BaseComponent {
     // TODO: Can we just import the enum directly?
     // This enum should be kept in sync with ...home.HomePager.Page.
     public static enum Page {

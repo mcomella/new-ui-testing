@@ -14,8 +14,8 @@ import org.mozilla.gecko.FennecNativeDriver;
 import org.mozilla.gecko.FennecTalosAssert;
 import org.mozilla.gecko.TestConstants;
 import org.mozilla.gecko.tests.components.AboutHomeComponent;
+import org.mozilla.gecko.tests.components.BaseComponent;
 import org.mozilla.gecko.tests.components.ToolbarComponent;
-import org.mozilla.gecko.tests.components.UITestComponent;
 
 import com.jayway.android.robotium.solo.Solo;
 
@@ -162,7 +162,7 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     }
 
     @Override
-    public UITestComponent getComponent(final Component component) {
+    public BaseComponent getComponent(final Component component) {
         switch (component) {
         case ABOUTHOME:
             return ABOUTHOME;

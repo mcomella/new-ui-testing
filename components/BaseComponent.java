@@ -9,13 +9,12 @@ import org.mozilla.gecko.tests.UITestContext;
 
 import com.jayway.android.robotium.solo.Solo;
 
-// TODO: Rename to BaseComponent when packages are created.
-public abstract class UITestComponent {
+public abstract class BaseComponent {
     private final UITestContext mTestContext;
     protected final Solo mSolo;
     protected final Actions mActions;
 
-    public UITestComponent(final UITestContext testContext) {
+    public BaseComponent(final UITestContext testContext) {
         mTestContext = testContext;
         mSolo = mTestContext.getSolo();
         mActions = mTestContext.getActions();

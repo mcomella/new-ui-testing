@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class ToolbarComponent extends UITestComponent {
+public class ToolbarComponent extends BaseComponent {
     private static final String BROWSER_TOOLBAR_ID = "browser_toolbar";
     private static final String URL_EDIT_TEXT_ID = "url_edit_text";
     private static final String URL_DISPLAY_CONTAINER_ID = "url_display_container";

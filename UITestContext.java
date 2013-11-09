@@ -7,7 +7,7 @@ package org.mozilla.gecko.tests;
 import org.mozilla.gecko.Actions;
 import org.mozilla.gecko.Assert;
 import org.mozilla.gecko.Driver;
-import org.mozilla.gecko.tests.components.UITestComponent;
+import org.mozilla.gecko.tests.components.BaseComponent;
 
 import com.jayway.android.robotium.solo.Solo;
 
@@ -28,7 +28,7 @@ public interface UITestContext {
     public String getAbsoluteUrl(final String url);
     public String getAbsoluteRawUrl(final String url);
 
-    public UITestComponent getComponent(final Component component);
+    public BaseComponent getComponent(final Component component);
 
     public static enum Component {
         ABOUTHOME,
