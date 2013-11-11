@@ -4,13 +4,11 @@
 
 package org.mozilla.gecko.tests.components;
 
-import static org.mozilla.gecko.tests.AssertionHelper.*;
+import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
 import org.mozilla.gecko.Actions;
-import org.mozilla.gecko.tests.GestureHelper;
+import org.mozilla.gecko.tests.helpers.*;
 import org.mozilla.gecko.tests.UITestContext;
-import org.mozilla.gecko.tests.ViewHelper;
-import org.mozilla.gecko.tests.WaitHelper;
 
 import com.jayway.android.robotium.solo.Condition;
 import com.jayway.android.robotium.solo.Solo;

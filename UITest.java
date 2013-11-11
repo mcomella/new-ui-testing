@@ -16,6 +16,7 @@ import org.mozilla.gecko.TestConstants;
 import org.mozilla.gecko.tests.components.AboutHomeComponent;
 import org.mozilla.gecko.tests.components.BaseComponent;
 import org.mozilla.gecko.tests.components.ToolbarComponent;
+import org.mozilla.gecko.tests.helpers.*;
 
 import com.jayway.android.robotium.solo.Solo;
 

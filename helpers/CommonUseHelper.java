@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package org.mozilla.gecko.tests;
+package org.mozilla.gecko.tests.helpers;
 
 /**
  * A Helper for common use cases combining multiple components or not belonging to a particular

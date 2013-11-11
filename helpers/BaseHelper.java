@@ -2,20 +2,20 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package org.mozilla.gecko.tests;
+package org.mozilla.gecko.tests.helpers;
 
 import org.mozilla.gecko.Actions;
 import org.mozilla.gecko.Assert;
 import org.mozilla.gecko.Driver;
-import org.mozilla.gecko.tests.components.AboutHomeComponent;
-import org.mozilla.gecko.tests.components.ToolbarComponent;
+import org.mozilla.gecko.tests.components.*;
+import org.mozilla.gecko.tests.UITestContext;
 import org.mozilla.gecko.tests.UITestContext.Component;
 
 import com.jayway.android.robotium.solo.Solo;
 
 import android.app.Activity;
 
-class BaseHelper {
+public class BaseHelper {
     protected static UITestContext sContext;
 
     // TODO: These are included when AssertionHelper is imported statically. Make sure they're

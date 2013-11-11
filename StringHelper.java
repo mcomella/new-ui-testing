@@ -2,7 +2,7 @@ package org.mozilla.gecko.tests;
 
 import org.mozilla.gecko.*;
 
-class StringHelper {
+public class StringHelper {
     // Note: DEFAULT_BOOKMARKS_TITLES.length == DEFAULT_BOOKMARKS_URLS.length
     public static final String[] DEFAULT_BOOKMARKS_TITLES = new String[] {
         "Firefox: About your browser",

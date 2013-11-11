@@ -2,10 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package org.mozilla.gecko.tests;
+package org.mozilla.gecko.tests.helpers;
 
 import org.mozilla.gecko.Element;
-import static org.mozilla.gecko.tests.AssertionHelper.*;
+import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
 import android.view.View;
 

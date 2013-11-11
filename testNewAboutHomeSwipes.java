@@ -1,7 +1,8 @@
 package org.mozilla.gecko.tests;
 
-import static org.mozilla.gecko.tests.AssertionHelper.*;
+import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
+import org.mozilla.gecko.tests.helpers.*;
 import org.mozilla.gecko.tests.components.AboutHomeComponent.Page;
 
 // TODO: Elaborate on test desc and use /**.
