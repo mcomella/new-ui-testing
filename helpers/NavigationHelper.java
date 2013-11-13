@@ -44,12 +44,12 @@ final public class NavigationHelper extends BaseHelper {
     }
 
     public static void goBack() {
-        // TODO: Assert !editing?
         if (DeviceHelper.isTablet()) {
-            TOOLBAR.pressBackButton(); // Waits for page load.
+            TOOLBAR.pressBackButton(); // Waits for page load & asserts isNotEditing.
             return;
         }
 
+        TOOLBAR.assertIsNotEditing();
         WaitHelper.waitForPageLoad(new Runnable() {
             @Override
             public void run() {
@@ -63,10 +63,11 @@ final public class NavigationHelper extends BaseHelper {
 
     public static void goForward() {
         if (DeviceHelper.isTablet()) {
-            TOOLBAR.pressForwardButton(); // Waits for page load.
+            TOOLBAR.pressForwardButton(); // Waits for page load & asserts isNotEditing.
             return;
         }
 
+        TOOLBAR.assertIsNotEditing();
         WaitHelper.waitForPageLoad(new Runnable() {
             @Override
             public void run() {

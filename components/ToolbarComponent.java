@@ -189,6 +189,7 @@ public class ToolbarComponent extends BaseComponent {
         assertTrue("The " + buttonName + " button is enabled", view.isEnabled());
         assertEquals("The " + buttonName + " button is visible",
                 View.VISIBLE, view.getVisibility());
+        assertIsNotEditing();
 
         WaitHelper.waitForPageLoad(new Runnable() {
             @Override
