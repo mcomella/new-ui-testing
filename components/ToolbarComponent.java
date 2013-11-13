@@ -96,7 +96,7 @@ public class ToolbarComponent extends BaseComponent {
         return getUrlTitleText().getText();
     }
 
-    public boolean isEditing() {
+    private boolean isEditing() {
         return getUrlDisplayContainer().getVisibility() != View.VISIBLE &&
                 getUrlEditText().getVisibility() == View.VISIBLE;
     }
