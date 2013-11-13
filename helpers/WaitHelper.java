@@ -49,7 +49,7 @@ public final class WaitHelper extends BaseHelper {
     }
 
     public static void waitForPageLoad(final InitiatingAction initiatingAction) {
-        assertNotNull("Asserting initiatingAction is not null", initiatingAction);
+        assertNotNull("initiatingAction is not null", initiatingAction);
 
         // Some changes to the UI occur in response to the same event we listen to for when
         // the page has finished loading (e.g. a page title update). As such, we ensure this

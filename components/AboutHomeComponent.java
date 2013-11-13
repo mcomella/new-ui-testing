@@ -40,7 +40,7 @@ public class AboutHomeComponent extends BaseComponent {
 
     public AboutHomeComponent assertCurrentPage(final Page page) {
         assertVisible();
-        assertEquals("Asserting the current HomePager page",
+        assertEquals("The current HomePager page is " + Page.values()[page.ordinal()],
                 page.ordinal(), getHomePagerView().getCurrentItem());
         return this;
     }
@@ -48,13 +48,13 @@ public class AboutHomeComponent extends BaseComponent {
     public AboutHomeComponent assertNotVisible() {
         // TODO: assertFalse is inconsistent with assertVisible but probably better
         // than adding assertNotEquals and being inconsistent with JUnit.
-        assertFalse("Asserting that the HomePager is not visible",
+        assertFalse("The HomePager is not visible",
                 getHomePagerView().getVisibility() == View.VISIBLE);
         return this;
     }
 
     public AboutHomeComponent assertVisible() {
-        assertEquals("Asserting that the HomePager is visible",
+        assertEquals("The HomePager is visible",
                 View.VISIBLE, getHomePagerView().getVisibility());
         return this;
     }
@@ -82,7 +82,7 @@ public class AboutHomeComponent extends BaseComponent {
         }
 
         final PagerAdapter adapter = getHomePagerView().getAdapter();
-        assertNotNull("Asserting the HomePager's PagerAdapter is not null", adapter);
+        assertNotNull("The HomePager's PagerAdapter is not null", adapter);
 
         // Swiping left goes to next, swiping right goes to previous
         final int unboundedPageIndex = pageIndex + (direction == Solo.LEFT ? 1 : -1);

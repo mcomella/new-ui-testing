@@ -39,7 +39,7 @@ public final class DeviceHelper extends BaseHelper {
     private DeviceHelper() { /* To disallow instantiation. */ }
 
     public static void assertIsTablet() {
-        assertTrue("Asserting that the device is a tablet", isTablet());
+        assertTrue("The device is a tablet", isTablet());
     }
 
     public static void init() {

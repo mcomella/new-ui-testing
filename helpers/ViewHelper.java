@@ -21,8 +21,8 @@ public final class ViewHelper extends BaseHelper {
      * necessarily unique in the View hierarchy.
      */
     public static View findViewById(final View root, final String id) {
-        assertNotNull("Asserting the root view is not null", root);
-        assertNotNull("Asserting the id is not null", id);
+        assertNotNull("The root view is not null", root);
+        assertNotNull("The id is not null", id);
 
         final Element element = sDriver.findElement(sActivity, id);
         return root.findViewById(element.getId());

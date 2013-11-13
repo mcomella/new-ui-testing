@@ -31,12 +31,12 @@ public class ToolbarComponent extends BaseComponent {
     }
 
     public ToolbarComponent assertIsEditing() {
-        assertTrue("Asserting that the toolbar is in the editing state", isEditing());
+        assertTrue("The toolbar is in the editing state", isEditing());
         return this;
     }
 
     public ToolbarComponent assertIsNotEditing() {
-        assertFalse("Asserting that the toolbar is not in the editing state", isEditing());
+        assertFalse("The toolbar is not in the editing state", isEditing());
         return this;
     }
 
@@ -45,13 +45,13 @@ public class ToolbarComponent extends BaseComponent {
         assertIsNotEditing(); // TODO: Causes a race condition in wait for page load?
         // Verify is or is not editing in waitForPageLoad? Maybe custom register Verifiers
         // as arg to waitForPageLoad? Or waitForPageLoad(boolean isEditing);
-        assertEquals("Asserting the Toolbar title", expected, getTitle());
+        assertEquals("The Toolbar title is " + expected, expected, getTitle());
         return this;
     }
 
     public ToolbarComponent assertUrl(final String expected) {
         assertIsEditing();
-        assertEquals("Asserting the Toolbar url", expected, getUrlEditText().getText());
+        assertEquals("The Toolbar url is " + expected, expected, getUrlEditText().getText());
         return this;
     }
 
@@ -149,12 +149,12 @@ public class ToolbarComponent extends BaseComponent {
     }
 
     public ToolbarComponent enterUrl(final String url) {
-        assertNotNull("Asserting url is not null", url);
+        assertNotNull("url is not null", url);
 
         assertIsEditing();
 
         final EditText urlEditText = getUrlEditText();
-        assertTrue("Asserting that the UrlEditText is the input method target",
+        assertTrue("The UrlEditText is the input method target",
                 urlEditText.isInputMethodTarget());
 
         mSolo.clearEditText(urlEditText);
@@ -174,9 +174,9 @@ public class ToolbarComponent extends BaseComponent {
     }
 
     private ToolbarComponent pressButton(final View view, final String buttonName) {
-        assertNotNull("Asserting that the " + buttonName + " button View is not null", view);
-        assertTrue("Asserting that the " + buttonName + " button is enabled", view.isEnabled());
-        assertEquals("Asserting that the " + buttonName + " button is visible",
+        assertNotNull("The " + buttonName + " button View is not null", view);
+        assertTrue("The " + buttonName + " button is enabled", view.isEnabled());
+        assertEquals("The " + buttonName + " button is visible",
                 View.VISIBLE, view.getVisibility());
 
         WaitHelper.waitForPageLoad(new InitiatingAction() {

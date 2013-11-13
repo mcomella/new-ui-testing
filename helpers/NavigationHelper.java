@@ -20,7 +20,7 @@ final public class NavigationHelper extends BaseHelper {
     };
 
     public static void enterAndLoadUrl(String url) {
-        assertNotNull("Asserting url is not null", url);
+        assertNotNull("url is not null", url);
 
         url = adjustIfPredefined(url);
         TOOLBAR.enterEditingMode()
@@ -33,7 +33,7 @@ final public class NavigationHelper extends BaseHelper {
      * predefined, otherwise returns the given url.
      */
     private static String adjustIfPredefined(final String url) {
-        assertNotNull("Asserting url is not null", url);
+        assertNotNull("url is not null", url);
 
         for (final String predefinedUrl : sPredefinedUrls) {
             if (TextUtils.equals(url, predefinedUrl)) {
