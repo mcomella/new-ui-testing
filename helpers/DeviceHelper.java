@@ -24,14 +24,14 @@ public final class DeviceHelper extends BaseHelper {
         TABLET
     }
 
-    public enum PlatformVersion {
+    public enum AndroidVersion {
         v2x,
         v3x,
         v4x
     }
 
     private static Type sDeviceType;
-    private static PlatformVersion sAndroidVersion;
+    private static AndroidVersion sAndroidVersion;
 
     private static int sScreenHeight;
     private static int sScreenWidth;
@@ -51,11 +51,11 @@ public final class DeviceHelper extends BaseHelper {
     private static void setAndroidVersion() {
         int sdk = Build.VERSION.SDK_INT;
         if (sdk < Build.VERSION_CODES.HONEYCOMB) {
-            sAndroidVersion = PlatformVersion.v2x;
+            sAndroidVersion = AndroidVersion.v2x;
         } else if (sdk > Build.VERSION_CODES.HONEYCOMB_MR2) {
-            sAndroidVersion = PlatformVersion.v4x;
+            sAndroidVersion = AndroidVersion.v4x;
         } else {
-            sAndroidVersion = PlatformVersion.v3x;
+            sAndroidVersion = AndroidVersion.v3x;
         }
     }
 
@@ -93,7 +93,7 @@ public final class DeviceHelper extends BaseHelper {
         return sScreenWidth;
     }
 
-    public static PlatformVersion getAndroidVersion() {
+    public static AndroidVersion getAndroidVersion() {
         return sAndroidVersion;
     }
 
