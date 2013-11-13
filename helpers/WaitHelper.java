@@ -11,15 +11,6 @@ import org.mozilla.gecko.Actions.EventExpecter;
 import com.jayway.android.robotium.solo.Condition;
 
 public final class WaitHelper extends BaseHelper {
-    /**
-     * Performs the given action to start an event to be waited for. Implementations of this
-     * interface are used in methods that need to check for changes in state from before the
-     * given initiating action to after it.
-     */
-    public static interface InitiatingAction {
-        public void doAction();
-    }
-
     private static final int DEFAULT_MAX_WAIT_MS = 5000;
     private static final int PAGE_LOAD_WAIT_MS = 10000;
     private static final int CHANGE_WAIT_MS = 2000;
@@ -48,7 +39,11 @@ public final class WaitHelper extends BaseHelper {
         assertTrue(message, sSolo.waitForCondition(condition, waitMillis));
     }
 
-    public static void waitForPageLoad(final InitiatingAction initiatingAction) {
+    /**
+     * Waits for the Gecko event declaring the page has loaded. Takes in and runs a Runnable
+     * that will perform the action that will cause the page to load.
+     */
+    public static void waitForPageLoad(final Runnable initiatingAction) {
         assertNotNull("initiatingAction is not null", initiatingAction);
 
         // Some changes to the UI occur in response to the same event we listen to for when
@@ -62,7 +57,7 @@ public final class WaitHelper extends BaseHelper {
 
         // Wait for the page load event.
         final EventExpecter contentEventExpecter = sActions.expectGeckoEvent("DOMContentLoaded");
-        initiatingAction.doAction();
+        initiatingAction.run();
         contentEventExpecter.blockForEventDataWithTimeout(PAGE_LOAD_WAIT_MS);
         contentEventExpecter.unregisterListener();
 

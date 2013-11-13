@@ -7,7 +7,6 @@ package org.mozilla.gecko.tests.components;
 import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
 import org.mozilla.gecko.tests.helpers.*;
-import org.mozilla.gecko.tests.helpers.WaitHelper.InitiatingAction;
 import org.mozilla.gecko.tests.UITestContext;
 
 import com.jayway.android.robotium.solo.Condition;
@@ -120,9 +119,9 @@ public class ToolbarComponent extends BaseComponent {
     public ToolbarComponent commitEditingMode() {
         assertIsEditing();
 
-        WaitHelper.waitForPageLoad(new InitiatingAction() {
+        WaitHelper.waitForPageLoad(new Runnable() {
             @Override
-            public void doAction() {
+            public void run() {
                 mSolo.clickOnView(getGoButton());
             }
         });
@@ -179,9 +178,9 @@ public class ToolbarComponent extends BaseComponent {
         assertEquals("The " + buttonName + " button is visible",
                 View.VISIBLE, view.getVisibility());
 
-        WaitHelper.waitForPageLoad(new InitiatingAction() {
+        WaitHelper.waitForPageLoad(new Runnable() {
             @Override
-            public void doAction() {
+            public void run() {
                 mSolo.clickOnView(view);
             }
         });

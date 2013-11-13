@@ -8,7 +8,6 @@ import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
 import org.mozilla.gecko.Actions;
 import org.mozilla.gecko.tests.StringHelper;
-import org.mozilla.gecko.tests.helpers.WaitHelper.InitiatingAction;
 
 import android.text.TextUtils;
 
@@ -51,9 +50,9 @@ final public class NavigationHelper extends BaseHelper {
             return;
         }
 
-        WaitHelper.waitForPageLoad(new InitiatingAction() {
+        WaitHelper.waitForPageLoad(new Runnable() {
             @Override
-            public void doAction() {
+            public void run() {
                 // TODO: Lower soft keyboard first if applicable. Note that
                 // Solo.hideSoftKeyboard() does not clear focus (which might be fine since
                 // Gecko would be the element focused).
@@ -68,9 +67,9 @@ final public class NavigationHelper extends BaseHelper {
             return;
         }
 
-        WaitHelper.waitForPageLoad(new InitiatingAction() {
+        WaitHelper.waitForPageLoad(new Runnable() {
             @Override
-            public void doAction() {
+            public void run() {
                 // TODO: Press forward with APPMENU component
             }
         });
