@@ -90,8 +90,23 @@ public class ToolbarComponent extends BaseComponent {
         return (ImageButton) ViewHelper.findViewById(getToolbarView(), FORWARD_BUTTON_ID);
     }
 
-    public CharSequence getTitle() {
-        // TODO: Assert editing state? May break ToolbarTitleTextChangeVerifier.
+    private CharSequence getTitle() {
+        return getTitleHelper(true);
+    }
+
+    /**
+     * Returns the title of the page. Note that this makes no assertions to Toolbar state and
+     * may return a value that may never be visible to the user. Callers likely want to use
+     * {@link assertTitle} instead.
+     */
+    public CharSequence getPotentiallyInconsistentTitle() {
+        return getTitleHelper(false);
+    }
+
+    private CharSequence getTitleHelper(final boolean shouldAssertNotEditing) {
+        if (shouldAssertNotEditing) {
+            assertIsNotEditing();
+        }
         return getUrlTitleText().getText();
     }
 

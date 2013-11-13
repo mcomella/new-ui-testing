@@ -72,6 +72,7 @@ public final class WaitHelper extends BaseHelper {
                     return verifier.hasStateChanged();
                 }
             }, CHANGE_WAIT_MS);
+            // TODO: Make wait time an aggregated countdown?
 
             if (hasTimedOut) {
                 // TODO: Bug 709230: Remove reflection?
@@ -86,6 +87,12 @@ public final class WaitHelper extends BaseHelper {
      * returned from hasStateChanged, indicating this change of status.
      */
     private static interface ChangeVerifier {
+        /**
+         * Stores the initial state of the system. This system state is used to diff against
+         * the end state to determine if the system has changed. Since this is just a diff
+         * (with a timeout), * this method could potentially store state inconsistent with
+         * what is visible to the user.
+         */
         public void storeState();
         public boolean hasStateChanged();
     }
@@ -95,13 +102,13 @@ public final class WaitHelper extends BaseHelper {
 
         @Override
         public void storeState() {
-            oldTitleText = TOOLBAR.getTitle();
+            oldTitleText = TOOLBAR.getPotentiallyInconsistentTitle();
         }
 
         @Override
         public boolean hasStateChanged() {
             // TODO: Robocop sleeps .5 sec between calls. Cache title view?
-            return !oldTitleText.equals(TOOLBAR.getTitle());
+            return !oldTitleText.equals(TOOLBAR.getPotentiallyInconsistentTitle());
         }
     }
 }
