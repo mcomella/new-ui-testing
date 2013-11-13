@@ -41,9 +41,6 @@ public class ToolbarComponent extends BaseComponent {
 
     public ToolbarComponent assertTitle(final String expected) {
         // TODO: How is this affected by the showURL preference?
-        assertIsNotEditing(); // TODO: Causes a race condition in wait for page load?
-        // Verify is or is not editing in waitForPageLoad? Maybe custom register Verifiers
-        // as arg to waitForPageLoad? Or waitForPageLoad(boolean isEditing);
         assertEquals("The Toolbar title is " + expected, expected, getTitle());
         return this;
     }
