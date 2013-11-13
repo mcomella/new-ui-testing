@@ -18,8 +18,6 @@ import android.app.Activity;
 public class BaseHelper {
     protected static UITestContext sContext;
 
-    // TODO: These are included when AssertionHelper is imported statically. Make sure they're
-    // not when the packages are created.
     protected static Activity sActivity;
     protected static Solo sSolo;
     protected static Driver sDriver;
