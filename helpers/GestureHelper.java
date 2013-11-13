@@ -18,8 +18,8 @@ public final class GestureHelper extends BaseHelper {
         final int halfHeight = sDriver.getGeckoHeight() / 2;
 
         sSolo.drag(direction == Solo.LEFT ? halfWidth : 0,
-                     direction == Solo.LEFT ? 0 : halfWidth,
-                     halfHeight, halfHeight, DEFAULT_DRAG_STEP_COUNT);
+                   direction == Solo.LEFT ? 0 : halfWidth,
+                   halfHeight, halfHeight, DEFAULT_DRAG_STEP_COUNT);
     }
 
     public static void swipeLeft() {

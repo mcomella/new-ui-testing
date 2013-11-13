@@ -23,7 +23,9 @@ final public class NavigationHelper extends BaseHelper {
         assertNotNull("Asserting url is not null", url);
 
         url = adjustIfPredefined(url);
-        TOOLBAR.enterEditingMode().enterUrl(url).commitEditingMode();
+        TOOLBAR.enterEditingMode()
+               .enterUrl(url)
+               .commitEditingMode();
     }
 
     /**

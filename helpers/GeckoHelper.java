@@ -24,6 +24,7 @@ public final class GeckoHelper extends BaseHelper {
             final ClassLoader cl = sActivity.getClassLoader();
             final Class geckoThreadClass = cl.loadClass(GECKO_THREAD_CLASS);
             final Class launchStateClass = cl.loadClass(LAUNCH_STATE_CLASS);
+
             final Method checkLaunchStateMethod =
                     geckoThreadClass.getMethod("checkLaunchState", launchStateClass);
             final boolean isReady = ((Boolean) checkLaunchStateMethod.invoke(null,
