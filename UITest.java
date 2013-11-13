@@ -13,9 +13,7 @@ import org.mozilla.gecko.FennecNativeActions;
 import org.mozilla.gecko.FennecNativeDriver;
 import org.mozilla.gecko.FennecTalosAssert;
 import org.mozilla.gecko.TestConstants;
-import org.mozilla.gecko.tests.components.AboutHomeComponent;
-import org.mozilla.gecko.tests.components.BaseComponent;
-import org.mozilla.gecko.tests.components.ToolbarComponent;
+import org.mozilla.gecko.tests.components.*;
 import org.mozilla.gecko.tests.helpers.*;
 
 import com.jayway.android.robotium.solo.Solo;
