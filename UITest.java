@@ -98,7 +98,8 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         mBaseUrl = ((String) config.get("host")).replaceAll("(/$)", "");
         mRawBaseUrl = ((String) config.get("rawhost")).replaceAll("(/$)", "");
 
-        initComponents(); // Helpers depend on components so initialize them first.
+        // Helpers depend on components so initialize them first.
+        initComponents();
         initHelpers();
     }
 
