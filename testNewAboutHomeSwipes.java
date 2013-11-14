@@ -2,8 +2,8 @@ package org.mozilla.gecko.tests;
 
 import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
+import org.mozilla.gecko.home.HomePager.Page;
 import org.mozilla.gecko.tests.helpers.*;
-import org.mozilla.gecko.tests.components.AboutHomeComponent.Page;
 
 // TODO: Elaborate on test desc and use /**.
 /* Test correct state for URL bar after loading pages.

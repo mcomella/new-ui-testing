@@ -7,6 +7,7 @@ package org.mozilla.gecko.tests.components;
 import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
 import org.mozilla.gecko.Actions;
+import org.mozilla.gecko.home.HomePager.Page;
 import org.mozilla.gecko.R;
 import org.mozilla.gecko.tests.helpers.*;
 import org.mozilla.gecko.tests.UITestContext;
@@ -19,15 +20,6 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 public class AboutHomeComponent extends BaseComponent {
-    // TODO: Can we just import the enum directly?
-    // This enum should be kept in sync with ...home.HomePager.Page.
-    public static enum Page {
-        HISTORY,
-        TOP_SITES,
-        BOOKMARKS,
-        READING_LIST
-    }
-
     public AboutHomeComponent(final UITestContext testContext) {
         super(testContext);
     }
