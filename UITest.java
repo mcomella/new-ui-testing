@@ -25,6 +25,12 @@ import android.text.TextUtils;
 
 import java.util.HashMap;
 
+/**
+ * A base test class for Robocop (UI-centric) tests. This and the related classes attempt to
+ * provide a framework to improve upon the issues discovered with the previous BaseTest
+ * implementation by providing simple test authorship and framework extension, consistency,
+ * and reliability.
+ */
 abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
                       implements UITestContext {
     protected enum Type {
