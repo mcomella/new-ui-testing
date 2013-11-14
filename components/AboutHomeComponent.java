@@ -7,6 +7,7 @@ package org.mozilla.gecko.tests.components;
 import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
 import org.mozilla.gecko.Actions;
+import org.mozilla.gecko.R;
 import org.mozilla.gecko.tests.helpers.*;
 import org.mozilla.gecko.tests.UITestContext;
 
@@ -27,15 +28,12 @@ public class AboutHomeComponent extends BaseComponent {
         READING_LIST
     }
 
-    // TODO: Import R directly (nalexander said it can be done after preprocessing is rm).
-    private static final String HOME_PAGER_ID = "home_pager";
-
     public AboutHomeComponent(final UITestContext testContext) {
         super(testContext);
     }
 
     private ViewPager getHomePagerView() {
-        return (ViewPager) mSolo.getView(HOME_PAGER_ID);
+        return (ViewPager) mSolo.getView(R.id.home_pager);
     }
 
     public AboutHomeComponent assertCurrentPage(final Page page) {

@@ -8,6 +8,7 @@ import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
 import org.mozilla.gecko.tests.helpers.*;
 import org.mozilla.gecko.tests.UITestContext;
+import org.mozilla.gecko.R;
 
 import com.jayway.android.robotium.solo.Condition;
 
@@ -17,14 +18,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class ToolbarComponent extends BaseComponent {
-    private static final String BROWSER_TOOLBAR_ID = "browser_toolbar";
-    private static final String URL_EDIT_TEXT_ID = "url_edit_text";
-    private static final String URL_DISPLAY_CONTAINER_ID = "url_display_container";
-    private static final String URL_TITLE_TEXT_ID = "url_bar_title";
-    private static final String GO_BUTTON_ID = "go";
-    private static final String BACK_BUTTON_ID = "back";
-    private static final String FORWARD_BUTTON_ID = "forward";
-
     public ToolbarComponent(final UITestContext testContext) {
         super(testContext);
     }
@@ -55,36 +48,36 @@ public class ToolbarComponent extends BaseComponent {
      * Returns the root View for the browser toolbar.
      */
     private View getToolbarView() {
-        return mSolo.getView(BROWSER_TOOLBAR_ID);
+        return mSolo.getView(R.id.browser_toolbar);
     }
 
     private EditText getUrlEditText() {
-        return (EditText) ViewHelper.findViewById(getToolbarView(), URL_EDIT_TEXT_ID);
+        return (EditText) getToolbarView().findViewById(R.id.url_edit_text);
     }
 
     private View getUrlDisplayContainer() {
-        return ViewHelper.findViewById(getToolbarView(), URL_DISPLAY_CONTAINER_ID);
+        return getToolbarView().findViewById(R.id.url_display_container);
     }
 
     private TextView getUrlTitleText() {
-        return (TextView) ViewHelper.findViewById(getToolbarView(), URL_TITLE_TEXT_ID);
+        return (TextView) getToolbarView().findViewById(R.id.url_bar_title);
     }
 
     /**
      * Returns the View for the go button in the browser toolbar.
      */
     private ImageButton getGoButton() {
-        return (ImageButton) ViewHelper.findViewById(getToolbarView(), GO_BUTTON_ID);
+        return (ImageButton) getToolbarView().findViewById(R.id.go);
     }
 
     private ImageButton getBackButton() {
         DeviceHelper.assertIsTablet();
-        return (ImageButton) ViewHelper.findViewById(getToolbarView(), BACK_BUTTON_ID);
+        return (ImageButton) getToolbarView().findViewById(R.id.back);
     }
 
     private ImageButton getForwardButton() {
         DeviceHelper.assertIsTablet();
-        return (ImageButton) ViewHelper.findViewById(getToolbarView(), FORWARD_BUTTON_ID);
+        return (ImageButton) getToolbarView().findViewById(R.id.forward);
     }
 
     private CharSequence getTitle() {
