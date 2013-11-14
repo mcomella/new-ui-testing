@@ -29,17 +29,17 @@ public class StringHelper {
 
     // Context Menu menu items
     public static final String[] CONTEXT_MENU_ITEMS_IN_PRIVATE_TAB = new String[] {
-        "Open Link in Private Tab", 
-        "Copy Link", 
-        "Share Link", 
+        "Open Link in Private Tab",
+        "Copy Link",
+        "Share Link",
         "Bookmark Link"
     };
 
     public static final String[] CONTEXT_MENU_ITEMS_IN_NORMAL_TAB = new String[] {
         "Open Link in New Tab",
-        "Open Link in Private Tab", 
-        "Copy Link", 
-        "Share Link", 
+        "Open Link in Private Tab",
+        "Copy Link",
+        "Share Link",
         "Bookmark Link"
     };
 
