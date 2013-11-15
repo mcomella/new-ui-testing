@@ -18,51 +18,51 @@ public class testNewAboutHomeSwipes extends UITest {
         mAboutHome.assertVisible()
                   .assertCurrentPage(Page.TOP_SITES);
 
-        mAboutHome.swipeToNext();
+        mAboutHome.swipeToPageOnRight();
         mAboutHome.assertCurrentPage(Page.BOOKMARKS);
 
-        mAboutHome.swipeToNext();
+        mAboutHome.swipeToPageOnRight();
         mAboutHome.assertCurrentPage(Page.READING_LIST);
 
         if (!DeviceHelper.isTablet()) {
             // Edge case.
-            mAboutHome.swipeToNext();
+            mAboutHome.swipeToPageOnRight();
             mAboutHome.assertCurrentPage(Page.READING_LIST);
 
-            mAboutHome.swipeToPrevious();
+            mAboutHome.swipeToPageOnLeft();
             mAboutHome.assertCurrentPage(Page.BOOKMARKS);
 
-            mAboutHome.swipeToPrevious();
+            mAboutHome.swipeToPageOnLeft();
             mAboutHome.assertCurrentPage(Page.TOP_SITES);
 
-            mAboutHome.swipeToPrevious();
+            mAboutHome.swipeToPageOnLeft();
             mAboutHome.assertCurrentPage(Page.HISTORY);
 
             // Edge case.
-            mAboutHome.swipeToPrevious();
+            mAboutHome.swipeToPageOnLeft();
             mAboutHome.assertCurrentPage(Page.HISTORY);
 
-            mAboutHome.swipeToNext();
+            mAboutHome.swipeToPageOnRight();
             mAboutHome.assertCurrentPage(Page.TOP_SITES);
         } else {
-            mAboutHome.swipeToNext();
+            mAboutHome.swipeToPageOnRight();
             mAboutHome.assertCurrentPage(Page.HISTORY);
 
             // Edge case.
-            mAboutHome.swipeToNext();
+            mAboutHome.swipeToPageOnRight();
             mAboutHome.assertCurrentPage(Page.HISTORY);
 
-            mAboutHome.swipeToPrevious();
+            mAboutHome.swipeToPageOnLeft();
             mAboutHome.assertCurrentPage(Page.READING_LIST);
 
-            mAboutHome.swipeToPrevious();
+            mAboutHome.swipeToPageOnLeft();
             mAboutHome.assertCurrentPage(Page.BOOKMARKS);
 
-            mAboutHome.swipeToPrevious();
+            mAboutHome.swipeToPageOnLeft();
             mAboutHome.assertCurrentPage(Page.TOP_SITES);
 
             // Edge case.
-            mAboutHome.swipeToPrevious();
+            mAboutHome.swipeToPageOnLeft();
             mAboutHome.assertCurrentPage(Page.TOP_SITES);
         }
     }
