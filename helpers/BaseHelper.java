@@ -9,7 +9,7 @@ import org.mozilla.gecko.Assert;
 import org.mozilla.gecko.Driver;
 import org.mozilla.gecko.tests.components.*;
 import org.mozilla.gecko.tests.UITestContext;
-import org.mozilla.gecko.tests.UITestContext.Component;
+import org.mozilla.gecko.tests.UITestContext.ComponentType;
 
 import com.jayway.android.robotium.solo.Solo;
 
@@ -38,7 +38,7 @@ public class BaseHelper {
         sActions = sContext.getActions();
         sAsserter = sContext.getAsserter();
 
-        ABOUTHOME = (AboutHomeComponent) sContext.getComponent(Component.ABOUTHOME);
-        TOOLBAR = (ToolbarComponent) sContext.getComponent(Component.TOOLBAR);
+        ABOUTHOME = (AboutHomeComponent) sContext.getComponent(ComponentType.ABOUTHOME);
+        TOOLBAR = (ToolbarComponent) sContext.getComponent(ComponentType.TOOLBAR);
     }
 }

@@ -28,10 +28,10 @@ public interface UITestContext {
     public String getAbsoluteUrl(final String url);
     public String getAbsoluteRawUrl(final String url);
 
-    public static enum Component {
+    public static enum ComponentType {
         ABOUTHOME,
         TOOLBAR
     }
 
-    public BaseComponent getComponent(final Component component);
+    public BaseComponent getComponent(final ComponentType type);
 }
