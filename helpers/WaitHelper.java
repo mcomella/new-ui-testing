@@ -94,7 +94,6 @@ public final class WaitHelper {
             // TODO: Make wait time an aggregated countdown?
 
             if (hasTimedOut) {
-                // TODO: Bug 709230: Remove reflection?
                 sContext.dumpLog(verifier.getClass().getName() + " timed out.");
             }
         }

@@ -6,6 +6,7 @@ package org.mozilla.gecko.tests.helpers;
 
 import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
+import org.mozilla.gecko.GeckoAppShell;
 import org.mozilla.gecko.tests.UITestContext;
 
 import com.jayway.android.robotium.solo.Solo;
@@ -14,9 +15,6 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.util.DisplayMetrics;
-import java.lang.Class;
-import java.lang.ClassLoader;
-import java.lang.reflect.Method;
 
 public final class DeviceHelper {
     private static final String APP_SHELL_CLASS = "org.mozilla.gecko.GeckoAppShell";
@@ -32,7 +30,6 @@ public final class DeviceHelper {
         v4x
     }
 
-    private static UITestContext sContext;
     private static Activity sActivity;
     private static Solo sSolo;
 
@@ -49,7 +46,6 @@ public final class DeviceHelper {
     }
 
     public static void init(final UITestContext context) {
-        sContext = context;
         sActivity = context.getActivity();
         sSolo = context.getSolo();
 
@@ -78,18 +74,7 @@ public final class DeviceHelper {
     }
 
     private static void setDeviceType() {
-        boolean isTablet = false;
-        try {
-            // TODO: Bug 709230: Remove reflection?
-            final ClassLoader cl = sActivity.getClassLoader();
-            final Class appShellClass = cl.loadClass(APP_SHELL_CLASS);
-            final Method isTabletMethod = appShellClass.getMethod("isTablet");
-            isTablet = ((Boolean) isTabletMethod.invoke(null)).booleanValue();
-        } catch (Exception e) {
-            sContext.dumpLog("Exception in detectDevice", e);
-        }
-
-        sDeviceType = (isTablet ? Type.TABLET : Type.PHONE);
+        sDeviceType = (GeckoAppShell.isTablet() ? Type.TABLET : Type.PHONE);
     }
 
     public static int getScreenHeight() {
