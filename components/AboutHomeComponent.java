@@ -50,7 +50,7 @@ public class AboutHomeComponent extends BaseComponent {
     }
 
     // TODO: Take specific page as parameter rather than swipe in a direction?
-    // TODO: What is next/prev?
+    // TODO: What is next/prev? It's ambiguous!
     public AboutHomeComponent swipeToNext() {
         swipe(Solo.LEFT);
         return this;
