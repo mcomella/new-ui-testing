@@ -28,10 +28,19 @@ public class AboutHomeComponent extends BaseComponent {
         return (ViewPager) mSolo.getView(R.id.home_pager);
     }
 
-    public AboutHomeComponent assertCurrentPage(final Page page) {
+    public AboutHomeComponent assertCurrentPage(final Page expectedPage) {
         assertVisible();
-        assertEquals("The current HomePager page is " + Page.values()[page.ordinal()],
-                page.ordinal(), getHomePagerView().getCurrentItem());
+
+        int expectedPageIndex = expectedPage.ordinal();
+        if (DeviceHelper.isTablet()) {
+            // Left circular shift Page enum since the History tab is moved to the rightmost.
+            expectedPageIndex -= 1;
+            expectedPageIndex =
+                    (expectedPageIndex >= 0) ? expectedPageIndex : Page.values().length - 1;
+        }
+
+        assertEquals("The current HomePager page is " + Page.values()[expectedPageIndex],
+                expectedPageIndex, getHomePagerView().getCurrentItem());
         return this;
     }
 
