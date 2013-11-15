@@ -9,7 +9,6 @@ import org.mozilla.gecko.tests.helpers.*;
 /* Test correct state for URL bar after loading pages.
  */
 public class testNewAboutHomeSwipes extends UITest {
-    // TODO: Make this abstract using the Page enum.
     public void testNewAboutHomeSwipes() {
         GeckoHelper.blockForReady();
 
