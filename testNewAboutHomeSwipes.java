@@ -13,33 +13,33 @@ public class testNewAboutHomeSwipes extends UITest {
     public void testNewAboutHomeSwipes() {
         GeckoHelper.blockForReady();
 
-        ABOUTHOME.assertVisible()
-                 .assertCurrentPage(Page.TOP_SITES);
+        mAboutHome.assertVisible()
+                  .assertCurrentPage(Page.TOP_SITES);
 
-        ABOUTHOME.swipeToNext();
-        ABOUTHOME.assertCurrentPage(Page.BOOKMARKS);
+        mAboutHome.swipeToNext();
+        mAboutHome.assertCurrentPage(Page.BOOKMARKS);
 
-        ABOUTHOME.swipeToNext();
-        ABOUTHOME.assertCurrentPage(Page.READING_LIST);
-
-        // Edge case.
-        ABOUTHOME.swipeToNext();
-        ABOUTHOME.assertCurrentPage(Page.READING_LIST);
-
-        ABOUTHOME.swipeToPrevious();
-        ABOUTHOME.assertCurrentPage(Page.BOOKMARKS);
-
-        ABOUTHOME.swipeToPrevious();
-        ABOUTHOME.assertCurrentPage(Page.TOP_SITES);
-
-        ABOUTHOME.swipeToPrevious();
-        ABOUTHOME.assertCurrentPage(Page.HISTORY);
+        mAboutHome.swipeToNext();
+        mAboutHome.assertCurrentPage(Page.READING_LIST);
 
         // Edge case.
-        ABOUTHOME.swipeToPrevious();
-        ABOUTHOME.assertCurrentPage(Page.HISTORY);
+        mAboutHome.swipeToNext();
+        mAboutHome.assertCurrentPage(Page.READING_LIST);
 
-        ABOUTHOME.swipeToNext();
-        ABOUTHOME.assertCurrentPage(Page.TOP_SITES);
+        mAboutHome.swipeToPrevious();
+        mAboutHome.assertCurrentPage(Page.BOOKMARKS);
+
+        mAboutHome.swipeToPrevious();
+        mAboutHome.assertCurrentPage(Page.TOP_SITES);
+
+        mAboutHome.swipeToPrevious();
+        mAboutHome.assertCurrentPage(Page.HISTORY);
+
+        // Edge case.
+        mAboutHome.swipeToPrevious();
+        mAboutHome.assertCurrentPage(Page.HISTORY);
+
+        mAboutHome.swipeToNext();
+        mAboutHome.assertCurrentPage(Page.TOP_SITES);
     }
 }

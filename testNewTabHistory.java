@@ -13,27 +13,27 @@ public class testNewTabHistory extends UITest {
         GeckoHelper.blockForReady();
 
         NavigationHelper.enterAndLoadUrl(StringHelper.ROBOCOP_BLANK_PAGE_01_URL);
-        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_01_TITLE);
+        mToolbar.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_01_TITLE);
 
         NavigationHelper.enterAndLoadUrl(StringHelper.ROBOCOP_BLANK_PAGE_02_URL);
-        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
+        mToolbar.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
 
         NavigationHelper.enterAndLoadUrl(StringHelper.ROBOCOP_BLANK_PAGE_03_URL);
-        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_03_TITLE);
+        mToolbar.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_03_TITLE);
 
         NavigationHelper.goBack();
-        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
+        mToolbar.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
 
         NavigationHelper.goBack();
-        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_01_TITLE);
+        mToolbar.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_01_TITLE);
 
         // TODO: Implement this functionality and uncomment.
         /*
         NavigationHelper.goForward();
-        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
+        mToolbar.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
 
         NavigationHelper.reload();
-        TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
+        mToolbar.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
         */
     }
 }

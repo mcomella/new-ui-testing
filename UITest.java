@@ -54,8 +54,8 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     // Base to build raw absolute URLs
     private String mRawBaseUrl;
 
-    AboutHomeComponent ABOUTHOME;
-    ToolbarComponent TOOLBAR;
+    protected AboutHomeComponent mAboutHome;
+    protected ToolbarComponent mToolbar;
 
     static {
         try {
@@ -120,8 +120,8 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     }
 
     private void initComponents() {
-        ABOUTHOME = new AboutHomeComponent(this);
-        TOOLBAR = new ToolbarComponent(this);
+        mAboutHome = new AboutHomeComponent(this);
+        mToolbar = new ToolbarComponent(this);
     }
 
     private void initHelpers() {
@@ -178,9 +178,9 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     public BaseComponent getComponent(final ComponentType type) {
         switch (type) {
         case ABOUTHOME:
-            return ABOUTHOME;
+            return mAboutHome;
         case TOOLBAR:
-            return TOOLBAR;
+            return mToolbar;
 
         default:
             fail("Unknown component type, " + type + ".");
