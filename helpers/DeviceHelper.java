@@ -6,6 +6,8 @@ package org.mozilla.gecko.tests.helpers;
 
 import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
+import org.mozilla.gecko.tests.UITestContext;
+
 import com.jayway.android.robotium.solo.Solo;
 
 import android.app.Activity;
@@ -16,7 +18,7 @@ import java.lang.Class;
 import java.lang.ClassLoader;
 import java.lang.reflect.Method;
 
-public final class DeviceHelper extends BaseHelper {
+public final class DeviceHelper {
     private static final String APP_SHELL_CLASS = "org.mozilla.gecko.GeckoAppShell";
 
     public enum Type {
@@ -30,6 +32,10 @@ public final class DeviceHelper extends BaseHelper {
         v4x
     }
 
+    private static UITestContext sContext;
+    private static Activity sActivity;
+    private static Solo sSolo;
+
     private static Type sDeviceType;
     private static AndroidVersion sAndroidVersion;
 
@@ -42,7 +48,11 @@ public final class DeviceHelper extends BaseHelper {
         assertTrue("The device is a tablet", isTablet());
     }
 
-    public static void init() {
+    public static void init(final UITestContext context) {
+        sContext = context;
+        sActivity = context.getActivity();
+        sSolo = context.getSolo();
+
         setAndroidVersion();
         setScreenDimensions();
         setDeviceType();
@@ -60,21 +70,18 @@ public final class DeviceHelper extends BaseHelper {
     }
 
     private static void setScreenDimensions() {
-        final Activity activity = sContext.getActivity();
         final DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        sActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         sScreenHeight = dm.heightPixels;
         sScreenWidth = dm.widthPixels;
     }
 
     private static void setDeviceType() {
-        final Activity activity = sContext.getActivity();
-
         boolean isTablet = false;
         try {
             // TODO: Bug 709230: Remove reflection?
-            final ClassLoader cl = activity.getClassLoader();
+            final ClassLoader cl = sActivity.getClassLoader();
             final Class appShellClass = cl.loadClass(APP_SHELL_CLASS);
             final Method isTabletMethod = appShellClass.getMethod("isTablet");
             isTablet = ((Boolean) isTabletMethod.invoke(null)).booleanValue();

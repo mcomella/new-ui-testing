@@ -125,11 +125,18 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     }
 
     private void initHelpers() {
-        // Other helpers depend on BaseHelper, so initialize it first.
-        BaseHelper.init(this);
+        // TODO: Classes import AssertionHelper.init statically. If we keep AssertionHelper,
+        // we should create a helpers.HelperInitializer class and change the access levels of
+        // init to protected.
 
-        // Note that not all helpers need to be initialized.
-        DeviceHelper.init();
+        // Other helpers make assertions so init AssertionHelper first.
+        AssertionHelper.init(this);
+
+        DeviceHelper.init(this);
+        GeckoHelper.init(this);
+        GestureHelper.init(this);
+        NavigationHelper.init(this);
+        WaitHelper.init(this);
     }
 
     @Override

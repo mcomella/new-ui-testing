@@ -6,20 +6,39 @@ package org.mozilla.gecko.tests.helpers;
 
 import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
+import org.mozilla.gecko.Actions;
 import org.mozilla.gecko.Actions.EventExpecter;
+import org.mozilla.gecko.tests.components.ToolbarComponent;
+import org.mozilla.gecko.tests.UITestContext;
+import org.mozilla.gecko.tests.UITestContext.ComponentType;
 
 import com.jayway.android.robotium.solo.Condition;
+import com.jayway.android.robotium.solo.Solo;
 
-public final class WaitHelper extends BaseHelper {
+public final class WaitHelper {
     private static final int DEFAULT_MAX_WAIT_MS = 5000;
     private static final int PAGE_LOAD_WAIT_MS = 10000;
     private static final int CHANGE_WAIT_MS = 2000;
 
-    private static ChangeVerifier[] sPageLoadVerifiers = new ChangeVerifier[] {
+    private static final ChangeVerifier[] PAGE_LOAD_VERIFIERS = new ChangeVerifier[] {
         new ToolbarTitleTextChangeVerifier()
     };
 
+    private static UITestContext sContext;
+    private static Solo sSolo;
+    private static Actions sActions;
+
+    private static ToolbarComponent sToolbarComponent;
+
     private WaitHelper() { /* To disallow instantiation. */ }
+
+    public static void init(final UITestContext context) {
+        sContext = context;
+        sSolo = context.getSolo();
+        sActions = context.getActions();
+
+        sToolbarComponent = (ToolbarComponent) context.getComponent(ComponentType.TOOLBAR);
+    }
 
     /**
      * Waits for the given {@link solo.Condition} using the default wait duration; will throw an
@@ -50,7 +69,7 @@ public final class WaitHelper extends BaseHelper {
         // the page has finished loading (e.g. a page title update). As such, we ensure this
         // UI state has changed before returning from this method; here we store the initial
         // state.
-        final ChangeVerifier[] pageLoadVerifiers = sPageLoadVerifiers;
+        final ChangeVerifier[] pageLoadVerifiers = PAGE_LOAD_VERIFIERS;
         for (final ChangeVerifier verifier : pageLoadVerifiers) {
             verifier.storeState();
         }
@@ -102,13 +121,13 @@ public final class WaitHelper extends BaseHelper {
 
         @Override
         public void storeState() {
-            oldTitleText = TOOLBAR.getPotentiallyInconsistentTitle();
+            oldTitleText = sToolbarComponent.getPotentiallyInconsistentTitle();
         }
 
         @Override
         public boolean hasStateChanged() {
             // TODO: Robocop sleeps .5 sec between calls. Cache title view?
-            return !oldTitleText.equals(TOOLBAR.getPotentiallyInconsistentTitle());
+            return !oldTitleText.equals(sToolbarComponent.getPotentiallyInconsistentTitle());
         }
     }
 }

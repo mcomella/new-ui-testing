@@ -4,17 +4,30 @@
 
 package org.mozilla.gecko.tests.helpers;
 
+import org.mozilla.gecko.Actions;
 import org.mozilla.gecko.Actions.EventExpecter;
+import org.mozilla.gecko.tests.UITestContext;
 
+import android.app.Activity;
 import java.lang.Class;
 import java.lang.ClassLoader;
 import java.lang.reflect.Method;
 
-public final class GeckoHelper extends BaseHelper {
+public final class GeckoHelper {
     private static final String GECKO_THREAD_CLASS = "org.mozilla.gecko.GeckoThread";
     private static final String LAUNCH_STATE_CLASS = GECKO_THREAD_CLASS + "$LaunchState";
 
+    private static UITestContext sContext;
+    private static Activity sActivity;
+    private static Actions sActions;
+
     private GeckoHelper() { /* To disallow instantiation. */ }
+
+    public static void init(final UITestContext context) {
+        sContext = context;
+        sActivity = context.getActivity();
+        sActions = context.getActions();
+    }
 
     public static void blockForReady() {
         try {

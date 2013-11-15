@@ -6,25 +6,41 @@ package org.mozilla.gecko.tests.helpers;
 
 import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
-import org.mozilla.gecko.Actions;
+import org.mozilla.gecko.tests.components.ToolbarComponent;
 import org.mozilla.gecko.tests.StringHelper;
+import org.mozilla.gecko.tests.UITestContext;
+import org.mozilla.gecko.tests.UITestContext.ComponentType;
+
+import com.jayway.android.robotium.solo.Solo;
 
 import android.text.TextUtils;
 
-final public class NavigationHelper extends BaseHelper {
-    private static String[] sPredefinedUrls = new String[] {
+final public class NavigationHelper {
+    private final static String[] PREDEFINED_URLS = new String[] {
         StringHelper.ROBOCOP_BLANK_PAGE_01_URL,
         StringHelper.ROBOCOP_BLANK_PAGE_02_URL,
         StringHelper.ROBOCOP_BLANK_PAGE_03_URL
     };
 
+    private static UITestContext sContext;
+    private static Solo sSolo;
+
+    private static ToolbarComponent sToolbarComponent;
+
+    public static void init(final UITestContext context) {
+        sContext = context;
+        sSolo = context.getSolo();
+
+        sToolbarComponent = (ToolbarComponent) context.getComponent(ComponentType.TOOLBAR);
+    }
+
     public static void enterAndLoadUrl(String url) {
         assertNotNull("url is not null", url);
 
         url = adjustIfPredefined(url);
-        TOOLBAR.enterEditingMode()
-               .enterUrl(url)
-               .commitEditingMode();
+        sToolbarComponent.enterEditingMode()
+                         .enterUrl(url)
+                         .commitEditingMode();
     }
 
     /**
@@ -34,7 +50,7 @@ final public class NavigationHelper extends BaseHelper {
     private static String adjustIfPredefined(final String url) {
         assertNotNull("url is not null", url);
 
-        for (final String predefinedUrl : sPredefinedUrls) {
+        for (final String predefinedUrl : PREDEFINED_URLS) {
             if (TextUtils.equals(url, predefinedUrl)) {
                 return sContext.getAbsoluteUrl(url);
             }
@@ -45,11 +61,11 @@ final public class NavigationHelper extends BaseHelper {
 
     public static void goBack() {
         if (DeviceHelper.isTablet()) {
-            TOOLBAR.pressBackButton(); // Waits for page load & asserts isNotEditing.
+            sToolbarComponent.pressBackButton(); // Waits for page load & asserts isNotEditing.
             return;
         }
 
-        TOOLBAR.assertIsNotEditing();
+        sToolbarComponent.assertIsNotEditing();
         WaitHelper.waitForPageLoad(new Runnable() {
             @Override
             public void run() {
@@ -63,11 +79,11 @@ final public class NavigationHelper extends BaseHelper {
 
     public static void goForward() {
         if (DeviceHelper.isTablet()) {
-            TOOLBAR.pressForwardButton(); // Waits for page load & asserts isNotEditing.
+            sToolbarComponent.pressForwardButton(); // Waits for page load & asserts isNotEditing.
             return;
         }
 
-        TOOLBAR.assertIsNotEditing();
+        sToolbarComponent.assertIsNotEditing();
         WaitHelper.waitForPageLoad(new Runnable() {
             @Override
             public void run() {

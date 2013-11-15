@@ -5,10 +5,17 @@
 package org.mozilla.gecko.tests.helpers;
 
 import org.mozilla.gecko.Assert;
+import org.mozilla.gecko.tests.UITestContext;
 
 // TODO: Add ispixel assertions.
-public final class AssertionHelper extends BaseHelper {
+public final class AssertionHelper {
+    private static Assert sAsserter;
+
     private AssertionHelper() { /* To disallow instantation. */ }
+
+    public static void init(final UITestContext context) {
+        sAsserter = context.getAsserter();
+    }
 
     public static void assertEquals(final String message, final Object expected, final Object actual) {
         sAsserter.is(actual, expected, message);
