@@ -27,10 +27,13 @@ public class testNewTabHistory extends UITest {
         NavigationHelper.goBack();
         TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_01_TITLE);
 
+        // TODO: Implement this functionality and uncomment.
+        /*
         NavigationHelper.goForward();
         TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
 
         NavigationHelper.reload();
         TOOLBAR.assertTitle(StringHelper.ROBOCOP_BLANK_PAGE_02_TITLE);
+        */
     }
 }

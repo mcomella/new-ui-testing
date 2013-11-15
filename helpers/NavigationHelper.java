@@ -88,6 +88,7 @@ final public class NavigationHelper {
             @Override
             public void run() {
                 // TODO: Press forward with APPMENU component
+                throw new UnsupportedOperationException("Not yet implemented.");
             }
         });
     }
@@ -96,5 +97,6 @@ final public class NavigationHelper {
         // TODO: On tablets, press reload in TOOLBAR. Note that this is technically
         // an app menu item so tread carefully.
         //       On phones, press reload in APPMENU.
+        throw new UnsupportedOperationException("Not yet implemented.");
     }
 }
