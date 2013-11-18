@@ -9,6 +9,9 @@ import org.mozilla.gecko.tests.UITestContext;
 
 // TODO: Add ispixel assertions.
 public final class AssertionHelper {
+    // Assert.ok has a "diag" ("diagnostic") parameter that has no useful purpose.
+    private static final String DIAG_STRING = "";
+
     private static Assert sAsserter;
 
     private AssertionHelper() { /* To disallow instantation. */ }
@@ -26,8 +29,7 @@ public final class AssertionHelper {
     }
 
     public static void assertFalse(final String message, final boolean actual) {
-        // TODO: What is diag? (Also assertTrue)
-        sAsserter.ok(!actual, message, "");
+        sAsserter.ok(!actual, message, DIAG_STRING);
     }
 
     public static void assertNotNull(final String message, final Object actual) {
@@ -39,11 +41,10 @@ public final class AssertionHelper {
     }
 
     public static void assertTrue(final String message, final boolean actual) {
-        sAsserter.ok(actual, message, "");
+        sAsserter.ok(actual, message, DIAG_STRING);
     }
 
     public static void fail(final String message) {
-        // TODO: diag?
-        sAsserter.ok(false, message, "");
+        sAsserter.ok(false, message, DIAG_STRING);
     }
 }
