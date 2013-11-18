@@ -17,8 +17,6 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 
 public final class DeviceHelper {
-    private static final String APP_SHELL_CLASS = "org.mozilla.gecko.GeckoAppShell";
-
     public enum Type {
         PHONE,
         TABLET
