@@ -8,11 +8,11 @@ import org.mozilla.gecko.tests.helpers.*;
 // TODO: Elaborate on test desc and use /**.
 /* Test correct state for URL bar after loading pages.
  */
-public class testNewAboutHomeSwipes extends UITest {
+public class testAwesomescreenPages extends UITest {
     // TODO: Define this test dynamically by creating dynamic representations of the Page
     // enum for both phone and tablet, then swiping through the pages. This will also
     // benefit having a HomePager with custom pages.
-    public void testNewAboutHomeSwipes() {
+    public void testAwesomescreenPages() {
         GeckoHelper.blockForReady();
 
         mAboutHome.assertVisible()
@@ -66,4 +66,40 @@ public class testNewAboutHomeSwipes extends UITest {
             mAboutHome.assertCurrentPage(Page.TOP_SITES);
         }
     }
+
+    // TODO: The following is code from the old testAwesomebarSwipes which contains
+    // additional functionality we don't cover here. We should reimplement it in the new
+    // framework.
+    /*
+        //  Removed by Bug 896576 - [fig] Remove [getAllPagesList] from BaseTest
+        //  ListView list = getAllPagesList("about:firefox");
+
+        // Test normal sliding of the list left and right
+        ViewPager pager = (ViewPager)mSolo.getView(ViewPager.class, 0);
+        mAsserter.is(pager.getCurrentItem(), 0, "All pages is selected");
+
+        int width = mDriver.getGeckoWidth() / 2;
+        int y = mDriver.getGeckoHeight() / 2;
+        mActions.drag(width, 0, y, y);
+        mAsserter.is(pager.getCurrentItem(), 1, "Bookmarks page is selected");
+
+        mActions.drag(0, width, y, y);
+        mAsserter.is(pager.getCurrentItem(), 0, "All pages is selected");
+
+        // Test tapping on the tab strip changes tabs
+        TabWidget tabwidget = (TabWidget)mSolo.getView(TabWidget.class, 0);
+        mSolo.clickOnView(tabwidget.getChildAt(1));
+        mAsserter.is(pager.getCurrentItem(), 1, "Clicking on tab selected bookmarks page");
+
+        // Test typing in the awesomebar changes tabs and prevents panning
+        mSolo.typeText(0, "woot");
+        mAsserter.is(pager.getCurrentItem(), 0, "Searching switched to all pages tab");
+        mSolo.scrollToSide(Solo.LEFT);
+        mAsserter.is(pager.getCurrentItem(), 0, "Dragging left is not allowed when searching");
+
+        mSolo.scrollToSide(Solo.RIGHT);
+        mAsserter.is(pager.getCurrentItem(), 0, "Dragging right is not allowed when searching");
+
+        mActions.sendSpecialKey(Actions.SpecialKey.BACK);
+    */
 }
