@@ -15,6 +15,9 @@ import org.mozilla.gecko.tests.UITestContext.ComponentType;
 import com.jayway.android.robotium.solo.Condition;
 import com.jayway.android.robotium.solo.Solo;
 
+/**
+ * Provides functionality related to waiting on certain events to happen.
+ */
 public final class WaitHelper {
     private static final int DEFAULT_MAX_WAIT_MS = 5000;
     private static final int PAGE_LOAD_WAIT_MS = 10000;

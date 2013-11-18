@@ -14,6 +14,9 @@ import com.jayway.android.robotium.solo.Solo;
 import android.app.Activity;
 import android.app.Instrumentation;
 
+/**
+ * Interface to the global information about a UITest environment.
+ */
 public interface UITestContext {
     public Activity getActivity();
     public Solo getSolo();

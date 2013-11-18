@@ -15,6 +15,10 @@ import com.jayway.android.robotium.solo.Solo;
 
 import android.text.TextUtils;
 
+/**
+ * Provides helper functionality for navigating around the Firefox UI. These functions will often
+ * combine actions taken on multiple components to perform larger interactions.
+ */
 final public class NavigationHelper {
     private final static String[] PREDEFINED_URLS = new String[] {
         StringHelper.ROBOCOP_BLANK_PAGE_01_URL,

@@ -9,6 +9,9 @@ import org.mozilla.gecko.tests.UITestContext;
 
 import com.jayway.android.robotium.solo.Solo;
 
+/**
+ * Provides simplified gestures wrapping the Robotium gestures API.
+ */
 public final class GestureHelper {
     private static int DEFAULT_DRAG_STEP_COUNT = 10;
 

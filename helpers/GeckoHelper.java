@@ -12,6 +12,9 @@ import org.mozilla.gecko.tests.UITestContext;
 
 import android.app.Activity;
 
+/**
+ * Provides helper functions for accessing the underlying Gecko engine.
+ */
 public final class GeckoHelper {
     private static Activity sActivity;
     private static Actions sActions;

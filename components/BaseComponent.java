@@ -9,6 +9,13 @@ import org.mozilla.gecko.tests.UITestContext;
 
 import com.jayway.android.robotium.solo.Solo;
 
+/**
+ * A base class for constructing components - an abstraction over small bits of Firefox
+ * functionality. For example, the Toolbar or the about:home screen could be considered a
+ * component. Components should not need to know about each others existences and should be
+ * combined via helpers. Helpers can also handle a series of actions taken on one component
+ * (e.g. clicking the toolbar, entering a url, and waiting for page load).
+ */
 public abstract class BaseComponent {
     private final UITestContext mTestContext;
     protected final Solo mSolo;

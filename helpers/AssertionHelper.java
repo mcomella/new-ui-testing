@@ -8,6 +8,9 @@ import org.mozilla.gecko.Assert;
 import org.mozilla.gecko.tests.UITestContext;
 
 // TODO: Add ispixel assertions.
+/**
+ * Provides assertions in a JUnit-like API that wraps the robocop Assert interface.
+ */
 public final class AssertionHelper {
     // Assert.ok has a "diag" ("diagnostic") parameter that has no useful purpose.
     private static final String DIAG_STRING = "";

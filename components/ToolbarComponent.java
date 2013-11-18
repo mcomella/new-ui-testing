@@ -17,6 +17,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+/**
+ * A class representing any interactions that take place on the Toolbar.
+ */
 public class ToolbarComponent extends BaseComponent {
     public ToolbarComponent(final UITestContext testContext) {
         super(testContext);

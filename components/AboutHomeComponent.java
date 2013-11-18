@@ -19,6 +19,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+/**
+ * A class representing any interactions that take place on the Awesomescreen.
+ */
 public class AboutHomeComponent extends BaseComponent {
     public AboutHomeComponent(final UITestContext testContext) {
         super(testContext);

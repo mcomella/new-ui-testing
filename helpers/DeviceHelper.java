@@ -16,6 +16,10 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.util.DisplayMetrics;
 
+/**
+ * Provides general hardware (ex: configuration) and software (ex: version) information
+ * about the current test device and allows changing its configuration.
+ */
 public final class DeviceHelper {
     public enum Type {
         PHONE,
