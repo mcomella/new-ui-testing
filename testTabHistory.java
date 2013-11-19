@@ -8,8 +8,8 @@ import org.mozilla.gecko.tests.helpers.*;
 // TODO: Elaborate on test desc and use /**.
 /* Test correct state for URL bar after loading pages.
  */
-public class testNewTabHistory extends UITest {
-    public void testNewTabHistory() {
+public class testTabHistory extends UITest {
+    public void testTabHistory() {
         GeckoHelper.blockForReady();
 
         NavigationHelper.enterAndLoadUrl(StringHelper.ROBOCOP_BLANK_PAGE_01_URL);
