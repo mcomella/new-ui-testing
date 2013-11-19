@@ -7,7 +7,6 @@ package org.mozilla.gecko.tests.helpers;
 import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
 import org.mozilla.gecko.tests.components.ToolbarComponent;
-import org.mozilla.gecko.tests.StringHelper;
 import org.mozilla.gecko.tests.UITestContext;
 import org.mozilla.gecko.tests.UITestContext.ComponentType;
 
@@ -20,12 +19,6 @@ import android.text.TextUtils;
  * combine actions taken on multiple components to perform larger interactions.
  */
 final public class NavigationHelper {
-    private final static String[] PREDEFINED_URLS = new String[] {
-        StringHelper.ROBOCOP_BLANK_PAGE_01_URL,
-        StringHelper.ROBOCOP_BLANK_PAGE_02_URL,
-        StringHelper.ROBOCOP_BLANK_PAGE_03_URL
-    };
-
     private static UITestContext sContext;
     private static Solo sSolo;
 
@@ -41,26 +34,19 @@ final public class NavigationHelper {
     public static void enterAndLoadUrl(String url) {
         assertNotNull("url is not null", url);
 
-        url = adjustIfPredefined(url);
+        url = adjustUrl(url);
         sToolbarComponent.enterEditingMode()
                          .enterUrl(url)
                          .commitEditingMode();
     }
 
     /**
-     * Returns a new URL with the docshell HTTP server host prefix if the given url is
-     * predefined, otherwise returns the given url.
+     * Returns a new URL with the docshell HTTP server host prefix.
      */
-    private static String adjustIfPredefined(final String url) {
+    private static String adjustUrl(final String url) {
         assertNotNull("url is not null", url);
 
-        for (final String predefinedUrl : PREDEFINED_URLS) {
-            if (TextUtils.equals(url, predefinedUrl)) {
-                return sContext.getAbsoluteUrl(url);
-            }
-        }
-
-        return url;
+        return sContext.getAbsoluteUrl(url);
     }
 
     public static void goBack() {
