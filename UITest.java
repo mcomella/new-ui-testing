@@ -188,6 +188,10 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         }
     }
 
+    /**
+     * Returns the test type. By default this returns MOCHITEST, but tests can override this
+     * method in order to change the type of the test.
+     */
     protected Type getTestType() {
         return Type.MOCHITEST;
     }
