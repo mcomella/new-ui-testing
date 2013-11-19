@@ -24,47 +24,57 @@ public class testAwesomescreenPages extends UITest {
         mAboutHome.swipeToPageOnRight();
         mAboutHome.assertCurrentPage(Page.READING_LIST);
 
-        if (!DeviceHelper.isTablet()) {
-            // Edge case.
-            mAboutHome.swipeToPageOnRight();
-            mAboutHome.assertCurrentPage(Page.READING_LIST);
-
-            mAboutHome.swipeToPageOnLeft();
-            mAboutHome.assertCurrentPage(Page.BOOKMARKS);
-
-            mAboutHome.swipeToPageOnLeft();
-            mAboutHome.assertCurrentPage(Page.TOP_SITES);
-
-            mAboutHome.swipeToPageOnLeft();
-            mAboutHome.assertCurrentPage(Page.HISTORY);
-
-            // Edge case.
-            mAboutHome.swipeToPageOnLeft();
-            mAboutHome.assertCurrentPage(Page.HISTORY);
-
-            mAboutHome.swipeToPageOnRight();
-            mAboutHome.assertCurrentPage(Page.TOP_SITES);
+        // Ideally these helpers would just be their own tests. However, by keeping this within
+        // one method, we're saving test setUp and tearDown resources.
+        if (DeviceHelper.isTablet()) {
+            helperTestTablet();
         } else {
-            mAboutHome.swipeToPageOnRight();
-            mAboutHome.assertCurrentPage(Page.HISTORY);
-
-            // Edge case.
-            mAboutHome.swipeToPageOnRight();
-            mAboutHome.assertCurrentPage(Page.HISTORY);
-
-            mAboutHome.swipeToPageOnLeft();
-            mAboutHome.assertCurrentPage(Page.READING_LIST);
-
-            mAboutHome.swipeToPageOnLeft();
-            mAboutHome.assertCurrentPage(Page.BOOKMARKS);
-
-            mAboutHome.swipeToPageOnLeft();
-            mAboutHome.assertCurrentPage(Page.TOP_SITES);
-
-            // Edge case.
-            mAboutHome.swipeToPageOnLeft();
-            mAboutHome.assertCurrentPage(Page.TOP_SITES);
+            helperTestPhone();
         }
+    }
+
+    private void helperTestTablet() {
+        mAboutHome.swipeToPageOnRight();
+        mAboutHome.assertCurrentPage(Page.HISTORY);
+
+        // Edge case.
+        mAboutHome.swipeToPageOnRight();
+        mAboutHome.assertCurrentPage(Page.HISTORY);
+
+        mAboutHome.swipeToPageOnLeft();
+        mAboutHome.assertCurrentPage(Page.READING_LIST);
+
+        mAboutHome.swipeToPageOnLeft();
+        mAboutHome.assertCurrentPage(Page.BOOKMARKS);
+
+        mAboutHome.swipeToPageOnLeft();
+        mAboutHome.assertCurrentPage(Page.TOP_SITES);
+
+        // Edge case.
+        mAboutHome.swipeToPageOnLeft();
+        mAboutHome.assertCurrentPage(Page.TOP_SITES);
+    }
+
+    private void helperTestPhone() {
+        // Edge case.
+        mAboutHome.swipeToPageOnRight();
+        mAboutHome.assertCurrentPage(Page.READING_LIST);
+
+        mAboutHome.swipeToPageOnLeft();
+        mAboutHome.assertCurrentPage(Page.BOOKMARKS);
+
+        mAboutHome.swipeToPageOnLeft();
+        mAboutHome.assertCurrentPage(Page.TOP_SITES);
+
+        mAboutHome.swipeToPageOnLeft();
+        mAboutHome.assertCurrentPage(Page.HISTORY);
+
+        // Edge case.
+        mAboutHome.swipeToPageOnLeft();
+        mAboutHome.assertCurrentPage(Page.HISTORY);
+
+        mAboutHome.swipeToPageOnRight();
+        mAboutHome.assertCurrentPage(Page.TOP_SITES);
     }
 
     // TODO: The following is code from the old testAwesomebarSwipes which contains
