@@ -48,8 +48,6 @@ public class AboutHomeComponent extends BaseComponent {
     }
 
     public AboutHomeComponent assertNotVisible() {
-        // TODO: assertFalse is inconsistent with assertVisible but probably better
-        // than adding assertNotEquals and being inconsistent with JUnit.
         assertFalse("The HomePager is not visible",
                 getHomePagerView().getVisibility() == View.VISIBLE);
         return this;
