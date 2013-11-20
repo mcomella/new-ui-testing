@@ -114,7 +114,7 @@ public final class WaitHelper {
         /**
          * Stores the initial state of the system. This system state is used to diff against
          * the end state to determine if the system has changed. Since this is just a diff
-         * (with a timeout), * this method could potentially store state inconsistent with
+         * (with a timeout), this method could potentially store state inconsistent with
          * what is visible to the user.
          */
         public void storeState();
