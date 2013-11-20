@@ -122,6 +122,9 @@ public final class WaitHelper {
     }
 
     private static class ToolbarTitleTextChangeVerifier implements ChangeVerifier {
+        // A regex that matches the page title that shows up while the page is loading.
+        private static final String LOADING_REGEX = "^[A-Za-z]{3,9}://";
+
         private CharSequence oldTitleText;
 
         @Override
@@ -132,7 +135,15 @@ public final class WaitHelper {
         @Override
         public boolean hasStateChanged() {
             // TODO: Robocop sleeps .5 sec between calls. Cache title view?
-            return !oldTitleText.equals(sToolbarComponent.getPotentiallyInconsistentTitle());
+            final CharSequence title = sToolbarComponent.getPotentiallyInconsistentTitle();
+
+            // TODO: Handle the case where the URL is shown instead of page title by preference.
+            // HACK: We want to wait until the title changes to the state a tester may assert
+            // (e.g. the page title). However, the title is set to the URL before the title is
+            // loaded from the server and set as the final page title; we ignore the
+            // intermediate URL loading state here.
+            final boolean isLoading = title.toString().matches(LOADING_REGEX);
+            return !isLoading && !oldTitleText.equals(title);
         }
     }
 }
