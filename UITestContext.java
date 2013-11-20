@@ -28,8 +28,14 @@ public interface UITestContext {
     public void dumpLog(final String message);
     public void dumpLog(final String message, final Throwable t);
 
-    public String getAbsoluteUrl(final String url);
-    public String getAbsoluteRawUrl(final String url);
+    /**
+     * Returns the absolute version of the given URL using the host's hostname.
+     */
+    public String getAbsoluteHostnameUrl(final String url);
+    /**
+     * Returns the absolute version of the given URL using the host's IP address.
+     */
+    public String getAbsoluteIpUrl(final String url);
 
     public static enum ComponentType {
         ABOUTHOME,

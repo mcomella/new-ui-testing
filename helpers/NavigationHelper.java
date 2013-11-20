@@ -47,7 +47,7 @@ final public class NavigationHelper {
         assertNotNull("url is not null", url);
 
         if (!url.startsWith("about:")) {
-            return sContext.getAbsoluteUrl(url);
+            return sContext.getAbsoluteHostnameUrl(url);
         }
 
         return url;

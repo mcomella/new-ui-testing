@@ -49,10 +49,10 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     private Actions mActions;
     private Assert mAsserter;
 
-    // Base to build absolute URLs
-    private String mBaseUrl;
-    // Base to build raw absolute URLs
-    private String mRawBaseUrl;
+    // Base to build hostname URLs
+    private String mBaseHostnameUrl;
+    // Base to build IP URLs
+    private String mBaseIpUrl;
 
     protected AboutHomeComponent mAboutHome;
     protected ToolbarComponent mToolbar;
@@ -99,8 +99,8 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         mDriver = new FennecNativeDriver(mActivity, mSolo, rootPath);
         mActions = new FennecNativeActions(mActivity, mSolo, getInstrumentation(), mAsserter);
 
-        mBaseUrl = ((String) config.get("host")).replaceAll("(/$)", "");
-        mRawBaseUrl = ((String) config.get("rawhost")).replaceAll("(/$)", "");
+        mBaseHostnameUrl = ((String) config.get("host")).replaceAll("(/$)", "");
+        mBaseIpUrl = ((String) config.get("rawhost")).replaceAll("(/$)", "");
 
         // TODO: Consider lazy initialization.
         // Helpers depend on components so initialize them first.
@@ -198,13 +198,17 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     }
 
     @Override
-    public String getAbsoluteUrl(final String url) {
-        return mBaseUrl + "/" + url.replaceAll("(^/)", "");
+    public String getAbsoluteHostnameUrl(final String url) {
+        return getAbsoluteUrl(mBaseHostnameUrl, url);
     }
 
     @Override
-    public String getAbsoluteRawUrl(final String url) {
-        return mRawBaseUrl + "/" + url.replaceAll("(^/)", "");
+    public String getAbsoluteIpUrl(final String url) {
+        return getAbsoluteUrl(mBaseIpUrl, url);
+    }
+
+    private String getAbsoluteUrl(final String baseUrl, final String url) {
+        return baseUrl + "/" + url.replaceAll("(^/)", "");
     }
 
     private static HashMap loadConfigTable(final String rootPath) {
