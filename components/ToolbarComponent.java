@@ -36,7 +36,6 @@ public class ToolbarComponent extends BaseComponent {
     }
 
     public ToolbarComponent assertTitle(final String expected) {
-        // TODO: How is this affected by the showURL preference?
         assertEquals("The Toolbar title is " + expected, expected, getTitle());
         return this;
     }
