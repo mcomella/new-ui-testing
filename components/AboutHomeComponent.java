@@ -34,6 +34,9 @@ public class AboutHomeComponent extends BaseComponent {
     public AboutHomeComponent assertCurrentPage(final Page expectedPage) {
         assertVisible();
 
+        // TODO: A "PhonePage" and "TabletPage" enum should be set explicitly or decided
+        // dynamically, likely with the work done in bug 940565. The current solution kind of
+        // sucks.
         int expectedPageIndex = expectedPage.ordinal();
         if (DeviceHelper.isTablet()) {
             // Left circular shift Page enum since the History tab is moved to the rightmost.
