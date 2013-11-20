@@ -134,6 +134,7 @@ public final class WaitHelper {
 
         @Override
         public boolean hasStateChanged() {
+            // TODO: Additionally, consider Solo.waitForText.
             // TODO: Robocop sleeps .5 sec between calls. Cache title view?
             final CharSequence title = sToolbarComponent.getPotentiallyInconsistentTitle();
 
