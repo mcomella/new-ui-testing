@@ -18,6 +18,12 @@ import android.app.Instrumentation;
  * Interface to the global information about a UITest environment.
  */
 public interface UITestContext {
+
+    public static enum ComponentType {
+        ABOUTHOME,
+        TOOLBAR
+    }
+
     public Activity getActivity();
     public Solo getSolo();
     public Assert getAsserter();
@@ -32,15 +38,11 @@ public interface UITestContext {
      * Returns the absolute version of the given URL using the host's hostname.
      */
     public String getAbsoluteHostnameUrl(final String url);
+
     /**
      * Returns the absolute version of the given URL using the host's IP address.
      */
     public String getAbsoluteIpUrl(final String url);
-
-    public static enum ComponentType {
-        ABOUTHOME,
-        TOOLBAR
-    }
 
     public BaseComponent getComponent(final ComponentType type);
 }
