@@ -5,14 +5,14 @@ import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 import org.mozilla.gecko.home.HomePager.Page;
 import org.mozilla.gecko.tests.helpers.*;
 
-// TODO: Elaborate on test desc and use /**.
-/* Test correct state for URL bar after loading pages.
+/**
+ * Tests functionality related to navigating between the various about:home pages.
  */
-public class testAwesomescreenPages extends UITest {
+public class testAboutHomePages extends UITest {
     // TODO: Define this test dynamically by creating dynamic representations of the Page
     // enum for both phone and tablet, then swiping through the pages. This will also
     // benefit having a HomePager with custom pages.
-    public void testAwesomescreenPages() {
+    public void testAboutHomePages() {
         GeckoHelper.blockForReady();
 
         mAboutHome.assertVisible()
@@ -77,9 +77,7 @@ public class testAwesomescreenPages extends UITest {
         mAboutHome.assertCurrentPage(Page.TOP_SITES);
     }
 
-    // TODO: The following is code from the old testAwesomebarSwipes which contains
-    // additional functionality we don't cover here. We should reimplement it in the new
-    // framework.
+    // TODO: bug 943706 - reimplement this old test code.
     /*
         //  Removed by Bug 896576 - [fig] Remove [getAllPagesList] from BaseTest
         //  ListView list = getAllPagesList("about:firefox");
