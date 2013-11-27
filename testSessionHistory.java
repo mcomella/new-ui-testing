@@ -4,12 +4,11 @@ import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 
 import org.mozilla.gecko.tests.helpers.*;
 
-// TODO: Class name confusing with history list.
-// TODO: Elaborate on test desc and use /**.
-/* Test correct state for URL bar after loading pages.
+/**
+ * Tests that navigating through session history (ex: forward, back) sets the correct UI state.
  */
-public class testTabHistory extends UITest {
-    public void testTabHistory() {
+public class testSessionHistory extends UITest {
+    public void testSessionHistory() {
         GeckoHelper.blockForReady();
 
         NavigationHelper.enterAndLoadUrl(StringHelper.ROBOCOP_BLANK_PAGE_01_URL);
