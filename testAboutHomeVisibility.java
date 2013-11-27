@@ -5,8 +5,8 @@ import static org.mozilla.gecko.tests.helpers.AssertionHelper.*;
 import org.mozilla.gecko.home.HomePager.Page;
 import org.mozilla.gecko.tests.helpers.*;
 
-// TODO: Elaborate on test desc and use /**.
-/* Test correct state for URL bar after loading pages.
+/**
+ * Tests the visibility of about:home after various interactions with the browser.
  */
 public class testAboutHomeVisibility extends UITest {
     public void testAboutHomeVisibility() {
