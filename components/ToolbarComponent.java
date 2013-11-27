@@ -99,6 +99,7 @@ public class ToolbarComponent extends BaseComponent {
         if (shouldAssertNotEditing) {
             assertIsNotEditing();
         }
+
         return getUrlTitleText().getText();
     }
 
