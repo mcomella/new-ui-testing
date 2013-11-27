@@ -22,22 +22,22 @@ final public class NavigationHelper {
     private static UITestContext sContext;
     private static Solo sSolo;
 
-    private static ToolbarComponent sToolbarComponent;
+    private static ToolbarComponent sToolbar;
 
     public static void init(final UITestContext context) {
         sContext = context;
         sSolo = context.getSolo();
 
-        sToolbarComponent = (ToolbarComponent) context.getComponent(ComponentType.TOOLBAR);
+        sToolbar = (ToolbarComponent) context.getComponent(ComponentType.TOOLBAR);
     }
 
     public static void enterAndLoadUrl(String url) {
         assertNotNull("url is not null", url);
 
         url = adjustUrl(url);
-        sToolbarComponent.enterEditingMode()
-                         .enterUrl(url)
-                         .commitEditingMode();
+        sToolbar.enterEditingMode()
+                .enterUrl(url)
+                .commitEditingMode();
     }
 
     /**
@@ -55,11 +55,11 @@ final public class NavigationHelper {
 
     public static void goBack() {
         if (DeviceHelper.isTablet()) {
-            sToolbarComponent.pressBackButton(); // Waits for page load & asserts isNotEditing.
+            sToolbar.pressBackButton(); // Waits for page load & asserts isNotEditing.
             return;
         }
 
-        sToolbarComponent.assertIsNotEditing();
+        sToolbar.assertIsNotEditing();
         WaitHelper.waitForPageLoad(new Runnable() {
             @Override
             public void run() {
@@ -73,11 +73,11 @@ final public class NavigationHelper {
 
     public static void goForward() {
         if (DeviceHelper.isTablet()) {
-            sToolbarComponent.pressForwardButton(); // Waits for page load & asserts isNotEditing.
+            sToolbar.pressForwardButton(); // Waits for page load & asserts isNotEditing.
             return;
         }
 
-        sToolbarComponent.assertIsNotEditing();
+        sToolbar.assertIsNotEditing();
         WaitHelper.waitForPageLoad(new Runnable() {
             @Override
             public void run() {
