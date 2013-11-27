@@ -33,6 +33,7 @@ import java.util.HashMap;
  */
 abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
                       implements UITestContext {
+
     protected enum Type {
         MOCHITEST,
         TALOS
@@ -78,12 +79,8 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         final Intent intent = createActivityIntent(config);
         setActivityIntent(intent);
 
-        // Start the activity
-        // TODO: Fix. getActivity() returns null so I call launchActivityWithIntent explicitly.
-        // Perhaps this is because the class' type parameter is "Activity"?
-        final String pkgName = getInstrumentation().getTargetContext().getPackageName();
-        mActivity = launchActivityWithIntent(pkgName, sLauncherActivityClass, intent);
-        //mActivity = getActivity();
+        // Start the activity.
+        mActivity = getActivity();
 
         if (getTestType() == Type.TALOS) {
             mAsserter = new FennecTalosAssert();
@@ -138,11 +135,6 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         GestureHelper.init(this);
         NavigationHelper.init(this);
         WaitHelper.init(this);
-    }
-
-    @Override
-    public Activity getActivity() {
-        return mActivity;
     }
 
     @Override
