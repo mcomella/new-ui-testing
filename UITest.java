@@ -99,7 +99,6 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
         mBaseHostnameUrl = ((String) config.get("host")).replaceAll("(/$)", "");
         mBaseIpUrl = ((String) config.get("rawhost")).replaceAll("(/$)", "");
 
-        // TODO: Consider lazy initialization.
         // Helpers depend on components so initialize them first.
         initComponents();
         initHelpers();
@@ -123,10 +122,6 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     }
 
     private void initHelpers() {
-        // TODO: Classes import AssertionHelper.init statically. If we keep AssertionHelper,
-        // we should create a helpers.HelperInitializer class and change the access levels of
-        // init to protected.
-
         // Other helpers make assertions so init AssertionHelper first.
         AssertionHelper.init(this);
 
