@@ -8,11 +8,11 @@ import org.mozilla.gecko.tests.helpers.*;
 /**
  * Tests functionality related to navigating between the various about:home pages.
  */
-public class testAboutHomePages extends UITest {
+public class testAboutHomePageNavigation extends UITest {
     // TODO: Define this test dynamically by creating dynamic representations of the Page
     // enum for both phone and tablet, then swiping through the pages. This will also
     // benefit having a HomePager with custom pages.
-    public void testAboutHomePages() {
+    public void testAboutHomePageNavigation() {
         GeckoHelper.blockForReady();
 
         mAboutHome.assertVisible()
