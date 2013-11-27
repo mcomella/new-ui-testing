@@ -170,14 +170,15 @@ abstract class UITest extends ActivityInstrumentationTestCase2<Activity>
     @Override
     public BaseComponent getComponent(final ComponentType type) {
         switch (type) {
-        case ABOUTHOME:
-            return mAboutHome;
-        case TOOLBAR:
-            return mToolbar;
+            case ABOUTHOME:
+                return mAboutHome;
 
-        default:
-            fail("Unknown component type, " + type + ".");
-            return null; // Should not reach this statement but required by javac.
+            case TOOLBAR:
+                return mToolbar;
+
+            default:
+                fail("Unknown component type, " + type + ".");
+                return null; // Should not reach this statement but required by javac.
         }
     }
 
