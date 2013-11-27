@@ -97,7 +97,6 @@ public final class WaitHelper {
                     return verifier.hasStateChanged();
                 }
             }, CHANGE_WAIT_MS);
-            // TODO: Make wait time an aggregated countdown?
 
             if (hasTimedOut) {
                 sContext.dumpLog(verifier.getClass().getName() + " timed out.");
