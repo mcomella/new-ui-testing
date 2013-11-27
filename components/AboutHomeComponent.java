@@ -35,8 +35,8 @@ public class AboutHomeComponent extends BaseComponent {
         assertVisible();
 
         // TODO: A "PhonePage" and "TabletPage" enum should be set explicitly or decided
-        // dynamically, likely with the work done in bug 940565. The current solution kind of
-        // sucks.
+        // dynamically, likely with the work done in bug 940565. The current solution should only
+        // be temporary.
         int expectedPageIndex = expectedPage.ordinal();
         if (DeviceHelper.isTablet()) {
             // Left circular shift Page enum since the History tab is moved to the rightmost.
@@ -46,19 +46,19 @@ public class AboutHomeComponent extends BaseComponent {
         }
 
         assertEquals("The current HomePager page is " + Page.values()[expectedPageIndex],
-                expectedPageIndex, getHomePagerView().getCurrentItem());
+                     expectedPageIndex, getHomePagerView().getCurrentItem());
         return this;
     }
 
     public AboutHomeComponent assertNotVisible() {
         assertFalse("The HomePager is not visible",
-                getHomePagerView().getVisibility() == View.VISIBLE);
+                    getHomePagerView().getVisibility() == View.VISIBLE);
         return this;
     }
 
     public AboutHomeComponent assertVisible() {
         assertEquals("The HomePager is visible",
-                View.VISIBLE, getHomePagerView().getVisibility());
+                     View.VISIBLE, getHomePagerView().getVisibility());
         return this;
     }
 
