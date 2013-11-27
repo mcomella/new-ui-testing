@@ -34,7 +34,7 @@ public final class WaitHelper {
     private static Solo sSolo;
     private static Actions sActions;
 
-    private static ToolbarComponent sToolbarComponent;
+    private static ToolbarComponent sToolbar;
 
     private WaitHelper() { /* To disallow instantiation. */ }
 
@@ -43,7 +43,7 @@ public final class WaitHelper {
         sSolo = context.getSolo();
         sActions = context.getActions();
 
-        sToolbarComponent = (ToolbarComponent) context.getComponent(ComponentType.TOOLBAR);
+        sToolbar = (ToolbarComponent) context.getComponent(ComponentType.TOOLBAR);
     }
 
     /**
@@ -129,14 +129,14 @@ public final class WaitHelper {
 
         @Override
         public void storeState() {
-            oldTitleText = sToolbarComponent.getPotentiallyInconsistentTitle();
+            oldTitleText = sToolbar.getPotentiallyInconsistentTitle();
         }
 
         @Override
         public boolean hasStateChanged() {
             // TODO: Additionally, consider Solo.waitForText.
             // TODO: Robocop sleeps .5 sec between calls. Cache title view?
-            final CharSequence title = sToolbarComponent.getPotentiallyInconsistentTitle();
+            final CharSequence title = sToolbar.getPotentiallyInconsistentTitle();
 
             // TODO: Handle the case where the URL is shown instead of page title by preference.
             // HACK: We want to wait until the title changes to the state a tester may assert
